@@ -1,0 +1,29 @@
+# Log Files
+*.log
+
+# Generated files
+*/bin/
+*/gen/
+*/out/
+*/target/
+
+# Gradle files
+.gradle/
+build/
+*/build/
+gradlew
+gradlew.bat
+
+#gradle wrapper
+gradle/
+
+#some local files
+*/.settings/
+*/.DS_Store
+.DS_Store
+*/.idea/
+.idea/
+*.iml
+*/target/
+
+__pycache__
