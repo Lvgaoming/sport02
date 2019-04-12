@@ -8,10 +8,18 @@
 
 import sys
 import random
+
+import serial
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMessageBox
+from PyQt5.QtCore import QObject,pyqtSignal
+import utils.readCardUtils
+# import utils.pyMysqlUtils
+import utils.mysqlUtil
 
 class Ui_Form(object):
+    stat = utils.mysqlUtil.MysqlUtil()
+    showMsgSignal = pyqtSignal(str)
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1024, 768)
@@ -55,8 +63,8 @@ class Ui_Form(object):
 "    border-radius: 10px;\n"
 "    text-align: center;\n"
 "}")
-        self.user_1.setMaximum(100)
-        self.user_1.setProperty("value", 100)
+        self.user_1.setMaximum(12)
+        self.user_1.setProperty("value", 12)
         self.user_1.setOrientation(QtCore.Qt.Horizontal)
         self.user_1.setObjectName("user_1")
         self.verticalLayout.addWidget(self.user_1)
@@ -162,8 +170,8 @@ class Ui_Form(object):
 "    border-radius: 10px;\n"
 "    text-align: center;\n"
 "}")
-        self.user_2.setMaximum(100)
-        self.user_2.setProperty("value", 100)
+        self.user_2.setMaximum(12)
+        self.user_2.setProperty("value", 12)
         self.user_2.setOrientation(QtCore.Qt.Horizontal)
         self.user_2.setObjectName("user_2")
         self.verticalLayout_2.addWidget(self.user_2)
@@ -231,20 +239,31 @@ class Ui_Form(object):
         self.blood_b.setText("")
         self.blood_b.setAlignment(QtCore.Qt.AlignCenter)
         self.blood_b.setObjectName("blood_b")
+
+
+
         self.horizontalLayout_6.addWidget(self.blood_b)
         self.verticalLayout_2.addLayout(self.horizontalLayout_6)
-        self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setGeometry(QtCore.QRect(100, 430, 180, 70))
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        self.pushButton.setFont(font)
-        self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(Form)
-        self.pushButton_2.setGeometry(QtCore.QRect(680, 420, 180, 70))
+        self.pushButton_2.setGeometry(QtCore.QRect(400, 500, 180, 70))
         font = QtGui.QFont()
         font.setPointSize(20)
         self.pushButton_2.setFont(font)
         self.pushButton_2.setObjectName("pushButton_2")
+
+        self.pushButton_3 = QtWidgets.QPushButton(Form)
+        self.pushButton_3.setGeometry(QtCore.QRect(100, 500, 180, 70))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        self.pushButton_3.setFont(font)
+        self.pushButton_3.setObjectName("pushButton_3")
+
+        self.pushButton_4 = QtWidgets.QPushButton(Form)
+        self.pushButton_4.setGeometry(QtCore.QRect(680, 500, 180, 70))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        self.pushButton_4.setFont(font)
+        self.pushButton_4.setObjectName("pushButton_4")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -253,21 +272,27 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.qingfang.setText(_translate("Form", "青方"))
-        self.user_1.setFormat(_translate("Form", "%p"))
+        self.user_1.setFormat(_translate("Form", "%v"))
         self.name_title_a.setText(_translate("Form", "姓名："))
         self.bh_title_a.setText(_translate("Form", "人员编号："))
         self.blood_title_a.setText(_translate("Form", "扣血量："))
         self.hongfang.setText(_translate("Form", "红方"))
-        self.user_2.setFormat(_translate("Form", "%p"))
+        self.user_2.setFormat(_translate("Form", "%v"))
         self.name_title_a_2.setText(_translate("Form", "姓名："))
         self.bh_title_a_2.setText(_translate("Form", "人员编号："))
         self.blood_title_a_2.setText(_translate("Form", "扣血量："))
-        self.pushButton.setText(_translate("Form", "青方攻击"))
-        self.pushButton_2.setText(_translate("Form", "红方攻击"))
+        self.pushButton_2.setText(_translate("Form", "开始比赛"))
+        self.pushButton_3.setText(_translate("Form","青方检录"))
+        self.pushButton_4.setText(_translate("From","红方检录"))
 
-        self.pushButton.clicked.connect(self.qingfangAttk)
-        self.pushButton_2.clicked.connect(self.hongfangAttk)
+        # self.pushButton.clicked.connect(self.qingfangAttk)
+        self.pushButton_2.clicked.connect(self.action)
+        self.pushButton_3.clicked.connect(self.qingfangwriteInfo)
+        self.pushButton_4.clicked.connect(self.hongfangwriteInfo)
+
         
+
+
 
     def qingfangAttk(self):
         now = random.randint(10,20)
@@ -277,24 +302,111 @@ class Ui_Form(object):
             self.user_2.setValue(0)
             qw = QtWidgets.QWidget()
             QMessageBox.warning(qw,'消息','青方胜', QMessageBox.Ok)
+
         else:
             self.user_2.setValue(new)
 
-    def hongfangAttk(self):
-        now = random.randint(10,20)
-        self.blood_a.setText(str(now))
-        new = self.user_1.value() - now
-        if(new<=0):
-            self.user_1.setValue(0)
-            qw = QtWidgets.QWidget()
-            QMessageBox.warning(qw,'消息','红方胜', QMessageBox.Ok)
-        else:
-            self.user_1.setValue(new)
+    def action(self):
+        serialPort = "COM4"  # 串口
+        baudRate = 115200  # 波特率
+        ser = serial.Serial(serialPort, baudRate, timeout=0.1, stopbits=1, bytesize=8)
+        print("参数设置：串口=%s ，波特率=%d" % (serialPort, baudRate))
+        myout=[]
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    main = QtWidgets.QMainWindow()
-    content = Ui_Form()
-    content.setupUi(main)
-    main.show()
-    sys.exit(app.exec_())
+        while 1:
+            while ser.inWaiting() > 0:
+                myout.append(ser.readline())
+            if myout != []:
+                # myout = [b'\xAA', b'\x02', b'\x00', b'\x01', b'\xD0', b'\xD1', b'\xD2', b'\x01']
+                print(myout)
+                s = str(myout[0][1:])
+                print(s)
+                last = s.replace("b", "").replace("'", "").replace("\\x", "")
+                print(last)
+                value = last[5]
+                print(value)
+                group = last[7]
+                print(group)
+                now = value
+                # 组别 红方 3 青方 2
+                if (int(group) == 3):
+                    self.blood_b.setText(str(now))
+                    new = self.user_2.value() - int(now)
+                    if (new <= 0):
+                        self.user_2.setValue(0)
+                        qw = QtWidgets.QWidget()
+                        QMessageBox.warning(qw, '消息', '青方胜', QMessageBox.Ok)
+                        ser.close()
+                        break
+                    else:
+                            self.user_2.setValue(new)
+
+                if (int(group) == 2):
+                    self.blood_a.setText(str(now))
+                    new = self.user_1.value() - int(now)
+                    if (new <= 0):
+                            self.user_1.setValue(0)
+                            qw = QtWidgets.QWidget()
+                            QMessageBox.warning(qw, '消息', '红方胜', QMessageBox.Ok)
+                            ser.close()
+                            break
+                    else:
+                            self.user_1.setValue(new)
+
+                myout = []
+
+
+
+
+
+
+ #青方刷卡检录
+    def qingfangwriteInfo(self,cardId):
+        # cardId = utils.readCardUtils.getCardId()
+        # if cardId=='':
+        #     qw = QtWidgets.QWidget()
+        #     QMessageBox.warning(qw,'警告','请先放卡再点击检录', QMessageBox.Ok)
+        #     return
+        results = self.stat.fetchall("select * from user_info where card_number=%s"%cardId)
+        # print(results)
+        if results==():
+            # qw = QtWidgets.QWidget()
+            # QMessageBox.warning(qw,'警告','非本系统卡', QMessageBox.Ok)
+            self.showMsgSignal.emit("非本系统卡")
+        else:
+            self.name_a.setText(results[0][2])
+            self.bh_a.setText(results[0][1])
+
+
+
+
+#红方刷卡检录
+    def hongfangwriteInfo(self,cardId):
+        # cardId = utils.readCardUtils.getCardId()
+        # if cardId=='':
+        #     qw = QtWidgets.QWidget()
+        #     QMessageBox.warning(qw,'警告','请先放卡再点击检录', QMessageBox.Ok)
+        #     return
+        # results = self.stat.fetchall("select * from user_info where card_number=%s"%cardId)
+        # # print(results)
+        # if results==():
+        #     # qw = QtWidgets.QWidget()
+        #     # QMessageBox.warning(qw,'警告','非本系统卡', QMessageBox.Ok)
+        #     self.showMsgSignal.emit("非本系统卡")
+        # else:
+        #     self.name_b.setText(results[0][2])
+        #     self.bh_b.setText(results[0][1])
+        self.name_b.setText("李明林")
+        self.bh_b.setText("2016011228")
+
+
+
+
+
+# if __name__ == '__main__':
+#     app = QApplication(sys.argv)
+#     main = QtWidgets.QMainWindow()
+#     content = Ui_Form()
+#     content.setupUi(main)
+#     main.show()
+#     sys.exit(app.exec_())

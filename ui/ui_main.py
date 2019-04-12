@@ -40,6 +40,14 @@ class Ui_ChildrenWindow(object):
         font.setPointSize(20)
         self.pushButton_4.setFont(font)
         self.pushButton_4.setObjectName("pushButton_4")
+
+        self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_5.setGeometry(QtCore.QRect(380, 300, 230, 150))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        self.pushButton_5.setFont(font)
+        self.pushButton_5.setObjectName("pushButton_5")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1024, 23))
@@ -59,3 +67,4 @@ class Ui_ChildrenWindow(object):
         self.pushButton_2.setText(_translate("MainWindow", "仰卧起坐测试系统"))
         self.pushButton_3.setText(_translate("MainWindow", "人员检录"))
         self.pushButton_4.setText(_translate("MainWindow", "数据库配置"))
+        self.pushButton_5.setText(_translate("MainWindow","血量系统"))

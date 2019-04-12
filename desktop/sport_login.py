@@ -9,6 +9,7 @@ import ui.ui_main
 import ui.ui_run
 import ui.ui_ryjl
 import ui.ui_sitUps
+import ui.ui_blood
 import ui.ui_setting_db
 # import utils.pyMysqlUtils
 import utils.mysqlUtil
@@ -27,6 +28,12 @@ class loginWindow(QMainWindow):
         # 登录按钮
         self.loginUI.pushButton.clicked.connect(lambda: goLogin(self.loginUI))
 
+
+
+
+
+
+
 # 主界面
 
 
@@ -36,12 +43,15 @@ class mainWindow(QMainWindow):
         self.mainUi = ui.ui_main.Ui_ChildrenWindow()
         self.ryjlUi = ui.ui_ryjl.Ui_Form()
         self.ywqzUi = ui.ui_sitUps.Ui_Form()
+        self.bloodUi = ui.ui_blood.Ui_Form()
+
         self.mainUi.setupUi(self)
         # 50米测试按钮
         self.mainUi.pushButton.clicked.connect(goRun)
         self.mainUi.pushButton_2.clicked.connect(ywqz)
         self.mainUi.pushButton_3.clicked.connect(jianlu)
         self.mainUi.pushButton_4.clicked.connect(showDB)
+        self.mainUi.pushButton_5.clicked.connect(blood)
 
 # 跑步界面
 
@@ -65,6 +75,19 @@ class ywqzWindow(QWidget):
         QWidget.__init__(self)
         self.ywqzUi = ui.ui_sitUps.Ui_Form()
         self.ywqzUi.setupUi(self)
+
+
+
+
+# 血量界面
+
+class bloodWindow(QWidget):
+    def __init__(self):
+        QWidget.__init__(self)
+        self.bloodUi = ui.ui_blood.Ui_Form()
+        self.bloodUi.setupUi(self)
+
+
 
 # 出现50米测试页面
 
@@ -97,7 +120,13 @@ def jianlu():
 #人员检录
 
 def ywqz():
-    _ywqz.show()  
+    _ywqz.show()
+
+def blood():
+    _blood.show()
+
+
+
 
 #数据库显示
 def showDB():
@@ -124,6 +153,7 @@ if __name__ == '__main__':
     _run = runWindow()
     _ryjl = ryjlWindow()
     _ywqz = ywqzWindow()
+    _blood = bloodWindow()
     _showDB = ui.ui_setting_db.setDBWindow()
     _login.show()
     # widget.show()

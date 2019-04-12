@@ -27,6 +27,7 @@ class MysqlUtil(QObject):
             db = pymysql.connect(MysqlUtil.host,MysqlUtil.username,MysqlUtil.password,MysqlUtil.database,charset='utf8')  
             return db
         except Exception:
+            print(Exception.args)
             self.showDB()
             return self.getConnect()
   
