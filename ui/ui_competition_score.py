@@ -3000,21 +3000,26 @@ class Ui_Form(object):
             print(sql)
             _thread.start_new_thread(self.stat.insert, (sql,))
             self.stat.insert(sql)
-            # try:
-            #     print('开始连接串口')
-            #     x = serial.Serial(self.chuankou, "115200")
-            #     print(x)
-            #     self.dataFlag = True
-            #     _thread.start_new_thread(self.getData, (x,))
-            #
-            #
-            #     # 测试页面刷新
-            #     # _thread.start_new_thread(self.getData2,(x,))
-            #     self.lianjie_bt.setText('已连接')
-            # except:
-            #     self.isfirst=True
-            #     qw = QtWidgets.QWidget()
-            #     QMessageBox.warning(qw, '错误', "连接串口失败，请检查串口号和波特率是否正确", QMessageBox.Ok)
+
+            # print(gl.get_value('qinghujunum'))
+            # print(gl.get_value('honghujunum'))
+            # print(gl.get_value('hongtoukuinum'))
+            # print(gl.get_value('qingtoukuinum'))
+            try:
+                print('开始连接串口')
+                # print(gl.get_value())
+                x = serial.Serial(self.chuankou, "115200")
+                print(x)
+                self.dataFlag = True
+                _thread.start_new_thread(self.getData, (x,))
+
+                # 测试页面刷新
+                # _thread.start_new_thread(self.getData2,(x,))
+                self.lianjie_bt.setText('已连接')
+            except:
+                self.isfirst=True
+                qw = QtWidgets.QWidget()
+                QMessageBox.warning(qw, '错误', "连接串口失败，请检查串口号和波特率是否正确", QMessageBox.Ok)
 
 
 
@@ -3921,9 +3926,15 @@ class Ui_Form(object):
                 print(last)
 
                 #判断是电子护具(组别 红方 3 青方 2)还是打分器
-                group_1 = last[3]
+                group_1 = last[5]
+                #判断头盔是否被击打
+                is_jida=last[9]
+
+                #判断头盔是否旋转
+
+                is_rotate=last[7]
                 print("group_1",group_1)
-                hujunum=int(last[2])
+                hujunum=int(last[4])
                 print("hujunum",hujunum)
                 print("self.hujunum",self.hujunum)
                 print('护具组号---',hujunum)
@@ -3999,12 +4010,15 @@ class Ui_Form(object):
 
                     if(group_1=="7" or group_1=="8"):
                         if (group_1 == "7"):
-                            self.hongfangtoukuitime = time.time()
                             print('青方头盔')
-                            if ((self.hongfangtoukuitime - self.hongfangtoukuidefentime) > 0.3):
-                                self.hongfangtoukuidefentime = time.time()
+                            self.qingfangtoukuitime = time.time()
 
+                            if (is_rotate == "1"):
+                                self.qingfangtoukuirotatetime = time.time()
+                                print("青方旋转")
 
+                            if ((self.qingfangtoukuitime - self.qingfangtoukuidefentime) > 0.3 and is_jida == "1"):
+                                self.qingfangtoukuidefentime = time.time()
                                 # 记录当前护具得分时间
                                 # lizhixian=self.firstlizhi_qing - (1 * int(self.defenqujian))
                                 # if(lizhi<lizhixian):
@@ -4019,6 +4033,9 @@ class Ui_Form(object):
 
                                 # print(sql)
                                 hongfangdefen = int(self.hongfangzongfen.text()) + 3
+
+                                if(self.qingfangtoukuitime-self.hongfangtoukuirotatetime<0.3):
+                                    hongfangdefen = hongfangdefen+2
 
                                 _thread.start_new_thread(self.hongfangzongfen.setText,
                                                          (str(hongfangdefen),))
@@ -4039,9 +4056,14 @@ class Ui_Form(object):
                         if (group_1 == "8"):
 
                             print('红方头盔')
-                            self.qingfangtoukuitime=time.time()
-                            if ((self.qingfangtoukuitime - self.qingfangtoukuidefentime) > 0.3):
-                                self.qingfangtoukuidefentime = time.time()
+                            self.hongfangtoukuitime=time.time()
+
+                            if (is_rotate == "1"):
+                                self.hongfangtoukuirotatetime = time.time()
+                                print("红方旋转")
+
+                            if ((self.hongfangtoukuitime - self.hongfangtoukuidefentime) > 0.3 and is_jida == "1"):
+                                self.hongfangtoukuidefentime = time.time()
                                 # 记录当前护具得分时间
 
                                 # lizhixian = self.firstlizhi_hong - (1 * int(self.defenqujian))
@@ -4068,6 +4090,9 @@ class Ui_Form(object):
 
                                 # print("得2分")
                                 qingfangdefen = int(self.qingfangzongfen.text()) + 3
+
+                                if (self.hongfangtoukuitime - self.qingfangtoukuirotatetime < 0.3):
+                                    qingfangdefen = qingfangdefen + 2
                                 music_path = r'music\liangfen.wav'
                                 self.sound(music_path)
 
@@ -4097,10 +4122,10 @@ class Ui_Form(object):
                         if (group_1 == "2"):
                             lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                             print("力值--",lizhi)
-                            self.hongfanghujutime=time.time()
-                            hongfanglizhi=0
-                            if ((self.hongfanghujutime - self.hongfanghujudefentime) > 0.3):
-                                self.hongfanghujudefentime = time.time()
+                            self.qingfanghujutime = time.time()
+                            hongfanglizhi = 0
+                            if ((self.qingfanghujutime - self.qingfanghujudefentime) > 0.3):
+                                self.qingfanghujudefentime = time.time()
 
 
                                 # 记录当前护具得分时间
@@ -4111,7 +4136,7 @@ class Ui_Form(object):
                                 #     hongfanglizhi = math.ceil((self.firstlizhi_qing - lizhi) / 1)
                                 # print("红方力值",hongfanglizhi)
                                 if (lizhi <= 300):
-                                    hongfanglizhi = math.ceil(lizhi / 10)
+                                    hongfanglizhi = math.floor(lizhi / 10)
                                 else:
                                     hongfanglizhi = 30
                                 print("hongfanglizhi",hongfanglizhi)
@@ -4135,6 +4160,11 @@ class Ui_Form(object):
                                     # print(sql)
                                     hongfangdefen=int(self.hongfangzongfen.text()) + 2
 
+                                    if (self.qingfanghujutime - self.hongfangtoukuirotatetime < 0.3):
+                                        hongfangdefen = hongfangdefen + 2
+
+
+
                                     _thread.start_new_thread(self.hongfangzongfen.setText,
                                                              (str(hongfangdefen),))
                                     sql = "update bisaixinxi set hongfangdefen='%s' where bisaixuhao='%s'" % (
@@ -4154,11 +4184,12 @@ class Ui_Form(object):
                         if (group_1 == "3"):
                             lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                             # print("力值--", lizhi)
-                            self.qingfanghujutime = time.time()
 
-                            qingfanglizhi=0
-                            if ((self.qingfanghujutime - self.qingfanghujudefentime) > 0.3):
-                                self.qingfanghujudefentime = time.time()
+                            self.hongfanghujutime = time.time()
+                            qingfanglizhi = 0
+                            if ((self.hongfanghujutime - self.hongfanghujudefentime) > 0.3):
+                                self.hongfanghujudefentime = time.time()
+
                                 #记录当前护具得分时间
 
                                 # lizhixian = self.firstlizhi_hong - (1 * int(self.defenqujian))
@@ -4169,7 +4200,7 @@ class Ui_Form(object):
                                 # print("青方力值",qingfanglizhi)
                                 # print("红方力值", hongfanglizhi)
                                 if(lizhi<=300):
-                                    qingfanglizhi=math.ceil(lizhi/10)
+                                    qingfanglizhi=math.floor(lizhi/10)
                                 else:
                                     qingfanglizhi=30
                                 print("qingfanglizhi",qingfanglizhi)
@@ -4200,6 +4231,8 @@ class Ui_Form(object):
                                 if(qingfanglizhi>=int(self.defenqujian)):
                                     print("得2分")
                                     qingfangdefen=int(self.qingfangzongfen.text()) + 2
+                                    if (self.hongfanghujutime - self.qingfangtoukuirotatetime < 0.3):
+                                        qingfangdefen = qingfangdefen + 2
                                     music_path = r'music\liangfen.wav'
                                     self.sound(music_path)
 
@@ -4719,15 +4752,15 @@ class Ui_Form(object):
                 # 判断是电子护具(组别 红方 3 青方 2)还是打分器
                 group_1 = last[5]
                 lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
-                print("力值",math.ceil(lizhi / 10))
-                if(group_1=="2"):
-
-
-                    _thread.start_new_thread(self.qingfangzongfen.setText, (str(y),))
-                    y = y + 1
-                if(group_1=="3"):
-                    _thread.start_new_thread(self.hongfangzongfen.setText, (str(z),))
-                    z=z+1
+                print("力值",math.floor(lizhi / 10))
+                # if(group_1=="2"):
+                #
+                #
+                #     _thread.start_new_thread(self.qingfangzongfen.setText, (str(y),))
+                #     y = y + 1
+                # if(group_1=="3"):
+                #     _thread.start_new_thread(self.hongfangzongfen.setText, (str(z),))
+                #     z=z+1
 
 
                 # time.sleep(0.01)

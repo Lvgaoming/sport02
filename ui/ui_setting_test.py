@@ -533,6 +533,89 @@ class Ui_Form(QWidget):
         self.label.setStyleSheet("border:0px")
 
 
+        #
+        # #青方护具设备号
+        # self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        # self.label.setGeometry(QtCore.QRect(155, 210, 80, 20))
+        # font = QtGui.QFont()
+        # font.setFamily("微软雅黑")
+        # font.setPointSize(10)
+        # self.label.setFont(font)
+        # self.label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.label.setObjectName("label")
+        # self.label.setText("青方护具号")
+        # self.label.setStyleSheet("border:0px")
+        # self.qinghujunum = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        # self.qinghujunum.setGeometry(QtCore.QRect(235, 210, 40, 20))
+        # self.qinghujunum.setObjectName("qinghujunum")
+        # self.qinghujunum.setText("0")
+        # self.qinghujunum.setAlignment(QtCore.Qt.AlignCenter)
+        # self.qinghujunum.setFixedWidth(40)
+        # self.qinghujunum.setStyleSheet(
+        #     "color:#000 ; border-radius:5px ; background-color:#FFE05E ;border-color:#FFE05E")
+        #
+        # # 红护具设备号
+        # self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        # self.label.setGeometry(QtCore.QRect(155, 240, 80, 20))
+        # font = QtGui.QFont()
+        # font.setFamily("微软雅黑")
+        # font.setPointSize(10)
+        # self.label.setFont(font)
+        # self.label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.label.setObjectName("label")
+        # self.label.setText("红方护具号")
+        # self.label.setStyleSheet("border:0px")
+        # self.honghujunum = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        # self.honghujunum.setGeometry(QtCore.QRect(235, 240, 40, 20))
+        # self.honghujunum.setObjectName("honghujunum")
+        # self.honghujunum.setText("0")
+        # self.honghujunum.setAlignment(QtCore.Qt.AlignCenter)
+        # self.honghujunum.setFixedWidth(40)
+        # self.honghujunum.setStyleSheet(
+        #     "color:#000 ; border-radius:5px ; background-color:#FFE05E ;border-color:#FFE05E")
+        #
+        # # 青方头盔设备号
+        # self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        # self.label.setGeometry(QtCore.QRect(155, 270, 80, 20))
+        # font = QtGui.QFont()
+        # font.setFamily("微软雅黑")
+        # font.setPointSize(10)
+        # self.label.setFont(font)
+        # self.label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.label.setObjectName("label")
+        # self.label.setText("青方头盔号")
+        # self.label.setStyleSheet("border:0px")
+        # self.qingtoukuinum = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        # self.qingtoukuinum.setGeometry(QtCore.QRect(235, 270, 40, 20))
+        # self.qingtoukuinum.setObjectName("qingtoukuinum")
+        # self.qingtoukuinum.setText("0")
+        # self.qingtoukuinum.setAlignment(QtCore.Qt.AlignCenter)
+        # self.qingtoukuinum.setFixedWidth(40)
+        # self.qingtoukuinum.setStyleSheet(
+        #     "color:#000 ; border-radius:5px ; background-color:#FFE05E ;border-color:#FFE05E")
+        #
+        # # 红头盔设备号
+        # self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        # self.label.setGeometry(QtCore.QRect(155, 300, 80, 20))
+        # font = QtGui.QFont()
+        # font.setFamily("微软雅黑")
+        # font.setPointSize(10)
+        # self.label.setFont(font)
+        # self.label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.label.setObjectName("label")
+        # self.label.setText("红方头盔号")
+        # self.label.setStyleSheet("border:0px")
+        # self.hongtoukuinum = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        # self.hongtoukuinum.setGeometry(QtCore.QRect(235, 300, 40, 20))
+        # self.hongtoukuinum.setObjectName("hongtoukuinum")
+        # self.hongtoukuinum.setText("0")
+        # self.hongtoukuinum.setAlignment(QtCore.Qt.AlignCenter)
+        # self.hongtoukuinum.setFixedWidth(40)
+        # self.hongtoukuinum.setStyleSheet(
+        #     "color:#000 ; border-radius:5px ; background-color:#FFE05E ;border-color:#FFE05E")
+
+
+
         # 休息时间
         self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.label.setGeometry(QtCore.QRect(10, 90, 80, 20))
@@ -915,6 +998,12 @@ class Ui_Form(QWidget):
             gl.set_value('hujunum',self.hujunum.text())
             gl.set_value('dangqianju',self.dangqianju.text())
             gl.set_value('dangqianshijian',self.dangqianshijian.text())
+            # gl.set_value('qinghujunum',self.qinghujunum.text())
+            # gl.set_value('honghujunum', self.honghujunum.text())
+            # gl.set_value('qingtoukuinum', self.qingtoukuinum.text())
+            # gl.set_value('hongtoukuinum',self.hongtoukuinum.text())
+
+
             print(self.dangqianju.text())
             print(self.dangqianshijian.text())
             print("qqqqqqqq")
