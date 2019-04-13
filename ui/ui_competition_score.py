@@ -1958,7 +1958,7 @@ class Ui_Form(object):
 
         # 红方这两个字
         self.honglabel = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.honglabel.setGeometry(QtCore.QRect(200, 50, 80, 20))
+        self.honglabel.setGeometry(QtCore.QRect(180, 50, 80, 20))
         font = QtGui.QFont()
         font.setFamily("Arial Black")
         font.setPointSize(10)
@@ -1972,6 +1972,24 @@ class Ui_Form(object):
                                  "QLabel{border:2px}"
                                  "QLabel{border-radius:5px}"
                                  "QLabel{padding:2px 4px}")
+
+
+        #设备号
+        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.label.setGeometry(QtCore.QRect(250, 50, 80, 20))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label.setText("设备号")
+        self.label.setStyleSheet("QLabel{color:#000}"
+                                     "QLabel{background-color:#fff}"
+                                     "QLabel{border:2px}"
+                                     "QLabel{border-radius:5px}"
+                                     "QLabel{padding:2px 4px}")
 
         # 青方这两个字
         self.qinglabel = QtWidgets.QLabel(self.verticalLayoutWidget)
@@ -1989,6 +2007,24 @@ class Ui_Form(object):
                                  "QLabel{border:2px}"
                                  "QLabel{border-radius:5px}"
                                  "QLabel{padding:2px 4px}")
+
+        # 设备号
+        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.label.setGeometry(QtCore.QRect(115, 50, 80, 20))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label.setText("设备号")
+        self.label.setStyleSheet("QLabel{color:#000}"
+                                 "QLabel{background-color:#fff}"
+                                 "QLabel{border:2px}"
+                                 "QLabel{border-radius:5px}"
+                                 "QLabel{padding:2px 4px}")
+
 
         # 头盔这两个字
         self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
@@ -2015,9 +2051,19 @@ class Ui_Form(object):
         self.qingfangtoukui.setStyleSheet(
             "background-color:#FFE05E;border-color:#FFE05E ;border-radius:15px")
 
+        self.qingtoukuinum = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.qingtoukuinum.setGeometry(QtCore.QRect(130, 90, 40, 20))
+        self.qingtoukuinum.setObjectName("qingtoukuinum")
+        self.qingtoukuinum.setText("0")
+        self.qingtoukuinum.setAlignment(QtCore.Qt.AlignCenter)
+        self.qingtoukuinum.setFixedWidth(40)
+        self.qingtoukuinum.setStyleSheet(
+            "color:#000 ; border-radius:5px ; background-color:#FFE05E ;border-color:#FFE05E")
+
+
         # 红方头盔
         self.hongfangtoukui = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.hongfangtoukui.setGeometry(QtCore.QRect(225, 85, 30, 30))
+        self.hongfangtoukui.setGeometry(QtCore.QRect(205, 85, 30, 30))
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         font.setPointSize(10)
@@ -2026,6 +2072,15 @@ class Ui_Form(object):
         self.hongfangtoukui.setObjectName("hongfangtoukui")
         self.hongfangtoukui.setText("")
         self.hongfangtoukui.setStyleSheet("background-color:#FFE05E;border-color:#FFE05E ;border-radius:15px")
+
+        self.hongtoukuinum = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.hongtoukuinum.setGeometry(QtCore.QRect(265, 90, 40, 20))
+        self.hongtoukuinum.setObjectName("hongtoukuinum")
+        self.hongtoukuinum.setText("0")
+        self.hongtoukuinum.setAlignment(QtCore.Qt.AlignCenter)
+        self.hongtoukuinum.setFixedWidth(40)
+        self.hongtoukuinum.setStyleSheet(
+            "color:#000 ; border-radius:5px ; background-color:#FFE05E ;border-color:#FFE05E")
 
 
 
@@ -2054,10 +2109,22 @@ class Ui_Form(object):
         self.qingfanghuju.setStyleSheet(
             "background-color:#FFE05E;border-color:#FFE05E ;border-radius:0px")
 
+        self.qinghujunum = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.qinghujunum.setGeometry(QtCore.QRect(130, 150, 40, 20))
+        self.qinghujunum.setObjectName("qinghujunum")
+        self.qinghujunum.setText("0")
+        self.qinghujunum.setAlignment(QtCore.Qt.AlignCenter)
+        self.qinghujunum.setFixedWidth(40)
+        self.qinghujunum.setStyleSheet(
+            "color:#000 ; border-radius:5px ; background-color:#FFE05E ;border-color:#FFE05E")
+
+
+
+
 
         # 红方护具
         self.hongfanghuju = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.hongfanghuju.setGeometry(QtCore.QRect(223, 140, 40, 40))
+        self.hongfanghuju.setGeometry(QtCore.QRect(203, 140, 40, 40))
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         font.setPointSize(10)
@@ -2066,6 +2133,17 @@ class Ui_Form(object):
         self.hongfanghuju.setObjectName("hongfanghuju")
         self.hongfanghuju.setText("")
         self.hongfanghuju.setStyleSheet("background-color:#FFE05E;border-color:#FFE05E ;border-radius:0px")
+
+        self.honghujunum = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.honghujunum.setGeometry(QtCore.QRect(265, 150, 40, 20))
+        self.honghujunum.setObjectName("honghujunum")
+        self.honghujunum.setText("0")
+        self.honghujunum.setAlignment(QtCore.Qt.AlignCenter)
+        self.honghujunum.setFixedWidth(40)
+        self.honghujunum.setStyleSheet(
+            "color:#000 ; border-radius:5px ; background-color:#FFE05E ;border-color:#FFE05E")
+
+
 
         self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.label.setGeometry(QtCore.QRect(60, 220, 80, 20))
@@ -2936,8 +3014,8 @@ class Ui_Form(object):
             # 裁判时差
             self.caipanshicha = int(gl.get_value('caipanshicha'))
 
-            #护具号
-            self.hujunum=int(gl.get_value('hujunum'))
+            #组号
+            self.zunum=int(gl.get_value('hujunum'))
 
             # 设置青方信息
             self.qingfangdanwei.setText(gl.get_value('qingfangdanwei'))
@@ -2965,6 +3043,12 @@ class Ui_Form(object):
             self.changdi.setText(gl.get_value('changdi'))
             self.changdihao.setText(gl.get_value('changdihao'))
             self.jibie.setText(gl.get_value('jibie'))
+
+            #设置设备号
+            self.qingtoukuinum.setText(gl.get_value('qingtoukuinum'))
+            self.hongtoukuinum.setText(gl.get_value('hongtoukuinum'))
+            self.qinghujunum.setText(gl.get_value('qinghujunum'))
+            self.honghujunum.setText(gl.get_value('honghujunum'))
 
             self.isfirst = False
             self.istest = False
@@ -3934,19 +4018,23 @@ class Ui_Form(object):
 
                 is_rotate=last[7]
                 print("group_1",group_1)
-                hujunum=int(last[4])
-                print("hujunum",hujunum)
-                print("self.hujunum",self.hujunum)
-                print('护具组号---',hujunum)
+                #设备组号
+                zunum=int(last[2])
+                print("组号",zunum)
+                print("设置的设备组号",self.zunum)
+                print('当前组号---',zunum)
+                #设备号
+                shebeinum=int(last[4])
+
                 # print(group_1)
                 lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                 print("力值--", lizhi)
 
-                if ((group_1 == "2" or group_1 == "3" or group_1=="7" or group_1=="8") and self.hujunum==hujunum):
+                if ((group_1 == "2" or group_1 == "3" or group_1=="7" or group_1=="8") and self.zunum==zunum):
 
                     lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                     # print(lizhi)
-                    if (group_1 == "2"):
+                    if (group_1 == "2" and shebeinum==int(self.qinghujunum.text())):
                         if (self.ishujufirst_qing):
                             self.firstlizhi_qing = lizhi
 
@@ -3958,7 +4046,7 @@ class Ui_Form(object):
                                                          "QLabel{padding:2px 4px}")
                             myout = []
                             self.ishujufirst_qing = False
-                    if (group_1 == "3"):
+                    if (group_1 == "3" and shebeinum==int(self.honghujunum.text())):
                         if (self.ishujufirst_hong):
                             self.firstlizhi_hong = lizhi
 
@@ -3972,7 +4060,7 @@ class Ui_Form(object):
                             self.ishujufirst_hong = False
 
                     if (self.istest):
-                        if (group_1 == "2"):
+                        if (group_1 == "2" and shebeinum==int(self.qinghujunum.text())):
                             # print("力值" + str(lizhi))
 
                             # self.qingfanghuju.setStyleSheet(
@@ -3980,7 +4068,7 @@ class Ui_Form(object):
                             _thread.start_new_thread(self.qingfanghuju.setStyleSheet, ( "background-color:rgb(0,120,215);border-color:(0,120,215) ;border-radius:0px",))
                             self.isqingfangtestfinsh = True
 
-                        if (group_1 == "3"):
+                        if (group_1 == "3" and shebeinum==int(self.honghujunum.text())):
                             # print("力值" + str(lizhi))
                             # self.hongfanghuju.setStyleSheet("background-color:red;border-color:red ;border-radius:0px")
                             _thread.start_new_thread(self.hongfanghuju.setStyleSheet, (
@@ -3988,14 +4076,14 @@ class Ui_Form(object):
 
                             self.ishongfangtestfinsh = True
 
-                        if (group_1 == "7" ):
+                        if (group_1 == "7" and shebeinum==int(self.qingtoukuinum.text()) ):
                             self.qingfangtoukui.setStyleSheet(
                                 "background-color:rgb(0,120,215);border-color:(0,120,215) ;border-radius:15px")
 
                             self.isqingtoutestfinsh = True
 
 
-                        if (group_1 == "8" ):
+                        if (group_1 == "8" and shebeinum==int(self.hongtoukuinum.text())):
                             # print("第一次力值" + str(self.firstlizhi_hong))
 
                             self.hongfangtoukui.setStyleSheet(
@@ -4009,7 +4097,7 @@ class Ui_Form(object):
                 if (self.dataFlag2):
 
                     if(group_1=="7" or group_1=="8"):
-                        if (group_1 == "7"):
+                        if (group_1 == "7" and shebeinum==int(self.qingtoukuinum.text())):
                             print('青方头盔')
                             self.qingfangtoukuitime = time.time()
 
@@ -4053,7 +4141,7 @@ class Ui_Form(object):
 
                             # print("当力值小于" + str(self.firstlizhi_qing - (30 * int(self.defenqujian))) + "得两分")
                             # print("ID:" + str(lizhi))
-                        if (group_1 == "8"):
+                        if (group_1 == "8" and shebeinum==int(self.hongtoukuinum.text())):
 
                             print('红方头盔')
                             self.hongfangtoukuitime=time.time()
@@ -4119,7 +4207,7 @@ class Ui_Form(object):
                         # print(lizhi)
 
 
-                        if (group_1 == "2"):
+                        if (group_1 == "2" and shebeinum==int(self.qinghujunum.text())):
                             lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                             print("力值--",lizhi)
                             self.qingfanghujutime = time.time()
@@ -4181,7 +4269,7 @@ class Ui_Form(object):
 
                             # print("当力值小于" + str(self.firstlizhi_qing - (30 * int(self.defenqujian))) + "得两分")
                             # print("ID:" + str(lizhi))
-                        if (group_1 == "3"):
+                        if (group_1 == "3" and shebeinum==int(self.honghujunum.text())):
                             lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                             # print("力值--", lizhi)
 
