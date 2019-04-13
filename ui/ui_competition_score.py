@@ -3070,6 +3070,9 @@ class Ui_Form(object):
 
             self.qingfanghujufirst_lizhi.setText(str(self.defenqujian))
 
+            self.qingfangtoukuirotatetime=0
+            self.hongfangtoukuirotatetime=0
+
             sql="select id from dangqianbisai where changdi='%s'"%(self.changdi.text())
             if(self.stat.fetchone(sql)):
 
