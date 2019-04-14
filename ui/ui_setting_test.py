@@ -8,9 +8,11 @@
 import _thread
 import time
 
+import win32ui
 import xlrd
 import xlwt
 from PyQt5 import Qt
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QApplication, QProgressDialog, QWidget
 from PyQt5.QtCore import QObject, pyqtSignal, QCoreApplication
@@ -1024,9 +1026,10 @@ class Ui_Form(QWidget):
 
     def chaxun(self):
         # self.li=[]
-        if (self.changdihaoresult == ()):
+        # print(self.changdihaoresult)
+        if (self.changdiresults == () or self.changdiresults==None):
             qw = QtWidgets.QWidget()
-            QMessageBox.warning(qw, '错误', "没有数据", QMessageBox.Ok)
+            QMessageBox.warning(qw, '错误', "没有数据,请导入比赛数据！！", QMessageBox.Ok)
         else:
             # for i in self.changdihaoresult:
             #     self.li.append(i[0])
@@ -1041,7 +1044,7 @@ class Ui_Form(QWidget):
             print(self.yundongyuan)
             if(self.yundongyuan==()):
                 qw = QtWidgets.QWidget()
-                QMessageBox.warning(qw, '错误', "没有数据", QMessageBox.Ok)
+                QMessageBox.warning(qw, '错误', "没有数据,请导入比赛数据！！", QMessageBox.Ok)
             else:
                 self.iskaishi = True
                 # print(self.yundongyuans)
@@ -1059,7 +1062,7 @@ class Ui_Form(QWidget):
     def changdinext(self):
         if(self.changdi.text()==""):
             qw = QtWidgets.QWidget()
-            QMessageBox.warning(qw, '错误', "没有数据", QMessageBox.Ok)
+            QMessageBox.warning(qw, '错误', "没有数据,请导入比赛数据！！", QMessageBox.Ok)
         else:
             self.changdi_index +=1
             if(self.changdi_index<len(self.changdiresults)):
@@ -1145,7 +1148,7 @@ class Ui_Form(QWidget):
 
     def export(self,):
         table_name="bisaixinxi"
-        output_path="test_output.xls"
+        output_path="比赛信息.xls"
         self._cursor = self.stat.getConnect().cursor()
         print(self._cursor)
         count = self._cursor.execute('select * from ' + table_name)
@@ -1185,27 +1188,32 @@ class Ui_Form(QWidget):
         qw = QtWidgets.QWidget()
         QMessageBox.warning(qw, '成功', "导出成功", QMessageBox.Ok)
 
-    def open_excel(self):
+    def open_excel(self,filename):
         try:
-            book = xlrd.open_workbook("test_input.xls")  # 文件名，把文件与py文件放在同一目录下
+            book = xlrd.open_workbook(filename)  # 文件名，把文件与py文件放在同一目录下
             print('打开文件')
         except:
             qw = QtWidgets.QWidget()
             QMessageBox.warning(qw, '错误', "打开文件失败", QMessageBox.Ok)
         try:
-            sheet = book.sheet_by_name("table_bisaixinxi")  # execl里面的worksheet1
+            # sheet = book.sheet_by_name("table_bisaixinxi")  # execl里面的worksheet1
+            sheet = book.sheets()[0]
             print('打开作业簿')
             return sheet
         except:
             qw = QtWidgets.QWidget()
             QMessageBox.warning(qw, '错误', "打开文件失败2", QMessageBox.Ok)
 
-    def insert_deta(self):
+    def insert_deta(self,filename):
         self.showMsgSignal.emit("导入中......")
-        sheet = self.open_excel()
+        sheet = self.open_excel(filename)
 
         self.row_num = sheet.nrows
         self.value=[]
+
+        if (len(sheet.row_values(1)) != 39):
+            self.showMsgSignal.emit("excel表字段与数据库不符，请重新导入")
+
 
 #         progress = QProgressDialog(self)
 #         progress.setWindowTitle("请稍等")
@@ -1226,61 +1234,53 @@ class Ui_Form(QWidget):
 # 由上面我们知道：使用setMinimum() 和setMaximum() 或构造函数来设置操作中的“steps”数量，并在操作进行时调用setValue()。setRange(0,num)就是设置其最小和最大值，这里最小值0，最大值num，num是根据输入框中的数字确定的。
 #  """
 #         progress.setRange(0, row_num)
+        else:
+            for i in range(1, self.row_num):  # 第一行是标题名，对应表中的字段名所以应该从第二行开始，计算机以0开始计数，所以值是1
+                print(i)
+                row_data = sheet.row_values(i)
+                self.value = []
+                for j in row_data:
+                    if(j=="None"):
+                        j=''
+                    self.value.append(j)
+                    # self.value = (row_data[0], row_data[1], row_data[2], row_data[3],row_data[4], row_data[5], row_data[6], row_data[7],row_data[8], row_data[9], row_data[10], row_data[11],row_data[12], row_data[13], row_data[14], row_data[15],row_data[16], row_data[17], row_data[18], row_data[19],row_data[20], row_data[21], row_data[22], row_data[23],row_data[24], row_data[25], row_data[26], row_data[27],row_data[28], row_data[29], row_data[30], row_data[31],row_data[32], row_data[33], row_data[34], row_data[35],row_data[36])
+                # print(i)
+                self.value=tuple(self.value)
+                # print(self.value[0])
 
-
-
-
-        for i in range(1, self.row_num):  # 第一行是标题名，对应表中的字段名所以应该从第二行开始，计算机以0开始计数，所以值是1
-            print(i)
-            row_data = sheet.row_values(i)
-            self.value = []
-            for j in row_data:
-                if(j=="None"):
-                    j=''
-                self.value.append(j)
-                # self.value = (row_data[0], row_data[1], row_data[2], row_data[3],row_data[4], row_data[5], row_data[6], row_data[7],row_data[8], row_data[9], row_data[10], row_data[11],row_data[12], row_data[13], row_data[14], row_data[15],row_data[16], row_data[17], row_data[18], row_data[19],row_data[20], row_data[21], row_data[22], row_data[23],row_data[24], row_data[25], row_data[26], row_data[27],row_data[28], row_data[29], row_data[30], row_data[31],row_data[32], row_data[33], row_data[34], row_data[35],row_data[36])
-            # print(i)
-            self.value=tuple(self.value)
-            # print(self.value)
-            # print(self.value[0])
-
-            sql="SELECT bisaixuhao from bisaixinxi where bisaixuhao='%s'"%self.value[0]
-            # print(sql)
-            result=self.stat.fetchone(sql)
-            # print(result,"99999999999999999")
-            if(result==None):
-                sql = "INSERT INTO bisaixinxi(bisaixuhao,gamesn,zonglunci,lunci,changdi,changdihao,jibie,qingfangbianhao,qingfangxinming,qingfangdanwei,hongfangbianhao,hongfangxinming,hongfangdanwei,bisaizhuangtai,huoshengzhe,huoshengfangshi,qingfangdefen,hongfangdefen,qingfangkoufen,hongfangkoufen,qingfangdefen1,hongfangdefen1,qingfangkoufen1,hongfangkoufen1,qingfangdefen2,hongfangdefen2,qingfangkoufen2,hongfangkoufen2,qingfangdefen3,hongfangdefen3,qingfangkoufen3,hongfangkoufen3,qingfangdefen4,hongfangdefen4,qingfangkoufen4,hongfangkoufen4)VALUES" + str(
-                    self.value)
-                self.stat.insert(sql)
+                sql="SELECT bisaixuhao from bisaixinxi where bisaixuhao='%s'"%self.value[0]
                 # print(sql)
-            else:
-                sql="DELETE FROM bisaixinxi WHERE bisaixuhao=%s"%self.value[0]
-                self.stat.delete(sql)
-                sql = "INSERT INTO bisaixinxi(bisaixuhao,gamesn,zonglunci,lunci,changdi,changdihao,jibie,qingfangbianhao,qingfangxinming,qingfangdanwei,hongfangbianhao,hongfangxinming,hongfangdanwei,bisaizhuangtai,huoshengzhe,huoshengfangshi,qingfangdefen,hongfangdefen,qingfangkoufen,hongfangkoufen,qingfangdefen1,hongfangdefen1,qingfangkoufen1,hongfangkoufen1,qingfangdefen2,hongfangdefen2,qingfangkoufen2,hongfangkoufen2,qingfangdefen3,hongfangdefen3,qingfangkoufen3,hongfangkoufen3,qingfangdefen4,hongfangdefen4,qingfangkoufen4,hongfangkoufen4)VALUES" + str(
-                    self.value)
-                self.stat.insert(sql)
-            # progress.setValue(i)
+                result=self.stat.fetchone(sql)
+                # print(result,"99999999999999999")
+                if(result==None):
+                    sql = "INSERT INTO bisaixinxi(bisaixuhao,zonglunci,lunci,changdi,changdihao,jibie,riqi,qingfangbianhao,qingfangxinming,qingfangdanwei,hongfangbianhao,hongfangxinming,hongfangdanwei,bisaizhuangtai,huoshengzhe,huoshengfangshi,qingfangdefen,hongfangdefen,qingfangkoufen,hongfangkoufen,qingfangdefen1,hongfangdefen1,qingfangkoufen1,hongfangkoufen1,qingfangdefen2,hongfangdefen2,qingfangkoufen2,hongfangkoufen2,qingfangdefen3,hongfangdefen3,qingfangkoufen3,hongfangkoufen3,qingfangdefen4,hongfangdefen4,qingfangkoufen4,hongfangkoufen4,yijian,erjian,sanjian)VALUES" + str(
+                        self.value)
+                    self.stat.insert(sql)
+                    # print(sql)
+                else:
+                    sql="DELETE FROM bisaixinxi WHERE bisaixuhao=%s"%self.value[0]
+                    self.stat.delete(sql)
+                    sql = "INSERT INTO bisaixinxi(bisaixuhao,zonglunci,lunci,changdi,changdihao,jibie,riqi,qingfangbianhao,qingfangxinming,qingfangdanwei,hongfangbianhao,hongfangxinming,hongfangdanwei,bisaizhuangtai,huoshengzhe,huoshengfangshi,qingfangdefen,hongfangdefen,qingfangkoufen,hongfangkoufen,qingfangdefen1,hongfangdefen1,qingfangkoufen1,hongfangkoufen1,qingfangdefen2,hongfangdefen2,qingfangkoufen2,hongfangkoufen2,qingfangdefen3,hongfangdefen3,qingfangkoufen3,hongfangkoufen3,qingfangdefen4,hongfangdefen4,qingfangkoufen4,hongfangkoufen4,yijian,erjian,sanjian)VALUES" + str(
+                        self.value)
+                    self.stat.insert(sql)
 
-
-                # print(sql)
-        # qw = QtWidgets.QWidget()
-        # QMessageBox.warning(qw, '成功', '导入成功', QMessageBox.Ok)
-        # QMessageBox.close()
-
-
-            # if progress.wasCanceled():
-            #     self.showMsgSignal.emit("操作失败")
-            #     break
-            # else:
-            #     progress.setValue(row_num)
-            #     self.showMsgSignal.emit("操作成功")
-        self.showMsgSignal.emit("导入成功")
-        self.firstchaxun()
+            self.showMsgSignal.emit("导入成功")
+            self.firstchaxun()
 
 
     def insert(self):
 
-        _thread.start_new_thread(self.insert_deta, ())
+        dlg = win32ui.CreateFileDialog(1)  # 1表示打开文件对话框
+        dlg.SetOFNInitialDir('C:/')  # 设置打开文件对话框中的初始显示目录
+        dlg.DoModal()
+        filename=""
+
+
+        filename = dlg.GetPathName()  # 获取选择的文件名称
+        print(filename)
+
+        if(filename!=None and filename!=""):
+            _thread.start_new_thread(self.insert_deta, (filename,))
 
 
 

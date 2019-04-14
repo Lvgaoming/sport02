@@ -2917,6 +2917,15 @@ class Ui_Form(object):
                 #     gl.set_value('changdihao',self.changdihao.text())
                     self.qingchu()
 
+                    # 道馆的每局比赛打完后给他清零，正式比赛一定要注释掉
+                    sql = "update bisaixinxi set hongfangdefen=%s,hongfangdefen1=%s,hongfangdefen2=%s,hongfangdefen3=%s,hongfangdefen4=%s,hongfangkoufen=%s,hongfangkoufen1=%s,hongfangkoufen2=%s,hongfangkoufen3=%s,hongfangkoufen4=%s," \
+                          "qingfangdefen=%s,qingfangdefen1=%s,qingfangdefen2=%s,qingfangdefen3=%s,qingfangdefen4=%s,qingfangkoufen=%s,qingfangkoufen1=%s,qingfangkoufen2=%s,qingfangkoufen3=%s,qingfangkoufen4=%s where bisaixuhao=%s" % (
+                        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                        gl.get_value('bisaixuhao'))
+                    print(sql)
+                    _thread.start_new_thread(self.stat.update, (sql,))
+
+
                     sql = "select bisaixuhao,changdihao,qingfangxinming,qingfangdanwei,hongfangxinming,hongfangdanwei,jibie,qingfangbianhao,hongfangbianhao,bisaizhuangtai,lunci " \
                           "from bisaixinxi where changdi='%s' and changdihao>'%s' and bisaizhuangtai='等待中' order by changdihao ASC LIMIT 1" % (
                     self.changdi.text(), self.changdihao.text())
@@ -3092,21 +3101,22 @@ class Ui_Form(object):
             # print(gl.get_value('honghujunum'))
             # print(gl.get_value('hongtoukuinum'))
             # print(gl.get_value('qingtoukuinum'))
-            try:
-                print('开始连接串口')
-                # print(gl.get_value())
-                x = serial.Serial(self.chuankou, "115200")
-                print(x)
-                self.dataFlag = True
-                _thread.start_new_thread(self.getData, (x,))
-
-                # 测试页面刷新
-                # _thread.start_new_thread(self.getData2,(x,))
-                self.lianjie_bt.setText('已连接')
-            except:
-                self.isfirst=True
-                qw = QtWidgets.QWidget()
-                QMessageBox.warning(qw, '错误', "连接串口失败，请检查串口号和波特率是否正确", QMessageBox.Ok)
+            # try:
+            #     print('开始连接串口')
+            #     # print(gl.get_value())
+            #     x = serial.Serial(self.chuankou, "57600")
+            #
+            #     print(x)
+            #     self.dataFlag = True
+            #     _thread.start_new_thread(self.getData, (x,))
+            #
+            #     # 测试页面刷新
+            #     # _thread.start_new_thread(self.getData2,(x,)    )
+            #     self.lianjie_bt.setText('已连接')
+            # except:
+            #     self.isfirst=True
+            #     qw = QtWidgets.QWidget()
+            #     QMessageBox.warning(qw, '错误', "连接串口失败，请检查串口号和波特率是否正确", QMessageBox.Ok)
 
 
 
@@ -3296,6 +3306,12 @@ class Ui_Form(object):
         self.isqingfangtestfinsh = False
         self.isqingfangtestfinsh = False
         self.ceshi_bt.setText('测试')
+
+        self.istest = False
+        self.isqingfangtestfinsh = False
+        self.ishongfangtestfinsh = False
+        self.isqingtoutestfinsh = False
+        self.ishongtoutestfinsh = False
 
 
         self.isjiashi = False
@@ -4022,10 +4038,10 @@ class Ui_Form(object):
                 is_rotate=last[7]
                 print("group_1",group_1)
                 #设备组号
-                zunum=int(last[2])
-                print("组号",zunum)
+                # zunum=int(last[2])
+                # print("组号",zunum)
                 print("设置的设备组号",self.zunum)
-                print('当前组号---',zunum)
+                # print('当前组号---',zunum)
                 #设备号
                 shebeinum=int(last[4])
 
@@ -4033,7 +4049,7 @@ class Ui_Form(object):
                 lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                 print("力值--", lizhi)
 
-                if ((group_1 == "2" or group_1 == "3" or group_1=="7" or group_1=="8") and self.zunum==zunum):
+                if ((group_1 == "2" or group_1 == "3" or group_1=="7" or group_1=="8") ):
 
                     lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                     # print(lizhi)
@@ -4093,7 +4109,7 @@ class Ui_Form(object):
                                 "background-color:red;border-color:red ;border-radius:15px")
                             self.ishongtoutestfinsh=True
 
-                        if (self.isqingfangtestfinsh and self.ishongfangtestfinsh and  self.ishongtoutestfinsh ):
+                        if (self.isqingfangtestfinsh and self.ishongfangtestfinsh and  self.ishongtoutestfinsh and isqingtoutestfinsh):
                             self.istest = False
                             self.ceshi_bt.setText('测试')
                 # 正式开始比赛
