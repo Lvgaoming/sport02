@@ -7,12 +7,13 @@
 # WARNING! All changes made in this file will be lost!
 import _thread
 import datetime
+import binascii
 import math
 import sys
 import PyQt5.sip
 import random
 from concurrent.futures import thread
-
+import playsound
 from playsound import playsound
 import serial
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -2917,13 +2918,7 @@ class Ui_Form(object):
                 #     gl.set_value('changdihao',self.changdihao.text())
                     self.qingchu()
 
-                    # 道馆的每局比赛打完后给他清零，正式比赛一定要注释掉
-                    sql = "update bisaixinxi set hongfangdefen=%s,hongfangdefen1=%s,hongfangdefen2=%s,hongfangdefen3=%s,hongfangdefen4=%s,hongfangkoufen=%s,hongfangkoufen1=%s,hongfangkoufen2=%s,hongfangkoufen3=%s,hongfangkoufen4=%s," \
-                          "qingfangdefen=%s,qingfangdefen1=%s,qingfangdefen2=%s,qingfangdefen3=%s,qingfangdefen4=%s,qingfangkoufen=%s,qingfangkoufen1=%s,qingfangkoufen2=%s,qingfangkoufen3=%s,qingfangkoufen4=%s where bisaixuhao=%s" % (
-                        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                        gl.get_value('bisaixuhao'))
-                    print(sql)
-                    _thread.start_new_thread(self.stat.update, (sql,))
+
 
 
                     sql = "select bisaixuhao,changdihao,qingfangxinming,qingfangdanwei,hongfangxinming,hongfangdanwei,jibie,qingfangbianhao,hongfangbianhao,bisaizhuangtai,lunci " \
@@ -3101,22 +3096,22 @@ class Ui_Form(object):
             # print(gl.get_value('honghujunum'))
             # print(gl.get_value('hongtoukuinum'))
             # print(gl.get_value('qingtoukuinum'))
-            # try:
-            #     print('开始连接串口')
-            #     # print(gl.get_value())
-            #     x = serial.Serial(self.chuankou, "57600")
-            #
-            #     print(x)
-            #     self.dataFlag = True
-            #     _thread.start_new_thread(self.getData, (x,))
-            #
-            #     # 测试页面刷新
-            #     # _thread.start_new_thread(self.getData2,(x,)    )
-            #     self.lianjie_bt.setText('已连接')
-            # except:
-            #     self.isfirst=True
-            #     qw = QtWidgets.QWidget()
-            #     QMessageBox.warning(qw, '错误', "连接串口失败，请检查串口号和波特率是否正确", QMessageBox.Ok)
+            try:
+                print('开始连接串口')
+                # print(gl.get_value())
+                x = serial.Serial(self.chuankou, "115200")
+
+                print(x)
+                self.dataFlag = True
+                _thread.start_new_thread(self.getData, (x,))
+
+                # 测试页面刷新
+                # _thread.start_new_thread(self.getData2,(x,)    )
+                self.lianjie_bt.setText('已连接')
+            except:
+                self.isfirst=True
+                qw = QtWidgets.QWidget()
+                QMessageBox.warning(qw, '错误', "连接串口失败，请检查串口号和波特率是否正确", QMessageBox.Ok)
 
 
 
@@ -3338,110 +3333,13 @@ class Ui_Form(object):
         self.qingfangtoukui.setStyleSheet(
             "background-color:#FFE05E;border-color:#FFE05E ;border-radius:15px")
 
-    # def chongsai(self):
-    #     self.qingfangzongfen.setText("0")
-    #     self.qingfangkoufen.setText("0")
-    #     self.qingfanghujufirst_lizhi.setText("0")
-    #     self.changcai_1_qing_1.setText("0")
-    #     self.changcai_1_qing_2.setText("0")
-    #     self.changcai_1_qing_3.setText("0")
-    #     self.changcai_1_qing_4.setText("0")
-    #     self.changcai_1_qing_5.setText("0")
-    #     self.changcai_2_qing_1.setText("0")
-    #     self.changcai_2_qing_2.setText("0")
-    #     self.changcai_2_qing_3.setText("0")
-    #     self.changcai_2_qing_4.setText("0")
-    #     self.changcai_2_qing_5.setText("0")
-    #     self.changcai_3_qing_1.setText("0")
-    #     self.changcai_3_qing_2.setText("0")
-    #     self.changcai_3_qing_3.setText("0")
-    #     self.changcai_3_qing_4.setText("0")
-    #     self.changcai_3_qing_5.setText("0")
-    #
-    #     self.qing_game_1_koufen.setText("0")
-    #     self.qing_game_1_defen.setText("0")
-    #
-    #     self.qing_game_2_koufen.setText("0")
-    #     self.qing_game_2_defen.setText("0")
-    #
-    #     self.qing_game_3_koufen.setText("0")
-    #     self.qing_game_3_defen.setText("0")
-    #
-    #     self.qing_game_4_koufen.setText("0")
-    #     self.qing_game_4_defen.setText("0")
-    #
-    #     self.hongfangzongfen.setText("0")
-    #     self.hongfangkoufen.setText("0")
-    #
-    #
-    #     self.changcai_1_hong_1.setText("0")
-    #     self.changcai_1_hong_2.setText("0")
-    #     self.changcai_1_hong_3.setText("0")
-    #     self.changcai_1_hong_4.setText("0")
-    #     self.changcai_1_hong_5.setText("0")
-    #     self.changcai_2_hong_1.setText("0")
-    #     self.changcai_2_hong_2.setText("0")
-    #     self.changcai_2_hong_3.setText("0")
-    #     self.changcai_2_hong_4.setText("0")
-    #     self.changcai_2_hong_5.setText("0")
-    #     self.changcai_3_hong_1.setText("0")
-    #     self.changcai_3_hong_2.setText("0")
-    #     self.changcai_3_hong_3.setText("0")
-    #     self.changcai_3_hong_4.setText("0")
-    #     self.changcai_3_hong_5.setText("0")
-    #
-    #     self.hong_game_1_koufen.setText("0")
-    #     self.hong_game_1_defen.setText("0")
-    #
-    #     self.hong_game_2_koufen.setText("0")
-    #     self.hong_game_2_defen.setText("0")
-    #
-    #     self.hong_game_3_koufen.setText("0")
-    #     self.hong_game_3_defen.setText("0")
-    #
-    #     self.hong_game_4_koufen.setText("0")
-    #     self.hong_game_4_defen.setText("0")
-    #     self.setdaojishi.setStyleSheet("color:#fff")
-    #
-    #     self.qingfanghujudefentime = 0
-    #     self.hongfanghujudefentime = 0
-    #     self.hongfanglizhi = ""
-    #     self.qingfanglizhi = ""
-    #
-    #     self.gamenum = 1
-    #     self.setgamenum.setText("第" + str(self.gamenum) + "局")
-    #     self.daojishi = 60
-    #     self.setdaojishi.setText(str(datetime.timedelta(seconds=int(self.daojishi)))[2:])
-    #
-    #     self.timer.stop()
-    #     self.istest = False
-    #     self.flag = True
-    #     self.isfight = False
-    #     self.dataFlag2 = False
-    #     self.ishujufirst_qing = True
-    #     self.issound = True
-    #     self.kaishi_bt.setText("开 始")
-    #     self.qinglabel.setStyleSheet("QLabel{color:#000}"
-    #                                  "QLabel{background-color:#fff}"
-    #                                  "QLabel{border:2px}"
-    #                                  "QLabel{border-radius:5px}"
-    #                                  "QLabel{padding:2px 4px}")
-    #
-    #     self.honglabel.setStyleSheet("QLabel{color:#000}"
-    #                                  "QLabel{background-color:#fff}"
-    #                                  "QLabel{border:2px}"
-    #                                  "QLabel{border-radius:5px}"
-    #                                  "QLabel{padding:2px 4px}")
-    #
-    #     self.qingfanghuju.setStyleSheet(
-    #         "background-color:#FFE05E;border-color:#FFE05E;border-radius:0px")
-    #
-    #     self.hongfanghuju.setStyleSheet("background-color:#FFE05E;border-color:#FFE05E ;border-radius:0px")
-    #
-    #     self.hongfangtoukui.setStyleSheet("background-color:#FFE05E;border-color:#FFE05E ;border-radius:15px")
-    #
-    #     self.qingfangtoukui.setStyleSheet(
-    #         "background-color:#FFE05E;border-color:#FFE05E ;border-radius:15px")
+        # 道馆的每局比赛打完后给他清零，正式比赛一定要注释掉
+        sql = "update bisaixinxi set hongfangdefen=%s,hongfangdefen1=%s,hongfangdefen2=%s,hongfangdefen3=%s,hongfangdefen4=%s,hongfangkoufen=%s,hongfangkoufen1=%s,hongfangkoufen2=%s,hongfangkoufen3=%s,hongfangkoufen4=%s," \
+              "qingfangdefen=%s,qingfangdefen1=%s,qingfangdefen2=%s,qingfangdefen3=%s,qingfangdefen4=%s,qingfangkoufen=%s,qingfangkoufen1=%s,qingfangkoufen2=%s,qingfangkoufen3=%s,qingfangkoufen4=%s where bisaixuhao=%s" % (
+                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                  gl.get_value('bisaixuhao'))
+        print(sql)
+        _thread.start_new_thread(self.stat.update, (sql,))
 
     def ceshi(self):
         self.istest=True
@@ -3609,7 +3507,7 @@ class Ui_Form(object):
         # self.stat.update(sql)
 
     def transform_hex_data(self, data):
-        return int(data.hex(), 16)
+        return int(data, 16)
 
     def start(self):
         # if self.serial_port.text() == '' or self.qujian == '' or self.bstime == '':
@@ -4011,7 +3909,7 @@ class Ui_Form(object):
 
             myout = []
             while x.inWaiting() > 0:
-                myout.append(x.read(1))
+                myout.append(binascii.b2a_hex(x.read(1)))
 
             if myout != []:
                 # myout = [b'\xAA', b'\x02', b'\x00', b'\x01', b'\xD0', b'\xD1', b'\xD2', b'\x01']
@@ -4023,7 +3921,7 @@ class Ui_Form(object):
                 # s = str(myout[0:])
                 s = str(myout)
                 #   print(s)
-                last = s.replace("b'\\x", "").replace("[", "").replace("']", "").replace(",", "").replace("' ",
+                last = s.replace("b'", "").replace("[", "").replace("']", "").replace(",", "").replace("' ",
                                                                                                           "").replace(
                     "b'_'", '')
                 print(last)
@@ -4109,7 +4007,7 @@ class Ui_Form(object):
                                 "background-color:red;border-color:red ;border-radius:15px")
                             self.ishongtoutestfinsh=True
 
-                        if (self.isqingfangtestfinsh and self.ishongfangtestfinsh and  self.ishongtoutestfinsh and isqingtoutestfinsh):
+                        if (self.isqingfangtestfinsh and self.ishongfangtestfinsh and  self.ishongtoutestfinsh and self.isqingtoutestfinsh):
                             self.istest = False
                             self.ceshi_bt.setText('测试')
                 # 正式开始比赛
@@ -4916,7 +4814,7 @@ if __name__ == '__main__':
     utils.mysqlUtil.MysqlUtil.host = 'localhost'
     utils.mysqlUtil.MysqlUtil.dbPort = '3306'
     utils.mysqlUtil.MysqlUtil.username = 'root'
-    utils.mysqlUtil.MysqlUtil.password = 'lgm123'
+    utils.mysqlUtil.MysqlUtil.password = 'root123'
     utils.mysqlUtil.MysqlUtil.database = 'sport'
 
     gl._init()

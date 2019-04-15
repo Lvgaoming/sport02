@@ -838,7 +838,7 @@ class Ui_Form(QWidget):
         self.defenqujian = QtWidgets.QLineEdit(self.verticalLayoutWidget)
         self.defenqujian.setGeometry(QtCore.QRect(88, 270, 40, 20))
         self.defenqujian.setObjectName("defenqujian")
-        self.defenqujian.setText("2")
+        self.defenqujian.setText("3")
         self.defenqujian.setAlignment(QtCore.Qt.AlignCenter)
         self.defenqujian.setFixedWidth(40)
         self.defenqujian.setStyleSheet(
