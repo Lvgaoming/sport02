@@ -17,6 +17,7 @@ class Ui_Form(QObject):
 
     showMsgSignal = pyqtSignal(str)
 
+
     # def __init__(self):
         # self.url_info.setText(utils.mysqlUtil.MysqlUtil.host)
         # self.username_info.setText(utils.mysqlUtil.MysqlUtil.username)
