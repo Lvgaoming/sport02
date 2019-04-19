@@ -2941,7 +2941,7 @@ class Ui_Form(object):
 
                         # _thread.start_new_thread(self.stat.update, (sql,))
 
-                        
+
                         #
                         # sql = "DELETE FROM dangqianbisai WHERE id=1"
                         # print(sql)
@@ -3550,6 +3550,8 @@ class Ui_Form(object):
                 self.xiuxitimenow = int(self.xiuxitime)
                 self.dataFlag2 = True
                 self.dataFlag=True
+
+                print(self.gamenum)
                 self.setgamenum.setText("第" + str(self.gamenum) + "局")
                 self.setdaojishi.setStyleSheet("color:#fff")
 
@@ -3824,7 +3826,7 @@ class Ui_Form(object):
 
                                 self.timer.stop()
                                 sql = "update dangqianbisai set changdihao=%s,daojishi=%s,bisaizhuangtai=%s,jishi=%s,dangqianju=%s where id = %s and changdi='%s'" % (
-                                    gl.get_value('changdihao'), self.daojishinow, 5, self.xiuxitimenow, 5,gl.get_value('bisaixuhao',self.changdi.text()))
+                                    gl.get_value('changdihao'), self.daojishinow, 5, self.xiuxitime, 5,gl.get_value('bisaixuhao',self.changdi.text()),self.changdi.text())
                                 print(sql)
                                 _thread.start_new_thread(self.stat.update, (sql,))
                                 # self.stat.update(sql)
