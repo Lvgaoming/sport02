@@ -3018,7 +3018,7 @@ class Ui_Form(object):
                 self.defenqujian = int(gl.get_value('defenqujian'))
 
                 # 串口
-                self.chuankou = gl.get_value('chuankou')
+                # self.chuankou = gl.get_value('chuankou')
                 # print(self.chuankou)
 
                 # 裁判时差
@@ -3104,8 +3104,16 @@ class Ui_Form(object):
                 # print(gl.get_value('qingtoukuinum'))
                 try:
                     print('开始连接串口')
-                    # print(gl.get_value())
-                    x = serial.Serial(self.chuankou, "115200")
+                    import serial.tools.list_ports
+                    port_list = list(serial.tools.list_ports.comports())
+                    if len(port_list) == 0:
+                        qw = QtWidgets.QWidget()
+                        QMessageBox.warning(qw, '错误', "未找到串口设备", QMessageBox.Ok)
+                    else:
+                        for i in range(0, len(port_list)):
+                            print(str(port_list[i])[:4])
+
+                    x = serial.Serial(str(port_list[0])[:4], "115200")
 
                     print(x)
                     self.dataFlag = True
