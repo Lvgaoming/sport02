@@ -2969,151 +2969,158 @@ class Ui_Form(object):
 
     def lianjie(self):
         if (self.isfirst):
-            # 比赛局数
-            self.gamenums = gl.get_value('bisaijushu')
-            self.gamenumsnow = int(self.gamenums)
-            self.gamenum=int(gl.get_value('dangqianju'))
-            # print('当前局')
-            # print(self.gamenum)
-            self.setgamenum.setText("第" + str(self.gamenum) + "局")
-            # 比赛裁判数
-            self.caipanshu = self.changcainum.text()
-            # 获取比赛局时
-            self.daojishi = gl.get_value('jushi')
-            self.daojishinow = int(gl.get_value('dangqianshijian'))
-
-
-            self.jiashijushi=gl.get_value('jiashijushi')
-            self.setdaojishi.setText(str(datetime.timedelta(seconds=int(self.daojishinow)))[2:])
-            # print(self.daojishi)
-            # 比赛休息时间
-            self.xiuxitime = gl.get_value('xiuxitime')
-            self.xiuxitimenow = int(self.xiuxitime)
-            # print(self.xiuxitime)
-
-            # #当前局
-            # self.dangqianju=gl.get_value('dangqianju')
-            #
-            # #当前时间
-            # self.dangqianshijian=gl.get_value('dangqianshijian')
-            #
-            # print(self.dangqianju)
-            # print(self.dangqianshijian)
-
-            #计时时间
-            self.jishitime=gl.get_value('jishitime')
-            self.jishitimenow=int(self.jishitime)
-
-            # 有效得分
-            self.youxiaodefen = int(gl.get_value('youxiaodefen'))
-            # 最大分差
-            self.maxfencha = int(gl.get_value('zuidafencha'))
-
-
-            # 得分区间
-            self.defenqujian = int(gl.get_value('defenqujian'))
-
-            # 串口
-            self.chuankou = gl.get_value('chuankou')
-            # print(self.chuankou)
-
-            # 裁判时差
-            self.caipanshicha = int(gl.get_value('caipanshicha'))
-
-            #组号
-            self.zunum=int(gl.get_value('hujunum'))
-
-            # 设置青方信息
-            self.qingfangdanwei.setText(gl.get_value('qingfangdanwei'))
-            # print(gl.get_value('qingfangdanwei'))
-            self.qingfangname.setText(gl.get_value('qingfangname'))
-            # print(gl.get_value('qingfangname'))
-
-            # 设置红方信息
-            self.hongfangdanwei.setText(gl.get_value('hongfangdanwei'))
-            # print(gl.get_value('hongfangname'))
-            # print(gl.get_value('hongfangdanwei'))
-            self.hongfangname.setText(gl.get_value('hongfangname'))
-
-            self.qingfanghujufirst_lizhi.setText(str(self.defenqujian))
-
-            # 允许扣分数，超过则对方胜
-            self.koufenshu=int(gl.get_value('koufenshu'))
-            # 加时赛得分，达到即胜
-            self.jiashizuidadefen=int(gl.get_value('jiashizuidadefen'))
-            # 加时赛允许扣分数，超过则对方胜
-            self.jiashikoufenshu=int(gl.get_value('jiashikoufenshu'))
-
-            self.lunci.setText(gl.get_value('lunci'))
-
-            self.changdi.setText(gl.get_value('changdi'))
-            self.changdihao.setText(gl.get_value('changdihao'))
-            self.jibie.setText(gl.get_value('jibie'))
-
-            #设置设备号
-            self.qingtoukuinum.setText(gl.get_value('qingtoukuinum'))
-            self.hongtoukuinum.setText(gl.get_value('hongtoukuinum'))
-            self.qinghujunum.setText(gl.get_value('qinghujunum'))
-            self.honghujunum.setText(gl.get_value('honghujunum'))
-
-            self.isfirst = False
-            self.istest = False
-            self.t1=0
-
-            sql = "select bisaixuhao,changdihao,qingfangxinming,qingfangdanwei,hongfangxinming,hongfangdanwei,jibie,qingfangbianhao,hongfangbianhao from bisaixinxi where changdi='%s' and changdihao='%s' and bisaizhuangtai='等待中' order by changdihao" % (
-                self.changdi.text(), self.changdihao.text())
-            # print(sql)
-            self.yundongyuan = self.stat.fetchone(sql)
-            # print(self.yundongyuan)
-
-            # 设置青方信息
-            self.qingfangdanwei.setText(self.yundongyuan[3])
-            self.qingfangname.setText(self.yundongyuan[2])
-
-            # 设置红方信息
-            self.hongfangdanwei.setText(self.yundongyuan[5])
-            self.hongfangname.setText(self.yundongyuan[4])
-
-            self.qingfanghujufirst_lizhi.setText(str(self.defenqujian))
-
-            self.qingfangtoukuirotatetime=0
-            self.hongfangtoukuirotatetime=0
-
-            sql="select id from dangqianbisai where changdi='%s'"%(self.changdi.text())
-            if(self.stat.fetchone(sql)):
-
-                sql = "DELETE FROM dangqianbisai WHERE changdi='%s'"%(self.changdi.text())
-                # print(sql)
-                _thread.start_new_thread(self.stat.delete, (sql,))
-                time.sleep(1)
-                # self.stat.delete(sql)
-
-
-            sql="insert into dangqianbisai (id,changdi,changdihao,daojishi,bisaizhuangtai,jishi,dangqianju,bisaixuhao,defenqujian) values (%s,'%s',%s,%s,%s,%s,%s,%s,%s)"%(gl.get_value('bisaixuhao'),self.changdi.text(),gl.get_value('changdihao'),self.daojishi,0,gl.get_value('jishitime'),0,gl.get_value('bisaixuhao'),gl.get_value('defenqujian'))
-            print(sql)
-            _thread.start_new_thread(self.stat.insert, (sql,))
-            self.stat.insert(sql)
-
-            # print(gl.get_value('qinghujunum'))
-            # print(gl.get_value('honghujunum'))
-            # print(gl.get_value('hongtoukuinum'))
-            # print(gl.get_value('qingtoukuinum'))
-            try:
-                print('开始连接串口')
-                # print(gl.get_value())
-                x = serial.Serial(self.chuankou, "115200")
-
-                print(x)
-                self.dataFlag = True
-                _thread.start_new_thread(self.getData, (x,))
-
-                # 测试页面刷新
-                # _thread.start_new_thread(self.getData2,(x,)    )
-                self.lianjie_bt.setText('已连接')
-            except:
-                self.isfirst=True
+            # 判断是否已经设置比赛信息
+            if (gl.get_value('bisaijushu') == None):
                 qw = QtWidgets.QWidget()
-                QMessageBox.warning(qw, '错误', "连接串口失败，请检查串口号和波特率是否正确", QMessageBox.Ok)
+                QMessageBox.warning(qw, '错误', "请先设置比赛信息", QMessageBox.Ok)
+
+            else:
+                # 比赛局数
+                self.gamenums = gl.get_value('bisaijushu')
+                self.gamenumsnow = int(self.gamenums)
+                self.gamenum = int(gl.get_value('dangqianju'))
+                # print('当前局')
+                # print(self.gamenum)
+                self.setgamenum.setText("第" + str(self.gamenum) + "局")
+                # 比赛裁判数
+                self.caipanshu = self.changcainum.text()
+                # 获取比赛局时
+                self.daojishi = gl.get_value('jushi')
+                self.daojishinow = int(gl.get_value('dangqianshijian'))
+
+                self.jiashijushi = gl.get_value('jiashijushi')
+                self.setdaojishi.setText(str(datetime.timedelta(seconds=int(self.daojishinow)))[2:])
+                # print(self.daojishi)
+                # 比赛休息时间
+                self.xiuxitime = gl.get_value('xiuxitime')
+                self.xiuxitimenow = int(self.xiuxitime)
+                # print(self.xiuxitime)
+
+                # #当前局
+                # self.dangqianju=gl.get_value('dangqianju')
+                #
+                # #当前时间
+                # self.dangqianshijian=gl.get_value('dangqianshijian')
+                #
+                # print(self.dangqianju)
+                # print(self.dangqianshijian)
+
+                # 计时时间
+                self.jishitime = gl.get_value('jishitime')
+                self.jishitimenow = int(self.jishitime)
+
+                # 有效得分
+                self.youxiaodefen = int(gl.get_value('youxiaodefen'))
+                # 最大分差
+                self.maxfencha = int(gl.get_value('zuidafencha'))
+
+                # 得分区间
+                self.defenqujian = int(gl.get_value('defenqujian'))
+
+                # 串口
+                self.chuankou = gl.get_value('chuankou')
+                # print(self.chuankou)
+
+                # 裁判时差
+                self.caipanshicha = int(gl.get_value('caipanshicha'))
+
+                # 组号
+                self.zunum = int(gl.get_value('hujunum'))
+
+                # 设置青方信息
+                self.qingfangdanwei.setText(gl.get_value('qingfangdanwei'))
+                # print(gl.get_value('qingfangdanwei'))
+                self.qingfangname.setText(gl.get_value('qingfangname'))
+                # print(gl.get_value('qingfangname'))
+
+                # 设置红方信息
+                self.hongfangdanwei.setText(gl.get_value('hongfangdanwei'))
+                # print(gl.get_value('hongfangname'))
+                # print(gl.get_value('hongfangdanwei'))
+                self.hongfangname.setText(gl.get_value('hongfangname'))
+
+                self.qingfanghujufirst_lizhi.setText(str(self.defenqujian))
+
+                # 允许扣分数，超过则对方胜
+                self.koufenshu = int(gl.get_value('koufenshu'))
+                # 加时赛得分，达到即胜
+                self.jiashizuidadefen = int(gl.get_value('jiashizuidadefen'))
+                # 加时赛允许扣分数，超过则对方胜
+                self.jiashikoufenshu = int(gl.get_value('jiashikoufenshu'))
+
+                self.lunci.setText(gl.get_value('lunci'))
+
+                self.changdi.setText(gl.get_value('changdi'))
+                self.changdihao.setText(gl.get_value('changdihao'))
+                self.jibie.setText(gl.get_value('jibie'))
+
+                # 设置设备号
+                self.qingtoukuinum.setText(gl.get_value('qingtoukuinum'))
+                self.hongtoukuinum.setText(gl.get_value('hongtoukuinum'))
+                self.qinghujunum.setText(gl.get_value('qinghujunum'))
+                self.honghujunum.setText(gl.get_value('honghujunum'))
+
+                self.isfirst = False
+                self.istest = False
+                self.t1 = 0
+
+                sql = "select bisaixuhao,changdihao,qingfangxinming,qingfangdanwei,hongfangxinming,hongfangdanwei,jibie,qingfangbianhao,hongfangbianhao from bisaixinxi where changdi='%s' and changdihao='%s' and bisaizhuangtai='等待中' order by changdihao" % (
+                    self.changdi.text(), self.changdihao.text())
+                # print(sql)
+                self.yundongyuan = self.stat.fetchone(sql)
+                # print(self.yundongyuan)
+
+                # 设置青方信息
+                self.qingfangdanwei.setText(self.yundongyuan[3])
+                self.qingfangname.setText(self.yundongyuan[2])
+
+                # 设置红方信息
+                self.hongfangdanwei.setText(self.yundongyuan[5])
+                self.hongfangname.setText(self.yundongyuan[4])
+
+                self.qingfanghujufirst_lizhi.setText(str(self.defenqujian))
+
+                self.qingfangtoukuirotatetime = 0
+                self.hongfangtoukuirotatetime = 0
+
+                sql = "select id from dangqianbisai where changdi='%s'" % (self.changdi.text())
+                if (self.stat.fetchone(sql)):
+                    sql = "DELETE FROM dangqianbisai WHERE changdi='%s'" % (self.changdi.text())
+                    # print(sql)
+                    _thread.start_new_thread(self.stat.delete, (sql,))
+                    time.sleep(1)
+                    # self.stat.delete(sql)
+
+                sql = "insert into dangqianbisai (id,changdi,changdihao,daojishi,bisaizhuangtai,jishi,dangqianju,bisaixuhao,defenqujian) values (%s,'%s',%s,%s,%s,%s,%s,%s,%s)" % (
+                gl.get_value('bisaixuhao'), self.changdi.text(), gl.get_value('changdihao'), self.daojishi, 0,
+                gl.get_value('jishitime'), 0, gl.get_value('bisaixuhao'), gl.get_value('defenqujian'))
+                print(sql)
+                _thread.start_new_thread(self.stat.insert, (sql,))
+                self.stat.insert(sql)
+
+                # print(gl.get_value('qinghujunum'))
+                # print(gl.get_value('honghujunum'))
+                # print(gl.get_value('hongtoukuinum'))
+                # print(gl.get_value('qingtoukuinum'))
+                try:
+                    print('开始连接串口')
+                    # print(gl.get_value())
+                    x = serial.Serial(self.chuankou, "115200")
+
+                    print(x)
+                    self.dataFlag = True
+                    _thread.start_new_thread(self.getData, (x,))
+
+                    # 测试页面刷新
+                    # _thread.start_new_thread(self.getData2,(x,)    )
+                    self.lianjie_bt.setText('已连接')
+                except:
+                    self.isfirst = True
+                    qw = QtWidgets.QWidget()
+                    QMessageBox.warning(qw, '错误', "连接串口失败，请检查串口号和波特率是否正确", QMessageBox.Ok)
+
+
+
 
 
 
@@ -4828,9 +4835,7 @@ if __name__ == '__main__':
     utils.mysqlUtil.MysqlUtil.username = 'root'
     utils.mysqlUtil.MysqlUtil.password = 'lgm123'
     utils.mysqlUtil.MysqlUtil.database = 'sport'
-
     gl._init()
-
     app = QApplication(sys.argv)
     main = QtWidgets.QMainWindow()
     seting = setSettingWindow()
