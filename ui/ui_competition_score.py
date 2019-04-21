@@ -3392,7 +3392,7 @@ class Ui_Form(object):
         sql = "update dangqianbisai set huoshengzhe='%s'  where bisaixuhao = '%s'" % (
             0,
             gl.get_value('bisaixuhao'))
-        # print(sql)
+        print(sql)
         _thread.start_new_thread(self.stat.update, (sql,))
         # self.stat.update(sql)
         self.timer.stop()
@@ -3458,10 +3458,20 @@ class Ui_Form(object):
 
         if(self.isjiashi):
             if (int(self.qingfangkoufen.text()) >= self.jiashikoufenshu):
-                self.hongsheng()
+                music_path = r'music\jieshu.wav'
+                self.sound(music_path)
+                self.timer.stop()
+                self.dataFlag = False
+                qw = QtWidgets.QWidget()
+                QMessageBox.warning(qw, '提示', "青方扣分数已达最大扣分数", QMessageBox.Ok)
         else:
             if(int(self.qingfangkoufen.text())>=self.koufenshu):
-                self.hongsheng()
+                music_path = r'music\jieshu.wav'
+                self.sound(music_path)
+                self.timer.stop()
+                self.dataFlag = False
+                qw = QtWidgets.QWidget()
+                QMessageBox.warning(qw, '提示', "青方扣分数已达最大扣分数", QMessageBox.Ok)
 
 
     def qingkoufenjian(self):
@@ -3506,10 +3516,22 @@ class Ui_Form(object):
         # self.stat.update(sql)
         if (self.isjiashi):
             if (int(self.hongfangkoufen.text()) >= self.jiashikoufenshu):
-                self.qingsheng()
+                self.setgamenum.setText("结束")
+                music_path = r'music\jieshu.wav'
+                self.sound(music_path)
+                self.timer.stop()
+                self.dataFlag = False
+                qw = QtWidgets.QWidget()
+                QMessageBox.warning(qw, '提示', "红方扣分数已达最大扣分数", QMessageBox.Ok)
         else:
             if (int(self.hongfangkoufen.text()) >= self.koufenshu):
-                self.qingsheng()
+                self.setgamenum.setText("结束")
+                music_path = r'music\jieshu.wav'
+                self.sound(music_path)
+                self.timer.stop()
+                self.dataFlag = False
+                qw = QtWidgets.QWidget()
+                QMessageBox.warning(qw, '提示', "红方扣分数已达最大扣分数", QMessageBox.Ok)
 
     def hongkoufenjian(self):
         self.hongfangkoufen.setText(str(int(self.hongfangkoufen.text()) - 1))
@@ -3567,7 +3589,10 @@ class Ui_Form(object):
                 self.dataFlag=True
 
                 print(self.gamenum)
-                self.setgamenum.setText("第" + str(self.gamenum) + "局")
+                if(self.isjiashi):
+                    self.setgamenum.setText("决胜局")
+                else:
+                    self.setgamenum.setText("第" + str(self.gamenum) + "局")
                 self.setdaojishi.setStyleSheet("color:#fff")
 
                 self.kaishi_bt.setText("暂 停")
@@ -3618,6 +3643,16 @@ class Ui_Form(object):
 
         if (int(self.daojishinow) > 0):
 
+            if (self.isjiashi):
+                if (int(self.hongfangzongfen.text()) >= self.jiashizuidadefen or int(self.hongfangzongfen.text()) >= self.jiashizuidadefen):
+                    self.setgamenum.setText("结束")
+                    music_path = r'music\jieshu.wav'
+                    self.sound(music_path)
+                    self.timer.stop()
+                    self.dataFlag = False
+                    qw = QtWidgets.QWidget()
+                    QMessageBox.warning(qw, '提示', "已达到加时赛最大得分", QMessageBox.Ok)
+            print("青方护具护具号", self.qinghujunum.text())
             self.isxiuxi=True
 
             self.t2 = time.time()
@@ -4075,9 +4110,7 @@ class Ui_Form(object):
                                 _thread.start_new_thread(self.stat.update, (sql,))
                                 # self.hongfangzongfen.setText(str(int(self.hongfangzongfen.text()) + 2))
                                 # self.stat.update(sql)
-                                if (self.isjiashi):
-                                    if (int(self.hongfangzongfen.text()) >= self.jiashizuidadefen):
-                                        self.hongsheng()
+
 
                                 self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
 
@@ -4135,9 +4168,7 @@ class Ui_Form(object):
                                 _thread.start_new_thread(self.stat.update, (sql,))
                                 # self.qingfangzongfen.setText(str(int(self.qingfangzongfen.text()) + 2))
                                 # self.stat.update(sql)
-                                if (self.isjiashi):
-                                    if (int(self.qingfangzongfen.text()) >= self.jiashizuidadefen):
-                                        self.qingsheng()
+
                                 self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
 
                             # print("当力值小于" + str(self.firstlizhi_hong - (30 * int(self.defenqujian))) + "得两分")
@@ -4203,9 +4234,7 @@ class Ui_Form(object):
                                     _thread.start_new_thread(self.stat.update, (sql,))
                                     # self.hongfangzongfen.setText(str(int(self.hongfangzongfen.text()) + 2))
                                     # self.stat.update(sql)
-                                if(self.isjiashi):
-                                    if(int(self.hongfangzongfen.text())>=self.jiashizuidadefen):
-                                        self.hongsheng()
+
 
                                 self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
 
@@ -4275,9 +4304,7 @@ class Ui_Form(object):
                                     _thread.start_new_thread(self.stat.update, (sql,))
                                     # self.qingfangzongfen.setText(str(int(self.qingfangzongfen.text()) + 2))
                                     # self.stat.update(sql)
-                                if (self.isjiashi):
-                                    if (int(self.qingfangzongfen.text()) >= self.jiashizuidadefen):
-                                        self.qingsheng()
+
                                 self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
 
 
