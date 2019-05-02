@@ -3360,7 +3360,15 @@ class Ui_Form(object):
         # _thread.start_new_thread(self.stat.update, (sql,))
 
     def ceshi(self):
-        self.istest=True
+        if(not self.istest):
+            self.istest=True
+            self.ceshi_bt.setText("取消")
+
+        else:
+            self.istest=False
+
+            self.ceshi_bt.setText("测试")
+
 
     def qingsheng(self):
 
@@ -4029,6 +4037,7 @@ class Ui_Form(object):
                 # print("力值--", lizhi)
 
                 if ((group_1 == "2" or group_1 == "3" or group_1=="7" or group_1=="8") ):
+                    self.shuaxin_bt.click()
 
                     # lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                     # print(lizhi)
@@ -4091,9 +4100,12 @@ class Ui_Form(object):
                         if (self.isqingfangtestfinsh and self.ishongfangtestfinsh and  self.ishongtoutestfinsh and self.isqingtoutestfinsh):
                             self.istest = False
                             self.ceshi_bt.setText('已测试')
+                        self.shuaxin_bt.click()
+
+
                 # 正式开始比赛
                 if (self.dataFlag2):
-
+                    self.shuaxin_bt.click()
                     if(group_1=="7" or group_1=="8"):
                         if (group_1 == "7" and shebeinum==int(self.qingtoukuinum.text())):
                             print('青方头盔')
@@ -4340,6 +4352,7 @@ class Ui_Form(object):
                             # print("ID:" + str(lizhi))
                         myout = []
                         self.ishujufirst = False
+                        self.shuaxin_bt.click()
 
 
 
@@ -4356,7 +4369,7 @@ class Ui_Form(object):
                         group = last[9]
                         # print("组别" + group)
                         value = last[7]
-
+                        self.shuaxin_bt.click()
 
 
 
@@ -4798,6 +4811,7 @@ class Ui_Form(object):
                                 # self.stat.update(sql)
                                 _thread.start_new_thread(self.stat.update, (sql,))
                                 self.fencha(int(self.qingfangzongfen.text()),int(self.hongfangzongfen.text()))
+                                self.shuaxin_bt.click()
             # QApplication.processEvents()
 
     def getData2(self,x ):
