@@ -33,6 +33,7 @@ class Ui_Form(object):
 
     updateMsgSignal = pyqtSignal(str)
     stat = utils.mysqlUtil.MysqlUtil()
+    gui = QApplication.processEvents
 
     def setupUi(self, Form):
 
@@ -3351,12 +3352,12 @@ class Ui_Form(object):
             "background-color:#FFE05E;border-color:#FFE05E ;border-radius:15px")
 
         # 道馆的每局比赛打完后给他清零，正式比赛一定要注释掉
-        sql = "update bisaixinxi set hongfangdefen=%s,hongfangdefen1=%s,hongfangdefen2=%s,hongfangdefen3=%s,hongfangdefen4=%s,hongfangkoufen=%s,hongfangkoufen1=%s,hongfangkoufen2=%s,hongfangkoufen3=%s,hongfangkoufen4=%s," \
-              "qingfangdefen=%s,qingfangdefen1=%s,qingfangdefen2=%s,qingfangdefen3=%s,qingfangdefen4=%s,qingfangkoufen=%s,qingfangkoufen1=%s,qingfangkoufen2=%s,qingfangkoufen3=%s,qingfangkoufen4=%s where bisaixuhao=%s" % (
-                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                  gl.get_value('bisaixuhao'))
-        # print(sql)
-        _thread.start_new_thread(self.stat.update, (sql,))
+        # sql = "update bisaixinxi set hongfangdefen=%s,hongfangdefen1=%s,hongfangdefen2=%s,hongfangdefen3=%s,hongfangdefen4=%s,hongfangkoufen=%s,hongfangkoufen1=%s,hongfangkoufen2=%s,hongfangkoufen3=%s,hongfangkoufen4=%s," \
+        #       "qingfangdefen=%s,qingfangdefen1=%s,qingfangdefen2=%s,qingfangdefen3=%s,qingfangdefen4=%s,qingfangkoufen=%s,qingfangkoufen1=%s,qingfangkoufen2=%s,qingfangkoufen3=%s,qingfangkoufen4=%s where bisaixuhao=%s" % (
+        #           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        #           gl.get_value('bisaixuhao'))
+        # # print(sql)
+        # _thread.start_new_thread(self.stat.update, (sql,))
 
     def ceshi(self):
         self.istest=True
@@ -3401,31 +3402,47 @@ class Ui_Form(object):
         self.showwin()
 
     def fencha(self, qingdefen, hongdefen):
-        if (qingdefen - hongdefen >= int(gl.get_value('zuidafencha'))):
-           music_path = r'music\jieshu.wav'
-           self.sound(music_path)
-           self.qingsheng_bt.click()
-           self.timer.stop()
-           self.istest = False
-           self.flag = True
-           self.isfight = False
-           self.dataFlag2 = False
-           self.ishujufirst_qing = True
-           self.kaishi_bt.setText("开 始")
+        if(abs(qingdefen - hongdefen)>=int(gl.get_value('zuidafencha'))):
+            music_path = r'music\jieshu.wav'
+            self.sound(music_path)
+            if qingdefen>hongdefen:
+                self.qingsheng_bt.click()
+            else:
+                self.hongsheng_bt.click()
 
-
-
-
-        elif (hongdefen - qingdefen >= int(gl.get_value('zuidafencha'))):
-
-           self.hongsheng_bt.click()
-           self.timer.stop()
-           self.istest = False
-           self.flag = True
-           self.isfight = False
-           self.dataFlag2 = False
-           self.ishujufirst_qing = True
-           self.kaishi_bt.setText("开 始")
+            self.timer.stop()
+            self.istest = False
+            self.flag = True
+            self.isfight = False
+            self.dataFlag2 = False
+            self.ishujufirst_qing = True
+            self.kaishi_bt.setText("开 始")
+        # if (qingdefen - hongdefen >= int(gl.get_value('zuidafencha'))):
+        #    music_path = r'music\jieshu.wav'
+        #    self.sound(music_path)
+        #    self.qingsheng_bt.click()
+        #    self.timer.stop()
+        #    self.istest = False
+        #    self.flag = True
+        #    self.isfight = False
+        #    self.dataFlag2 = False
+        #    self.ishujufirst_qing = True
+        #    self.kaishi_bt.setText("开 始")
+        #
+        #
+        #
+        #
+        # elif (hongdefen - qingdefen >= int(gl.get_value('zuidafencha'))):
+        #    music_path = r'music\jieshu.wav'
+        #    self.sound(music_path)
+        #    self.hongsheng_bt.click()
+        #    self.timer.stop()
+        #    self.istest = False
+        #    self.flag = True
+        #    self.isfight = False
+        #    self.dataFlag2 = False
+        #    self.ishujufirst_qing = True
+        #    self.kaishi_bt.setText("开 始")
 
     def qingdefenjia(self):
         self.qingfangzongfen.setText(str(int(self.qingfangzongfen.text())+1))
@@ -3433,6 +3450,7 @@ class Ui_Form(object):
                                                                               gl.get_value('bisaixuhao'))
         # print(sql)
         _thread.start_new_thread(self.stat.update, (sql,))
+        self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
         # self.stat.update(sql)
     def qingdefenjian(self):
         self.qingfangzongfen.setText(str(int(self.qingfangzongfen.text()) - 1))
@@ -3492,6 +3510,8 @@ class Ui_Form(object):
         # print(sql)
         _thread.start_new_thread(self.stat.update, (sql,))
         # self.stat.update(sql)
+        self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
+
 
 
     def hongdefenjian(self):
@@ -3638,11 +3658,12 @@ class Ui_Form(object):
 
 
     def on_timeout(self):
-        self.shuaxin()
+        # self.shuaxin()
 
 
         if (int(self.daojishinow) > 0):
 
+            self.shuaxin_bt.click()
             if (self.isjiashi):
                 if (int(self.hongfangzongfen.text()) >= self.jiashizuidadefen or int(self.hongfangzongfen.text()) >= self.jiashizuidadefen):
                     self.setgamenum.setText("结束")
@@ -4009,7 +4030,7 @@ class Ui_Form(object):
 
                 if ((group_1 == "2" or group_1 == "3" or group_1=="7" or group_1=="8") ):
 
-                    lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
+                    # lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                     # print(lizhi)
                     if (group_1 == "2" and shebeinum==int(self.qinghujunum.text())):
                         if (self.ishujufirst_qing):
@@ -4021,14 +4042,14 @@ class Ui_Form(object):
                                                          "QLabel{border:2px}"
                                                          "QLabel{border-radius:5px}"
                                                          "QLabel{padding:2px 4px}")
-                            myout = []
+                            # myout = []
                             self.ishujufirst_qing = False
                     if (group_1 == "3" and shebeinum==int(self.honghujunum.text())):
                         if (self.ishujufirst_hong):
                             self.firstlizhi_hong = lizhi
 
                             # print("第一次力值" + str(self.firstlizhi_hong))
-                            myout = []
+                            # myout = []
                             self.honglabel.setStyleSheet("QLabel{color:#fff}"
                                                          "QLabel{background-color:red}"
                                                          "QLabel{border:2px}"
@@ -4104,10 +4125,24 @@ class Ui_Form(object):
 
                                 _thread.start_new_thread(self.hongfangzongfen.setText,
                                                          (str(hongfangdefen),))
+
                                 sql = "update bisaixinxi set hongfangdefen='%s' where bisaixuhao='%s'" % (
                                     hongfangdefen,
                                     gl.get_value('bisaixuhao'))
                                 _thread.start_new_thread(self.stat.update, (sql,))
+
+                                if (self.hongfanglizhi == ""):
+                                    self.hongfanglizhi = str(40)
+                                else:
+                                    self.hongfanglizhi = self.hongfanglizhi + "," + str(40)
+
+                                # 击打头盔，力值为40
+                                sql = "update dangqianbisai set hongfanglizhi='%s' where bisaixuhao='%s'" % (
+                                    self.hongfanglizhi,
+                                    gl.get_value('bisaixuhao'))
+                                # print(sql)
+                                _thread.start_new_thread(self.stat.update, (sql,))
+
                                 # self.hongfangzongfen.setText(str(int(self.hongfangzongfen.text()) + 2))
                                 # self.stat.update(sql)
 
@@ -4127,31 +4162,7 @@ class Ui_Form(object):
 
                             if ((self.hongfangtoukuitime - self.hongfangtoukuidefentime) > 0.3 and is_jida == "1"):
                                 self.hongfangtoukuidefentime = time.time()
-                                # 记录当前护具得分时间
 
-                                # lizhixian = self.firstlizhi_hong - (1 * int(self.defenqujian))
-                                # if(lizhi<lizhixian):
-                                #     qingfanglizhi = math.ceil((lizhixian - lizhi) / 1) + int(self.defenqujian)
-                                # else:
-                                #     qingfanglizhi = math.ceil((self.firstlizhi_hong - lizhi) / 1)
-                                # print("青方力值",qingfanglizhi)
-                                # print("红方力值", hongfanglizhi)
-
-                                # self.stat.update(sql)
-                                # if (lizhi > (firstlizhi - (30 * (int(self.qujian.text()) )))):
-                                #     self.redjd.setText(str(int(self.qujian.text()) + 1))
-                                # elif (lizhi > (firstlizhi - (30 * (int(self.qujian.text()) + 2)))):
-                                #     self.redjd.setText(str(int(self.qujian.text()) + 2))
-                                # elif (lizhi > (firstlizhi - (30 * (int(self.qujian.text()) + 3)))):
-                                #     self.redjd.setText(str(int(self.qujian.text()) + 3))
-                                # elif (lizhi > (firstlizhi - (30 * (int(self.qujian.text()) + 4)))):
-                                #     self.redjd.setText(str(int(self.qujian.text()) + 4))
-                                # elif (lizhi > (firstlizhi - (30 * (int(self.qujian.text()) + 5)))):
-                                #     self.redjd.setText(str(int(self.qujian.text()) + 5))
-                                # elif (lizhi > (firstlizhi - (30 * (int(self.qujian.text()) + 6)))):
-                                #     self.redjd.setText(str(int(self.qujian.text()) + 6))
-
-                                # print("得2分")
                                 qingfangdefen = int(self.qingfangzongfen.text()) + 3
 
                                 if (self.hongfangtoukuitime - self.qingfangtoukuirotatetime < 0.3):
@@ -4159,17 +4170,33 @@ class Ui_Form(object):
                                 music_path = r'music\liangfen.wav'
                                 self.sound(music_path)
 
+
                                 _thread.start_new_thread(self.qingfangzongfen.setText, (str(qingfangdefen),))
+
 
                                 sql = "update bisaixinxi set qingfangdefen=%s where bisaixuhao=%s" % (
                                     qingfangdefen,
                                     gl.get_value('bisaixuhao'))
                                 # print(sql)
                                 _thread.start_new_thread(self.stat.update, (sql,))
+
+                                if (self.qingfanglizhi == ""):
+                                    self.qingfanglizhi = str(40)
+                                else:
+                                    self.qingfanglizhi = self.qingfanglizhi + "," + str(40)
+                                # 击打头盔，力值为40
+                                sql = "update dangqianbisai set qingfanglizhi='%s' where bisaixuhao='%s'" % (
+                                    self.qingfanglizhi,
+                                    gl.get_value('bisaixuhao'))
+                                # print(sql)
+                                _thread.start_new_thread(self.stat.update, (sql,))
+
+
+
                                 # self.qingfangzongfen.setText(str(int(self.qingfangzongfen.text()) + 2))
                                 # self.stat.update(sql)
 
-                                self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
+                                self.fencha(int(qingfangdefen), int(self.hongfangzongfen.text()))
 
                             # print("当力值小于" + str(self.firstlizhi_hong - (30 * int(self.defenqujian))) + "得两分")
                             # print("ID:" + str(lizhi))
@@ -4181,6 +4208,7 @@ class Ui_Form(object):
 
 
                         if (group_1 == "2" and shebeinum==int(self.qinghujunum.text())):
+                            print(myout)
                             lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                             # print("力值--",lizhi)
                             self.qingfanghujutime = time.time()
@@ -4189,13 +4217,7 @@ class Ui_Form(object):
                                 self.qingfanghujudefentime = time.time()
 
 
-                                # 记录当前护具得分时间
-                                # lizhixian=self.firstlizhi_qing - (1 * int(self.defenqujian))
-                                # if(lizhi<lizhixian):
-                                #     hongfanglizhi=math.ceil((lizhixian-lizhi)/1)+int(self.defenqujian)
-                                # else:
-                                #     hongfanglizhi = math.ceil((self.firstlizhi_qing - lizhi) / 1)
-                                # print("红方力值",hongfanglizhi)
+
                                 if (lizhi <= 300):
                                     hongfanglizhi = math.floor(lizhi / 10)
                                 else:
@@ -4225,9 +4247,10 @@ class Ui_Form(object):
                                         hongfangdefen = hongfangdefen + 2
 
 
-
                                     _thread.start_new_thread(self.hongfangzongfen.setText,
                                                              (str(hongfangdefen),))
+
+
                                     sql = "update bisaixinxi set hongfangdefen='%s' where bisaixuhao='%s'" % (
                                         hongfangdefen,
                                         gl.get_value('bisaixuhao'))
@@ -4236,11 +4259,12 @@ class Ui_Form(object):
                                     # self.stat.update(sql)
 
 
-                                self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
+                                self.fencha(int(self.qingfangzongfen.text()), int(hongfangdefen))
 
                             # print("当力值小于" + str(self.firstlizhi_qing - (30 * int(self.defenqujian))) + "得两分")
                             # print("ID:" + str(lizhi))
                         if (group_1 == "3" and shebeinum==int(self.honghujunum.text())):
+                            print(myout)
                             lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                             # print("力值--", lizhi)
 
@@ -4295,7 +4319,10 @@ class Ui_Form(object):
                                     music_path = r'music\liangfen.wav'
                                     self.sound(music_path)
 
+
                                     _thread.start_new_thread( self.qingfangzongfen.setText, (str(qingfangdefen),))
+
+
 
                                     sql = "update bisaixinxi set qingfangdefen=%s where bisaixuhao=%s" % (
                                         qingfangdefen,
@@ -4305,7 +4332,7 @@ class Ui_Form(object):
                                     # self.qingfangzongfen.setText(str(int(self.qingfangzongfen.text()) + 2))
                                     # self.stat.update(sql)
 
-                                self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
+                                self.fencha(int(qingfangdefen), int(self.hongfangzongfen.text()))
 
 
 
