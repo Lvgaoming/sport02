@@ -3429,7 +3429,7 @@ class Ui_Form(object):
                 self.isfight = False
                 self.dataFlag2 = False
         else:
-
+             #判断是否达到最大分差
             if(abs(qingdefen - hongdefen)>=int(gl.get_value('zuidafencha'))):
                 music_path = r'music\jieshu.wav'
                 self.sound(music_path)
@@ -3444,33 +3444,7 @@ class Ui_Form(object):
                 self.isfight = False
                 self.dataFlag2 = False
                 self.ishujufirst_qing = True
-                self.kaishi_bt.setText("开 始")
-        # if (qingdefen - hongdefen >= int(gl.get_value('zuidafencha'))):
-        #    music_path = r'music\jieshu.wav'
-        #    self.sound(music_path)
-        #    self.qingsheng_bt.click()
-        #    self.timer.stop()
-        #    self.istest = False
-        #    self.flag = True
-        #    self.isfight = False
-        #    self.dataFlag2 = False
-        #    self.ishujufirst_qing = True
-        #    self.kaishi_bt.setText("开 始")
-        #
-        #
-        #
-        #
-        # elif (hongdefen - qingdefen >= int(gl.get_value('zuidafencha'))):
-        #    music_path = r'music\jieshu.wav'
-        #    self.sound(music_path)
-        #    self.hongsheng_bt.click()
-        #    self.timer.stop()
-        #    self.istest = False
-        #    self.flag = True
-        #    self.isfight = False
-        #    self.dataFlag2 = False
-        #    self.ishujufirst_qing = True
-        #    self.kaishi_bt.setText("开 始")
+
 
     def qingdefenjia(self):
         self.qingfangzongfen.setText(str(int(self.qingfangzongfen.text())+1))
