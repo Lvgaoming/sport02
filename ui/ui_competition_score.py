@@ -3410,21 +3410,41 @@ class Ui_Form(object):
         self.showwin()
 
     def fencha(self, qingdefen, hongdefen):
-        if(abs(qingdefen - hongdefen)>=int(gl.get_value('zuidafencha'))):
-            music_path = r'music\jieshu.wav'
-            self.sound(music_path)
-            if qingdefen>hongdefen:
-                self.qingsheng_bt.click()
-            else:
+        # 加时得分
+        if(self.isjiashi):
+            if (hongdefen >= self.jiashizuidadefen):
+                self.setgamenum.setText("结束")
+                music_path = r'music\jieshu.wav'
+                self.sound(music_path)
                 self.hongsheng_bt.click()
+                self.flag = True
+                self.isfight = False
+                self.dataFlag2 = False
+            if (qingdefen >= self.jiashizuidadefen):
+                self.setgamenum.setText("结束")
+                music_path = r'music\jieshu.wav'
+                self.sound(music_path)
+                self.qingsheng_bt.click()
+                self.flag = True
+                self.isfight = False
+                self.dataFlag2 = False
+        else:
 
-            self.timer.stop()
-            self.istest = False
-            self.flag = True
-            self.isfight = False
-            self.dataFlag2 = False
-            self.ishujufirst_qing = True
-            self.kaishi_bt.setText("开 始")
+            if(abs(qingdefen - hongdefen)>=int(gl.get_value('zuidafencha'))):
+                music_path = r'music\jieshu.wav'
+                self.sound(music_path)
+                if qingdefen>hongdefen:
+                    self.qingsheng_bt.click()
+                else:
+                    self.hongsheng_bt.click()
+
+                self.timer.stop()
+                self.istest = False
+                self.flag = True
+                self.isfight = False
+                self.dataFlag2 = False
+                self.ishujufirst_qing = True
+                self.kaishi_bt.setText("开 始")
         # if (qingdefen - hongdefen >= int(gl.get_value('zuidafencha'))):
         #    music_path = r'music\jieshu.wav'
         #    self.sound(music_path)
@@ -3663,7 +3683,25 @@ class Ui_Form(object):
         pass
 
 
-
+    # 加时得分
+    # def jiashidefen(self,qingdefen,hongdefen):
+    #
+    #     if (hongdefen >= self.jiashizuidadefen):
+    #         self.setgamenum.setText("结束")
+    #         music_path = r'music\jieshu.wav'
+    #         self.sound(music_path)
+    #         self.hongsheng_bt.click()
+    #         self.flag = True
+    #         self.isfight = False
+    #         self.dataFlag2 = False
+    #     if (qingdefen >= self.jiashizuidadefen):
+    #         self.setgamenum.setText("结束")
+    #         music_path = r'music\jieshu.wav'
+    #         self.sound(music_path)
+    #         self.qingsheng_bt.click()
+    #         self.flag = True
+    #         self.isfight = False
+    #         self.dataFlag2 = False
 
     def on_timeout(self):
         # self.shuaxin()
@@ -3673,14 +3711,28 @@ class Ui_Form(object):
 
             self.shuaxin_bt.click()
             if (self.isjiashi):
-                if (int(self.hongfangzongfen.text()) >= self.jiashizuidadefen or int(self.hongfangzongfen.text()) >= self.jiashizuidadefen):
+                if (int(self.hongfangzongfen.text()) >= self.jiashizuidadefen):
                     self.setgamenum.setText("结束")
                     music_path = r'music\jieshu.wav'
                     self.sound(music_path)
-                    self.timer.stop()
-                    self.dataFlag = False
-                    qw = QtWidgets.QWidget()
-                    QMessageBox.warning(qw, '提示', "已达到加时赛最大得分", QMessageBox.Ok)
+                    self.hongsheng_bt.click()
+                    self.flag = True
+                    self.isfight = False
+                    self.dataFlag2 = False
+                if(int(self.qingfangzongfen.text()) >= self.jiashizuidadefen):
+                    self.setgamenum.setText("结束")
+                    music_path = r'music\jieshu.wav'
+                    self.sound(music_path)
+                    self.qingsheng_bt.click()
+                    self.flag = True
+                    self.isfight = False
+                    self.dataFlag2 = False
+
+
+                    # self.timer.stop()
+                    # self.dataFlag = False
+                    # qw = QtWidgets.QWidget()
+                    # QMessageBox.warning(qw, '提示', "已达到加时赛最大得分", QMessageBox.Ok)
             print("青方护具护具号", self.qinghujunum.text())
             self.isxiuxi=True
 
@@ -4159,7 +4211,7 @@ class Ui_Form(object):
                                 # self.stat.update(sql)
 
 
-                                self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
+                                self.fencha(int(self.qingfangzongfen.text()), hongfangdefen)
 
                             # print("当力值小于" + str(self.firstlizhi_qing - (30 * int(self.defenqujian))) + "得两分")
                             # print("ID:" + str(lizhi))
@@ -4465,8 +4517,8 @@ class Ui_Form(object):
                                 if (not dafenqi1_qing == 0 and dafenqi2_qing == dafenqi1_qing):
                                     print("1----------------------打分器得分------------------" + str(dafenqi1_qing))
                                     if(self.isfight):
-
-                                        self.qingfangzongfen.setText(str(int(self.qingfangzongfen.text())+dafenqi1_qing))
+                                        fenshu=int(self.qingfangzongfen.text())+dafenqi1_qing
+                                        self.qingfangzongfen.setText(str(fenshu))
 
                                         if(dafenqi1_qing==1):
                                             music_path = r'music\yifen.wav'
@@ -4481,6 +4533,7 @@ class Ui_Form(object):
                                             music_path = r'music\sifen.wav'
                                             self.sound(music_path)
 
+
                                         t = time.time()
                                         sql = "update dangqianbisai set caipanqing1=%s,caipanqing2=%s,caipanqing3=%s where bisaixuhao=%s" % (
                                             dafenqi1_qing, dafenqi2_qing, dafenqi3_qing,
@@ -4491,6 +4544,7 @@ class Ui_Form(object):
                                         dafenqi1_qing = 0
                                         dafenqi2_qing = 0
                                         dafenqi3_qing = 0
+                                        self.fencha(fenshu, int(self.hongfangzongfen.text()))
 
 
 
@@ -4499,7 +4553,8 @@ class Ui_Form(object):
                                 elif (not dafenqi2_qing == 0 and dafenqi3_qing == dafenqi2_qing):
                                     print("2----------------------打分器得分----------------" + str(dafenqi2_qing))
                                     if(self.isfight):
-                                        self.qingfangzongfen.setText(str(int(self.qingfangzongfen.text()) + dafenqi2_qing))
+                                        fenshu = int(self.qingfangzongfen.text()) + dafenqi2_qing
+                                        self.qingfangzongfen.setText(str(fenshu))
 
 
 
@@ -4526,6 +4581,7 @@ class Ui_Form(object):
                                         dafenqi1_qing = 0
                                         dafenqi2_qing = 0
                                         dafenqi3_qing = 0
+                                        self.fencha(fenshu, int(self.hongfangzongfen.text()))
 
 
 
@@ -4533,7 +4589,8 @@ class Ui_Form(object):
                                 elif (not dafenqi1_qing == 0 and dafenqi1_qing == dafenqi3_qing):
                                     print("3--------------------打分器得分---------------" + str(dafenqi1_qing))
                                     if(self.isfight):
-                                        self.qingfangzongfen.setText(str(int(self.qingfangzongfen.text()) + dafenqi1_qing))
+                                        fenshu = int(self.qingfangzongfen.text()) + dafenqi1_qing
+                                        self.qingfangzongfen.setText(str(fenshu))
 
 
                                         if (dafenqi1_qing == 1):
@@ -4559,6 +4616,7 @@ class Ui_Form(object):
                                         dafenqi1_qing = 0
                                         dafenqi2_qing = 0
                                         dafenqi3_qing = 0
+                                        self.fencha(fenshu, int(self.hongfangzongfen.text()))
 
 
 
@@ -4566,7 +4624,8 @@ class Ui_Form(object):
                                 elif (not dafenqi1_qing == 0 and dafenqi1_qing == dafenqi2_qing == dafenqi3_qing):
                                     print("4--------------------打分器得分---------------" + str(dafenqi1_qing))
                                     if(self.isfight):
-                                        self.qingfangzongfen.setText(str(int(self.qingfangzongfen.text()) + dafenqi1_qing))
+                                        fenshu = int(self.qingfangzongfen.text()) + dafenqi1_qing
+                                        self.qingfangzongfen.setText(str(fenshu))
 
 
                                         if (dafenqi1_qing == 1):
@@ -4592,13 +4651,14 @@ class Ui_Form(object):
                                         dafenqi1_qing = 0
                                         dafenqi2_qing = 0
                                         dafenqi3_qing = 0
+                                        self.fencha(fenshu, int(self.hongfangzongfen.text()))
 
                                 sql = "update bisaixinxi set qingfangdefen=%s where bisaixuhao=%s" % ( self.qingfangzongfen.text(),
                                     gl.get_value('bisaixuhao'))
                                 print(sql)
                                 _thread.start_new_thread(self.stat.update, (sql,))
                                 # self.stat.update(sql)
-                                self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
+                                # self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
 
 
 
@@ -4679,7 +4739,8 @@ class Ui_Form(object):
                                 if (not dafenqi1_hong == 0 and dafenqi2_hong == dafenqi1_hong):
                                     print("1----------------------打分器得分------------------" + str(dafenqi1_hong))
                                     if(self.isfight):
-                                        self.hongfangzongfen.setText(str(int(self.hongfangzongfen.text()) + dafenqi1_hong))
+                                        fenshu = int(self.hongfangzongfen.text()) + dafenqi1_hong
+                                        self.hongfangzongfen.setText(str(fenshu))
 
 
                                         if (dafenqi1_hong == 1):
@@ -4706,12 +4767,14 @@ class Ui_Form(object):
                                         dafenqi1_hong = 0
                                         dafenqi2_hong = 0
                                         dafenqi3_hong = 0
+                                        self.fencha(int(self.qingfangzongfen.text()), fenshu)
 
 
                                 elif (not dafenqi2_hong == 0 and dafenqi3_hong == dafenqi2_hong):
                                     print("2----------------------打分器得分----------------" + str(dafenqi2_hong))
                                     if(self.isfight):
-                                        self.hongfangzongfen.setText(str(int(self.hongfangzongfen.text()) + dafenqi2_hong))
+                                        fenshu = int(self.hongfangzongfen.text()) + dafenqi2_hong
+                                        self.hongfangzongfen.setText(str(fenshu))
 
 
                                         if (dafenqi2_hong == 1):
@@ -4738,12 +4801,14 @@ class Ui_Form(object):
                                         dafenqi1_hong = 0
                                         dafenqi2_hong = 0
                                         dafenqi3_hong = 0
+                                        self.fencha(int(self.qingfangzongfen.text()), fenshu)
 
 
                                 elif (not dafenqi1_hong == 0 and dafenqi1_hong == dafenqi3_hong):
                                     print("3--------------------打分器得分---------------" + str(dafenqi1_hong))
                                     if(self.isfight):
-                                        self.hongfangzongfen.setText(str(int(self.hongfangzongfen.text()) + dafenqi1_hong))
+                                        fenshu = int(self.hongfangzongfen.text()) + dafenqi1_hong
+                                        self.hongfangzongfen.setText(str(fenshu))
 
                                         if (dafenqi1_hong == 1):
                                             print("声音")
@@ -4769,13 +4834,15 @@ class Ui_Form(object):
                                         dafenqi1_hong = 0
                                         dafenqi2_hong = 0
                                         dafenqi3_hong = 0
+                                        self.fencha(int(self.qingfangzongfen.text()), fenshu)
 
 
 
                                 elif (not dafenqi1_hong == 0 and dafenqi1_hong == dafenqi2_hong == dafenqi3_hong):
                                     print("4--------------------打分器得分---------------" + str(dafenqi1_hong))
                                     if(self.isfight):
-                                        self.hongfangzongfen.setText(str(int(self.hongfangzongfen.text()) + dafenqi1_hong))
+                                        fenshu = int(self.hongfangzongfen.text()) + dafenqi1_hong
+                                        self.hongfangzongfen.setText(str(fenshu))
 
 
                                         if (dafenqi1_hong == 1):
@@ -4802,6 +4869,7 @@ class Ui_Form(object):
                                         dafenqi1_hong = 0
                                         dafenqi2_hong = 0
                                         dafenqi3_hong = 0
+                                        self.fencha(int(self.qingfangzongfen.text()), fenshu)
 
 
                                 sql = "update bisaixinxi set hongfangdefen=%s where bisaixuhao=%s" % (
@@ -4810,7 +4878,7 @@ class Ui_Form(object):
                                 # print(sql)
                                 # self.stat.update(sql)
                                 _thread.start_new_thread(self.stat.update, (sql,))
-                                self.fencha(int(self.qingfangzongfen.text()),int(self.hongfangzongfen.text()))
+                                # self.fencha(int(self.qingfangzongfen.text()),int(self.hongfangzongfen.text()))
                                 self.shuaxin_bt.click()
             # QApplication.processEvents()
 
