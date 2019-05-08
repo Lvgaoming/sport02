@@ -292,13 +292,13 @@ class Ui_Form(QWidget):
         self.label.setText("护具组号")
         self.label.setStyleSheet("border:0px")
 
-        self.hujunum = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.hujunum.setGeometry(QtCore.QRect(480, 120, 50, 20))
-        self.hujunum.setObjectName("hujunum")
-        self.hujunum.setText("0")
-        self.hujunum.setAlignment(QtCore.Qt.AlignCenter)
+        self.hujuzunum = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.hujuzunum.setGeometry(QtCore.QRect(480, 120, 50, 20))
+        self.hujuzunum.setObjectName("hujuzunum")
+        self.hujuzunum.setText("3")
+        self.hujuzunum.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.hujunum.setStyleSheet(
+        self.hujuzunum.setStyleSheet(
             "color:#3B3E40 ; border-radius:5px ; background-color:#FFE05E ;border-color:#FFE05E")
 
         # 红方
@@ -998,7 +998,7 @@ class Ui_Form(QWidget):
             gl.set_value('jiashizuidadefen',self.jiashizuidadefen.text())
             gl.set_value('jiashikoufenshu',self.jiashikoufenshu.text())
             #设备组号
-            gl.set_value('hujunum',self.hujunum.text())
+            gl.set_value('hujuzunum',self.hujuzunum.text())
 
             gl.set_value('dangqianju',self.dangqianju.text())
 
