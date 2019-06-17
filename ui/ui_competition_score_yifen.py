@@ -312,6 +312,59 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.label)
 
 
+        # # 青方警告
+        # self.horizontalLayoutWidget = QtWidgets.QWidget(Form)
+        # self.horizontalLayoutWidget.setGeometry(QtCore.QRect(170, 250, 80, 50))
+        # self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
+        # self.horizontalLayoutWidget.setStyleSheet("QWidget{color:#000}"
+        #                                           "QWidget{border:2px}"
+        #                                           "QWidget{border-radius:10px}"
+        #                                           "QWidget{padding:2px 4px}")
+        #
+        # self.verticalLayout = QtWidgets.QVBoxLayout(self.horizontalLayoutWidget)
+        # self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        # self.verticalLayout.setObjectName("verticalLayout")
+        # self.qingfangjinggao = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        # self.qingfangjinggao.setGeometry(QtCore.QRect(0, 0, 0, 0))
+        # font = QtGui.QFont()
+        # font.setFamily("Arial Black")
+        # font.setPointSize(25)
+        # font.setBold(True)
+        # self.qingfangjinggao.setFont(font)
+        # self.qingfangjinggao.setAlignment(QtCore.Qt.AlignCenter)
+        # self.qingfangjinggao.setObjectName("qingfangjinggao")
+        # self.qingfangjinggao.setText("0")
+        # self.qingfangjinggao.setStyleSheet("QLabel{color:#fff}"
+        #                          "QLabel{background-color:rgb(0,120,215)}"
+        #                          "QLabel{border:2px}"
+        #                          "QLabel{border-radius:10px}"
+        #                          "QLabel{padding:2px 4px}")
+        #
+        # self.verticalLayout.addWidget(self.qingfangjinggao)
+        #
+        # # 警告这两个字
+        # self.widget = QtWidgets.QWidget(Form)
+        # self.widget.setGeometry(QtCore.QRect(190, 220, 50, 30))
+        # self.widget.setObjectName("widget")
+        # self.label = QtWidgets.QLabel(self.widget)
+        # self.label.setGeometry(QtCore.QRect(0, 0, 0, 0))
+        # font = QtGui.QFont()
+        #
+        # font.setPointSize(15)
+        # font.setBold(True)
+        # self.label.setFont(font)
+        # self.label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.label.setObjectName("label")
+        # self.label.setText("警告")
+        # self.label.setStyleSheet("color:#595B5D")
+        #
+        # self.verticalLayout = QtWidgets.QHBoxLayout(self.widget)
+        # self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        # self.verticalLayout.setObjectName("verticalLayout")
+        # self.verticalLayout.addWidget(self.label)
+
+
+
         #红方单位
 
         self.horizontalLayoutWidget_1 = QtWidgets.QWidget(Form)
@@ -3098,6 +3151,7 @@ class Ui_Form(object):
 
                 self.twoPointsTimeNowqing=None
                 self.twoPointsTimeNowhong=None
+                self.dadaofencha = False
 
                 sql = "select id from dangqianbisai where changdi='%s'" % (self.changdi.text())
                 if (self.stat.fetchone(sql)):
@@ -3349,6 +3403,8 @@ class Ui_Form(object):
 
 
         self.isjiashi = False
+
+        self.dadaofencha=False
         self.kaishi_bt.setText("开 始")
         self.qinglabel.setStyleSheet("QLabel{color:#000}"
                                      "QLabel{background-color:#fff}"
@@ -3453,6 +3509,7 @@ class Ui_Form(object):
                     #     # qw = QtWidgets.QWidget()
                     #     # QMessageBox.warning(qw, '提示', "红方分差胜", QMessageBox.Ok)
                     self.kaishi_bt.click()
+
 
 
             pass
@@ -4215,7 +4272,7 @@ class Ui_Form(object):
                                     # print("得2分")
 
                                     # print(sql)
-                                    self.hongfangdefen = int(self.hongfangzongfen.text()) + 3
+                                    self.hongfangdefen = int(self.hongfangzongfen.text()) + 1
 
                                     if(self.qingfangtoukuitime-self.hongfangtoukuirotatetime<0.3):
                                         self.hongfangdefen = self.hongfangdefen+2
@@ -4267,7 +4324,7 @@ class Ui_Form(object):
                                 if ((self.hongfangtoukuitime - self.hongfangtoukuidefentime) > 0.8 and is_jida == "1"):
                                     self.hongfangtoukuidefentime = time.time()
 
-                                    self.qingfangdefen = int(self.qingfangzongfen.text()) + 3
+                                    self.qingfangdefen = int(self.qingfangzongfen.text()) + 1
 
                                     if (self.hongfangtoukuitime - self.qingfangtoukuirotatetime < 0.3):
                                         self.qingfangdefen = self.qingfangdefen + 2
@@ -4363,7 +4420,7 @@ class Ui_Form(object):
 
 
                                         # print(sql)
-                                        self.hongfangdefen=int(self.hongfangzongfen.text()) + 2
+                                        self.hongfangdefen=int(self.hongfangzongfen.text()) + 1
 
                                         if (self.qingfanghujutime - self.hongfangtoukuirotatetime < 0.3):
                                             self.hongfangdefen = self.hongfangdefen + 2
@@ -4452,7 +4509,7 @@ class Ui_Form(object):
                                     #     self.redjd.setText(str(int(self.qujian.text()) + 6))
                                     if(qingfanglizhi>=int(self.qingfanghujudefenqujian.text())):
                                         print("得2分")
-                                        self.qingfangdefen=int(self.qingfangzongfen.text()) + 2
+                                        self.qingfangdefen=int(self.qingfangzongfen.text()) + 1
                                         if (self.hongfanghujutime - self.qingfangtoukuirotatetime < 0.3):
                                             self.qingfangdefen = self.qingfangdefen + 2
 
@@ -5101,7 +5158,7 @@ if __name__ == '__main__':
     utils.mysqlUtil.MysqlUtil.host = 'localhost'
     utils.mysqlUtil.MysqlUtil.dbPort = '3306'
     utils.mysqlUtil.MysqlUtil.username = 'root'
-    utils.mysqlUtil.MysqlUtil.password = 'lgm123'
+    utils.mysqlUtil.MysqlUtil.password = 'root123'
     utils.mysqlUtil.MysqlUtil.database = 'sport'
     gl._init()
     app = QApplication(sys.argv)
