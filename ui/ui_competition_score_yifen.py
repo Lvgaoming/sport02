@@ -228,8 +228,116 @@ class Ui_Form(object):
                                  "QLabel{padding:2px 4px}")
         self.verticalLayout.addWidget(self.hongfangname)
 
+        # 头盔护具电量显示
+        self.horizontalLayoutWidget_4 = QtWidgets.QWidget(Form)
+        self.horizontalLayoutWidget_4.setGeometry(QtCore.QRect(30, 45, 250, 70))
+        self.horizontalLayoutWidget_4.setObjectName("horizontalLayoutWidget_1")
+        self.horizontalLayoutWidget_4.setStyleSheet("border-width: 1px;border-style: solid;border-color: #767475 "
+                                                    )
 
+        self.label = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.label.setGeometry(QtCore.QRect(10, 5, 80, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label.setText("青方头盔电量：")
+        self.label.setStyleSheet(
+            "color:#000; border-width:0px"
+        )
 
+        self.qingtou_dianliang = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.qingtou_dianliang.setGeometry(QtCore.QRect(80, 5, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.qingtou_dianliang.setFont(font)
+        self.qingtou_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.qingtou_dianliang.setObjectName("qingtou_dianliang")
+        self.qingtou_dianliang.setText("--")
+        self.qingtou_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
+        )
+
+        self.label = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.label.setGeometry(QtCore.QRect(10, 35, 80, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label.setText("青方护具电量：")
+        self.label.setStyleSheet(
+            "color:#000; border-width:0px"
+        )
+
+        self.qinghuju_dianliang = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.qinghuju_dianliang.setGeometry(QtCore.QRect(80, 35, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.qinghuju_dianliang.setFont(font)
+        self.qinghuju_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.qinghuju_dianliang.setObjectName("qinghuju_dianliang")
+        self.qinghuju_dianliang.setText("--")
+        self.qinghuju_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
+        )
+
+        self.label = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.label.setGeometry(QtCore.QRect(130, 5, 80, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label.setText("红方头盔电量：")
+        self.label.setStyleSheet(
+            "color:#000; border-width:0px"
+        )
+
+        self.hongtou_dianliang = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.hongtou_dianliang.setGeometry(QtCore.QRect(200, 5, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.hongtou_dianliang.setFont(font)
+        self.hongtou_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.hongtou_dianliang.setObjectName("hongtou_dianliang")
+        self.hongtou_dianliang.setText("--")
+        self.hongtou_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
+        )
+
+        self.label = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.label.setGeometry(QtCore.QRect(130, 35, 80, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label.setText("红方护具电量：")
+        self.label.setStyleSheet(
+            "color:#000; border-width:0px"
+        )
+
+        self.honghuju_dianliang = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.honghuju_dianliang.setGeometry(QtCore.QRect(200, 35, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.honghuju_dianliang.setFont(font)
+        self.honghuju_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.honghuju_dianliang.setObjectName("honghuju_dianliang")
+        self.honghuju_dianliang.setText("--")
+        self.honghuju_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
+        )
 
         #青方单位
 
@@ -894,8 +1002,7 @@ class Ui_Form(object):
                                  "QLabel{border-radius:5px}"
                                  "QLabel{padding:2px 4px}")
 
-
-        #一号裁判打分情况
+        # 一号裁判打分情况
         # 青方打分器分值
         self.changcai_1_qing_1 = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.changcai_1_qing_1.setGeometry(QtCore.QRect(190, 120, 25, 25))
@@ -966,7 +1073,6 @@ class Ui_Form(object):
         self.changcai_1_qing_5.setStyleSheet(
             "color:#000 ; border-radius:0px"
         )
-
 
         # 红方打分器分值
 
@@ -1039,10 +1145,20 @@ class Ui_Form(object):
             "color:#000 ; border-radius:0px"
         )
 
+        self.changcai_1_dianliang = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.changcai_1_dianliang.setGeometry(QtCore.QRect(540, 120, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.changcai_1_dianliang.setFont(font)
+        self.changcai_1_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.changcai_1_dianliang.setObjectName("changcai_1_dianliang")
+        self.changcai_1_dianliang.setText("--")
+        self.changcai_1_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
+        )
 
-
-
-        #二号裁判打分情况
+        # 二号裁判打分情况
         # 青方打分器分值
         self.changcai_2_qing_1 = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.changcai_2_qing_1.setGeometry(QtCore.QRect(190, 155, 25, 25))
@@ -1130,7 +1246,6 @@ class Ui_Form(object):
             "color:#000 ; border-radius:0px"
         )
 
-
         self.changcai_2_hong_4 = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.changcai_2_hong_4.setGeometry(QtCore.QRect(405, 155, 25, 25))
         font = QtGui.QFont()
@@ -1184,6 +1299,18 @@ class Ui_Form(object):
         self.changcai_2_hong_1.setText("0")
         self.changcai_2_hong_1.setStyleSheet(
             "color:#000 ; border-radius:0px"
+        )
+        self.changcai_2_dianliang = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.changcai_2_dianliang.setGeometry(QtCore.QRect(540, 155, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.changcai_2_dianliang.setFont(font)
+        self.changcai_2_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.changcai_2_dianliang.setObjectName("changcai_2_dianliang")
+        self.changcai_2_dianliang.setText("--")
+        self.changcai_2_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
         )
 
         # 三号裁判打分情况
@@ -1258,7 +1385,6 @@ class Ui_Form(object):
             "color:#000 ; border-radius:0px"
         )
 
-
         # 红方打分器分值
 
         self.changcai_3_hong_5 = QtWidgets.QLabel(self.verticalLayoutWidget)
@@ -1274,7 +1400,6 @@ class Ui_Form(object):
         self.changcai_3_hong_5.setStyleSheet(
             "color:#000 ; border-radius:0px"
         )
-
 
         self.changcai_3_hong_4 = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.changcai_3_hong_4.setGeometry(QtCore.QRect(405, 190, 25, 25))
@@ -1329,6 +1454,19 @@ class Ui_Form(object):
         self.changcai_3_hong_1.setText("0")
         self.changcai_3_hong_1.setStyleSheet(
             "color:#000 ; border-radius:0px"
+        )
+
+        self.changcai_3_dianliang = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.changcai_3_dianliang.setGeometry(QtCore.QRect(540, 190, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.changcai_3_dianliang.setFont(font)
+        self.changcai_3_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.changcai_3_dianliang.setObjectName("changcai_3_dianliang")
+        self.changcai_3_dianliang.setText("--")
+        self.changcai_3_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
         )
 
         self.dafenqiceshi_bt = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -3151,6 +3289,10 @@ class Ui_Form(object):
 
                 self.twoPointsTimeNowqing=None
                 self.twoPointsTimeNowhong=None
+                self.onePointsTimeNowqing = None
+                self.onePointsTimeNowhong = None
+                self.threePointsTimeNowqing = None
+                self.threePointsTimeNowhong = None
                 self.dadaofencha = False
 
                 sql = "select id from dangqianbisai where changdi='%s'" % (self.changdi.text())
@@ -3184,6 +3326,9 @@ class Ui_Form(object):
                             print(str(port_list[i])[:4])
 
                     x = serial.Serial(str(port_list[0])[:4], "115200")
+                    Hex_str = bytes.fromhex('01')
+
+                    x.write(Hex_str)
 
                     print(x)
                     self.dataFlag = True
@@ -4095,9 +4240,24 @@ class Ui_Form(object):
     #     self.stat.update(sql)
 
 
-    #保存裁判打2分（旋转）的时间，若0.5秒内运动员电子护具头盔得分则加上这两分，否则不加
+    #保存裁判打2分的时间，若1秒内运动员电子护具头盔得分则加上这两分，否则不加
     def twoPoinsTime(self,poins):
         if(poins==2):
+            return time.time()
+        else:
+            return None
+
+    # 保存裁判打1分的时间，若1秒内运动员电子护具头盔得分则加上这两分，否则不加
+
+    def onePoinsTime(self, poins):
+        if (poins == 1):
+            return time.time()
+        else:
+            return None
+
+
+    def threePoinsTime(self, poins):
+        if (poins == 3):
             return time.time()
         else:
             return None
@@ -4172,18 +4332,22 @@ class Ui_Form(object):
                 try:
                     shebeinum=int(last[4])
                     lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
+                    dianliang = self.transform_hex_data(myout[6])
+                    print("电量--", dianliang)
                     # print("力值--", lizhi)
                 except:
                     break
                 # print(group_1)
                 if(zunum==int(self.shebeizunum.text())):
 
-                    if ((group_1 == "2" or group_1 == "3" or group_1=="7" or group_1=="8") ):
+                    if (group_1 == "2" or group_1 == "3" or group_1 == "7" or group_1 == "8" or group_1 == "4" or group_1 == "5" or group_1 == "6"):
                         self.shuaxin_bt.click()
 
                         # lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                         # print(lizhi)
-                        if (group_1 == "2" and shebeinum==int(self.qinghujunum.text())):
+                        if (group_1 == "2" and shebeinum == int(self.qinghujunum.text())):
+                            print("青方护具电量--", dianliang)
+                            self.qinghuju_dianliang.setText(str(dianliang))
                             if (self.ishujufirst_qing):
                                 self.firstlizhi_qing = lizhi
 
@@ -4193,9 +4357,12 @@ class Ui_Form(object):
                                                              "QLabel{border:2px}"
                                                              "QLabel{border-radius:5px}"
                                                              "QLabel{padding:2px 4px}")
+
                                 # myout = []
                                 self.ishujufirst_qing = False
-                        if (group_1 == "3" and shebeinum==int(self.honghujunum.text())):
+                        if (group_1 == "3" and shebeinum == int(self.honghujunum.text())):
+                            print("红方护具电量--", dianliang)
+                            self.honghuju_dianliang.setText(str(dianliang))
                             if (self.ishujufirst_hong):
                                 self.firstlizhi_hong = lizhi
 
@@ -4206,7 +4373,28 @@ class Ui_Form(object):
                                                              "QLabel{border:2px}"
                                                              "QLabel{border-radius:5px}"
                                                              "QLabel{padding:2px 4px}")
+
                                 self.ishujufirst_hong = False
+                        if (group_1 == "7" and shebeinum == int(self.honghujunum.text())):
+                            print("青方头盔电量--", dianliang)
+                            self.qingtou_dianliang.setText(str(dianliang))
+
+                        if (group_1 == "8" and shebeinum == int(self.honghujunum.text())):
+                            print("红方头盔电量--", dianliang)
+                            self.hongtou_dianliang.setText(str(dianliang))
+
+                        if (group_1 == "4" and shebeinum == int(self.honghujunum.text())):
+                            print("一号打分器电量--", dianliang)
+                            self.changcai_1_dianliang.setText(str(dianliang))
+
+                        if (group_1 == "5" and shebeinum == int(self.honghujunum.text())):
+                            print("二号打分器电量--", dianliang)
+                            self.changcai_2_dianliang.setText(str(dianliang))
+
+                        if (group_1 == "6" and shebeinum == int(self.honghujunum.text())):
+                            print("三号打分器电量--", dianliang)
+                            self.changcai_3_dianliang.setText(str(dianliang))
+                        self.shuaxin_bt.click()
 
                         if (self.istest):
                             if (group_1 == "2" and shebeinum==int(self.qinghujunum.text())):
@@ -4278,10 +4466,23 @@ class Ui_Form(object):
                                         self.hongfangdefen = self.hongfangdefen+2
 
                                     if(self.twoPointsTimeNowhong):
-                                        if(self.qingfangtoukuitime-self.twoPointsTimeNowhong<0.5):
+                                        if(self.qingfangtoukuitime-self.twoPointsTimeNowhong<1):
                                             self.hongfangdefen = self.hongfangdefen + 2
 
                                         self.twoPointsTimeNowhong = None
+                                    if (self.onePointsTimeNowhong):
+                                        if (self.qingfangtoukuitime - self.onePointsTimeNowhong < 1):
+                                            self.hongfangdefen = self.hongfangdefen + 1
+
+                                        self.onePointsTimeNowhong = None
+
+                                    if (self.threePointsTimeNowhong):
+                                        if (self.qingfangtoukuitime - self.threePointsTimeNowhong < 1):
+                                            self.hongfangdefen = self.hongfangdefen + 3
+
+                                        self.threePointsTimeNowhong = None
+
+
 
 
                                     _thread.start_new_thread(self.hongfangzongfen.setText,
@@ -4293,11 +4494,11 @@ class Ui_Form(object):
                                     _thread.start_new_thread(self.stat.update, (sql,))
 
                                     if (self.hongfanglizhi == ""):
-                                        self.hongfanglizhi = str(40)
+                                        self.hongfanglizhi = str(70)
                                     else:
-                                        self.hongfanglizhi = self.hongfanglizhi + "," + str(40)
+                                        self.hongfanglizhi = self.hongfanglizhi + "," + str(70)
 
-                                    # 击打头盔，力值为40
+                                    # 击打头盔，力值为70
                                     sql = "update dangqianbisai set hongfanglizhi='%s' where bisaixuhao='%s'" % (
                                         self.hongfanglizhi,
                                         gl.get_value('bisaixuhao'))
@@ -4330,9 +4531,22 @@ class Ui_Form(object):
                                         self.qingfangdefen = self.qingfangdefen + 2
 
                                     if (self.twoPointsTimeNowqing):
-                                        if (self.hongfangtoukuitime - self.twoPointsTimeNowqing < 0.5):
+                                        if (self.hongfangtoukuitime - self.twoPointsTimeNowqing < 1):
                                             self.qingfangdefen = self.qingfangdefen + 2
                                         self.twoPointsTimeNowqing=None
+
+                                    if (self.onePointsTimeNowqing):
+                                        if (self.hongfangtoukuitime - self.onePointsTimeNowqing < 1):
+                                            self.qingfangdefen = self.qingfangdefen + 1
+                                        self.onePointsTimeNowqing = None
+
+                                    if (self.threePointsTimeNowqing):
+                                        if (self.hongfangtoukuitime - self.threePointsTimeNowqing < 1):
+                                            self.qingfangdefen = self.qingfangdefen + 3
+                                        self.threePointsTimeNowqing = None
+
+
+
 
                                     music_path = r'music\liangfen.wav'
                                     self.sound(music_path)
@@ -4348,10 +4562,10 @@ class Ui_Form(object):
                                     _thread.start_new_thread(self.stat.update, (sql,))
 
                                     if (self.qingfanglizhi == ""):
-                                        self.qingfanglizhi = str(40)
+                                        self.qingfanglizhi = str(70)
                                     else:
-                                        self.qingfanglizhi = self.qingfanglizhi + "," + str(40)
-                                    # 击打头盔，力值为40
+                                        self.qingfanglizhi = self.qingfanglizhi + "," + str(70)
+                                    # 击打头盔，力值为70
                                     sql = "update dangqianbisai set qingfanglizhi='%s' where bisaixuhao='%s'" % (
                                         self.qingfanglizhi,
                                         gl.get_value('bisaixuhao'))
@@ -4397,10 +4611,10 @@ class Ui_Form(object):
 
 
 
-                                    if (lizhi <= 300):
+                                    if (lizhi <= 600):
                                         hongfanglizhi = math.floor(lizhi / 10)
                                     else:
-                                        hongfanglizhi = 30
+                                        hongfanglizhi = 60
                                     print("红方力值",hongfanglizhi)
                                     if(self.hongfanglizhi==""):
                                         self.hongfanglizhi=str(hongfanglizhi)
@@ -4426,10 +4640,25 @@ class Ui_Form(object):
                                             self.hongfangdefen = self.hongfangdefen + 2
 
                                         if (self.twoPointsTimeNowhong):
-                                            if (self.qingfanghujutime - self.twoPointsTimeNowhong < 0.5):
+                                            if (self.qingfanghujutime - self.twoPointsTimeNowhong < 1):
                                                 self.hongfangdefen = self.hongfangdefen + 2
 
                                             self.twoPointsTimeNowhong = None
+
+
+                                        if (self.onePointsTimeNowhong):
+                                            if (self.qingfanghujutime - self.onePointsTimeNowhong < 1):
+                                                self.hongfangdefen = self.hongfangdefen + 1
+
+                                            self.onePointsTimeNowhong = None
+
+
+                                        if (self.threePointsTimeNowhong):
+                                            if (self.qingfanghujutime - self.threePointsTimeNowhong < 1):
+                                                self.hongfangdefen = self.hongfangdefen + 3
+
+                                            self.threePointsTimeNowhong = None
+
 
                                         _thread.start_new_thread(self.hongfangzongfen.setText,
                                                                  (str(self.hongfangdefen),))
@@ -4478,10 +4707,10 @@ class Ui_Form(object):
                                     #     qingfanglizhi = math.ceil((self.firstlizhi_hong - lizhi) / 1)
                                     # print("青方力值",qingfanglizhi)
                                     # print("红方力值", hongfanglizhi)
-                                    if(lizhi<=300):
+                                    if(lizhi<=600):
                                         qingfanglizhi=math.floor(lizhi/10)
                                     else:
-                                        qingfanglizhi=30
+                                        qingfanglizhi=60
                                     print("青方力值",qingfanglizhi)
 
                                     if(self.qingfanglizhi==""):
@@ -4514,9 +4743,19 @@ class Ui_Form(object):
                                             self.qingfangdefen = self.qingfangdefen + 2
 
                                         if (self.twoPointsTimeNowqing):
-                                            if (self.hongfanghujutime - self.twoPointsTimeNowqing < 0.5):
+                                            if (self.hongfanghujutime - self.twoPointsTimeNowqing < 1):
                                                 self.qingfangdefen = self.qingfangdefen + 2
                                             self.twoPointsTimeNowqing = None
+
+                                        if (self.onePointsTimeNowqing):
+                                            if (self.hongfanghujutime - self.onePointsTimeNowqing < 1):
+                                                self.qingfangdefen = self.qingfangdefen + 1
+                                            self.onePointsTimeNowqing = None
+
+                                        if (self.threePointsTimeNowqing):
+                                            if (self.hongfanghujutime - self.threePointsTimeNowqing < 1):
+                                                self.qingfangdefen = self.qingfangdefen + 3
+                                            self.threePointsTimeNowqing = None
 
                                         music_path = r'music\liangfen.wav'
                                         self.sound(music_path)
@@ -4672,36 +4911,43 @@ class Ui_Form(object):
                                     if (not dafenqi1_qing == 0 and dafenqi2_qing == dafenqi1_qing):
                                         print("1----------------------打分器得分------------------" + str(dafenqi1_qing))
                                         if(self.isfight):
-                                            self.twoPointsTimeNowqing=self.twoPoinsTime(dafenqi1_qing)
-                                            if( self.twoPointsTimeNowqing==None):
-                                                fenshu=int(self.qingfangzongfen.text())+dafenqi1_qing
-                                                self.qingfangzongfen.setText(str(fenshu))
 
-                                                if(dafenqi1_qing==1):
-                                                    music_path = r'music\yifen.wav'
-                                                    self.sound(music_path)
-                                                elif(dafenqi1_qing==2):
-                                                    music_path = r'music\liangfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_qing == 3):
-                                                    music_path = r'music\sanfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_qing == 4):
-                                                    music_path = r'music\sifen.wav'
-                                                    self.sound(music_path)
+                                            if(dafenqi1_qing==2):
+                                                self.twoPointsTimeNowqing=self.twoPoinsTime(dafenqi1_qing)
+                                            if(dafenqi1_qing==1):
+                                                self.onePointsTimeNowqing=self.onePoinsTime(dafenqi1_qing)
+                                            if(dafenqi1_qing==3):
+                                                self.threePointsTimeNowqing=self.threePoinsTime(dafenqi1_qing)
 
-
-                                                t = time.time()
-                                                # sql = "update dangqianbisai set caipanqing1=%s,caipanqing2=%s,caipanqing3=%s where bisaixuhao=%s" % (
-                                                #     dafenqi1_qing, dafenqi2_qing, dafenqi3_qing,
-                                                #     gl.get_value('bisaixuhao'))
-                                                # # print(sql)
-                                                # _thread.start_new_thread(self.stat.update, (sql,))
-                                                # self.stat.update(sql)
-                                                dafenqi1_qing = 0
-                                                dafenqi2_qing = 0
-                                                # dafenqi3_qing = 0
-                                                self.fencha(fenshu, int(self.hongfangzongfen.text()))
+                                            # if( self.twoPointsTimeNowqing==None):
+                                            #     fenshu=int(self.qingfangzongfen.text())+dafenqi1_qing
+                                            #     self.qingfangzongfen.setText(str(fenshu))
+                                            #
+                                            #     if(dafenqi1_qing==1):
+                                            #         music_path = r'music\yifen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif(dafenqi1_qing==2):
+                                            #         music_path = r'music\liangfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_qing == 3):
+                                            #         music_path = r'music\sanfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_qing == 4):
+                                            #         music_path = r'music\sifen.wav'
+                                            #         self.sound(music_path)
+                                            #
+                                            #
+                                            #     t = time.time()
+                                            #     # sql = "update dangqianbisai set caipanqing1=%s,caipanqing2=%s,caipanqing3=%s where bisaixuhao=%s" % (
+                                            #     #     dafenqi1_qing, dafenqi2_qing, dafenqi3_qing,
+                                            #     #     gl.get_value('bisaixuhao'))
+                                            #     # # print(sql)
+                                            #     # _thread.start_new_thread(self.stat.update, (sql,))
+                                            #     # self.stat.update(sql)
+                                            #     dafenqi1_qing = 0
+                                            #     dafenqi2_qing = 0
+                                            #     # dafenqi3_qing = 0
+                                            #     self.fencha(fenshu, int(self.hongfangzongfen.text()))
 
 
 
@@ -4710,37 +4956,42 @@ class Ui_Form(object):
                                     elif (not dafenqi2_qing == 0 and dafenqi3_qing == dafenqi2_qing):
                                         print("2----------------------打分器得分----------------" + str(dafenqi2_qing))
                                         if(self.isfight):
-                                            self.twoPointsTimeNowqing = self.twoPoinsTime(dafenqi2_qing)
-                                            if (self.twoPointsTimeNowqing == None):
-                                                fenshu = int(self.qingfangzongfen.text()) + dafenqi2_qing
-                                                self.qingfangzongfen.setText(str(fenshu))
-
-
-
-                                                if (dafenqi2_qing == 1):
-                                                    music_path = r'music\yifen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi2_qing == 2):
-                                                    music_path = r'music\liangfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi2_qing == 3):
-                                                    music_path = r'music\sanfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi2_qing == 4):
-                                                    music_path = r'music\sifen.wav'
-                                                    self.sound(music_path)
-
-                                                t = time.time()
-                                                # sql = "update dangqianbisai set caipanqing1=%s,caipanqing2=%s,caipanqing3=%s where bisaixuhao=%s" % (
-                                                #     dafenqi1_qing, dafenqi2_qing, dafenqi3_qing,
-                                                #     gl.get_value('bisaixuhao'))
-                                                # # print(sql)
-                                                # _thread.start_new_thread(self.stat.update, (sql,))
-                                                self.stat.update(sql)
-                                                # dafenqi1_qing = 0
-                                                dafenqi2_qing = 0
-                                                dafenqi3_qing = 0
-                                                self.fencha(fenshu, int(self.hongfangzongfen.text()))
+                                            if (dafenqi2_qing == 2):
+                                                self.twoPointsTimeNowqing = self.twoPoinsTime(dafenqi2_qing)
+                                            if (dafenqi2_qing == 1):
+                                                self.onePointsTimeNowqing = self.onePoinsTime(dafenqi2_qing)
+                                            if (dafenqi2_qing == 3):
+                                                self.threePointsTimeNowqing = self.threePoinsTime(dafenqi2_qing)
+                                            # if (self.twoPointsTimeNowqing == None):
+                                            #     fenshu = int(self.qingfangzongfen.text()) + dafenqi2_qing
+                                            #     self.qingfangzongfen.setText(str(fenshu))
+                                            #
+                                            #
+                                            #
+                                            #     if (dafenqi2_qing == 1):
+                                            #         music_path = r'music\yifen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi2_qing == 2):
+                                            #         music_path = r'music\liangfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi2_qing == 3):
+                                            #         music_path = r'music\sanfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi2_qing == 4):
+                                            #         music_path = r'music\sifen.wav'
+                                            #         self.sound(music_path)
+                                            #
+                                            #     t = time.time()
+                                            #     # sql = "update dangqianbisai set caipanqing1=%s,caipanqing2=%s,caipanqing3=%s where bisaixuhao=%s" % (
+                                            #     #     dafenqi1_qing, dafenqi2_qing, dafenqi3_qing,
+                                            #     #     gl.get_value('bisaixuhao'))
+                                            #     # # print(sql)
+                                            #     # _thread.start_new_thread(self.stat.update, (sql,))
+                                            #     self.stat.update(sql)
+                                            #     # dafenqi1_qing = 0
+                                            #     dafenqi2_qing = 0
+                                            #     dafenqi3_qing = 0
+                                            #     self.fencha(fenshu, int(self.hongfangzongfen.text()))
 
 
 
@@ -4748,36 +4999,41 @@ class Ui_Form(object):
                                     elif (not dafenqi1_qing == 0 and dafenqi1_qing == dafenqi3_qing):
                                         print("3--------------------打分器得分---------------" + str(dafenqi1_qing))
                                         if(self.isfight):
-                                            self.twoPointsTimeNowqing = self.twoPoinsTime(dafenqi1_qing)
-                                            if (self.twoPointsTimeNowqing == None):
-                                                fenshu = int(self.qingfangzongfen.text()) + dafenqi1_qing
-                                                self.qingfangzongfen.setText(str(fenshu))
-
-
-                                                if (dafenqi1_qing == 1):
-                                                    music_path = r'music\yifen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_qing == 2):
-                                                    music_path = r'music\liangfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_qing == 3):
-                                                    music_path = r'music\sanfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_qing == 4):
-                                                    music_path = r'music\sifen.wav'
-                                                    self.sound(music_path)
-
-                                                t = time.time()
-                                                # sql = "update dangqianbisai set caipanqing1=%s,caipanqing2=%s,caipanqing3=%s where bisaixuhao=%s" % (
-                                                #     dafenqi1_qing, dafenqi2_qing, dafenqi3_qing,
-                                                #     gl.get_value('bisaixuhao'))
-                                                # # print(sql)
-                                                # _thread.start_new_thread(self.stat.update, (sql,))
-                                                self.stat.update(sql)
-                                                dafenqi1_qing = 0
-                                                # dafenqi2_qing = 0
-                                                dafenqi3_qing = 0
-                                                self.fencha(fenshu, int(self.hongfangzongfen.text()))
+                                            if (dafenqi1_qing == 2):
+                                                self.twoPointsTimeNowqing = self.twoPoinsTime(dafenqi1_qing)
+                                            if (dafenqi1_qing == 1):
+                                                self.onePointsTimeNowqing = self.onePoinsTime(dafenqi1_qing)
+                                            if (dafenqi1_qing == 3):
+                                                self.threePointsTimeNowqing = self.threePoinsTime(dafenqi1_qing)
+                                            # if (self.twoPointsTimeNowqing == None):
+                                            #     fenshu = int(self.qingfangzongfen.text()) + dafenqi1_qing
+                                            #     self.qingfangzongfen.setText(str(fenshu))
+                                            #
+                                            #
+                                            #     if (dafenqi1_qing == 1):
+                                            #         music_path = r'music\yifen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_qing == 2):
+                                            #         music_path = r'music\liangfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_qing == 3):
+                                            #         music_path = r'music\sanfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_qing == 4):
+                                            #         music_path = r'music\sifen.wav'
+                                            #         self.sound(music_path)
+                                            #
+                                            #     t = time.time()
+                                            #     # sql = "update dangqianbisai set caipanqing1=%s,caipanqing2=%s,caipanqing3=%s where bisaixuhao=%s" % (
+                                            #     #     dafenqi1_qing, dafenqi2_qing, dafenqi3_qing,
+                                            #     #     gl.get_value('bisaixuhao'))
+                                            #     # # print(sql)
+                                            #     # _thread.start_new_thread(self.stat.update, (sql,))
+                                            #     self.stat.update(sql)
+                                            #     dafenqi1_qing = 0
+                                            #     # dafenqi2_qing = 0
+                                            #     dafenqi3_qing = 0
+                                            #     self.fencha(fenshu, int(self.hongfangzongfen.text()))
 
 
 
@@ -4785,36 +5041,41 @@ class Ui_Form(object):
                                     elif (not dafenqi1_qing == 0 and dafenqi1_qing == dafenqi2_qing == dafenqi3_qing):
                                         print("4--------------------打分器得分---------------" + str(dafenqi1_qing))
                                         if(self.isfight):
-                                            self.twoPointsTimeNowqing = self.twoPoinsTime(dafenqi1_qing)
-                                            if (self.twoPointsTimeNowqing == None):
-                                                fenshu = int(self.qingfangzongfen.text()) + dafenqi1_qing
-                                                self.qingfangzongfen.setText(str(fenshu))
-
-
-                                                if (dafenqi1_qing == 1):
-                                                    music_path = r'music\yifen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_qing == 2):
-                                                    music_path = r'music\liangfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_qing == 3):
-                                                    music_path = r'music\sanfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_qing == 4):
-                                                    music_path = r'music\sifen.wav'
-                                                    self.sound(music_path)
-
-                                                t = time.time()
-                                                # sql = "update dangqianbisai set caipanqing1=%s,caipanqing2=%s,caipanqing3=%s where bisaixuhao=%s" % (
-                                                #     dafenqi1_qing, dafenqi2_qing, dafenqi3_qing,
-                                                #     gl.get_value('bisaixuhao'))
-                                                # # print(sql)
-                                                # _thread.start_new_thread(self.stat.update, (sql,))
-                                                # self.stat.update(sql)
-                                                dafenqi1_qing = 0
-                                                dafenqi2_qing = 0
-                                                dafenqi3_qing = 0
-                                                self.fencha(fenshu, int(self.hongfangzongfen.text()))
+                                            if (dafenqi1_qing == 2):
+                                                self.twoPointsTimeNowqing = self.twoPoinsTime(dafenqi1_qing)
+                                            if (dafenqi1_qing == 1):
+                                                self.onePointsTimeNowqing = self.onePoinsTime(dafenqi1_qing)
+                                            if (dafenqi1_qing == 3):
+                                                self.threePointsTimeNowqing = self.threePoinsTime(dafenqi1_qing)
+                                            # if (self.twoPointsTimeNowqing == None):
+                                            #     fenshu = int(self.qingfangzongfen.text()) + dafenqi1_qing
+                                            #     self.qingfangzongfen.setText(str(fenshu))
+                                            #
+                                            #
+                                            #     if (dafenqi1_qing == 1):
+                                            #         music_path = r'music\yifen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_qing == 2):
+                                            #         music_path = r'music\liangfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_qing == 3):
+                                            #         music_path = r'music\sanfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_qing == 4):
+                                            #         music_path = r'music\sifen.wav'
+                                            #         self.sound(music_path)
+                                            #
+                                            #     t = time.time()
+                                            #     # sql = "update dangqianbisai set caipanqing1=%s,caipanqing2=%s,caipanqing3=%s where bisaixuhao=%s" % (
+                                            #     #     dafenqi1_qing, dafenqi2_qing, dafenqi3_qing,
+                                            #     #     gl.get_value('bisaixuhao'))
+                                            #     # # print(sql)
+                                            #     # _thread.start_new_thread(self.stat.update, (sql,))
+                                            #     # self.stat.update(sql)
+                                            #     dafenqi1_qing = 0
+                                            #     dafenqi2_qing = 0
+                                            #     dafenqi3_qing = 0
+                                            #     self.fencha(fenshu, int(self.hongfangzongfen.text()))
 
                                     sql = "update bisaixinxi set qingfangdefen=%s where bisaixuhao=%s" % ( self.qingfangzongfen.text(),
                                         gl.get_value('bisaixuhao'))
@@ -4912,145 +5173,166 @@ class Ui_Form(object):
                                     if (not dafenqi1_hong == 0 and dafenqi2_hong == dafenqi1_hong):
                                         print("1----------------------打分器得分------------------" + str(dafenqi1_hong))
                                         if(self.isfight):
-                                            self.twoPointsTimeNowhong = self.twoPoinsTime(dafenqi1_hong)
-                                            if (self.twoPointsTimeNowhong == None):
-                                                fenshu = int(self.hongfangzongfen.text()) + dafenqi1_hong
-                                                self.hongfangzongfen.setText(str(fenshu))
+                                            if(dafenqi1_hong==2):
+                                                self.twoPointsTimeNowhong = self.twoPoinsTime(dafenqi1_hong)
+                                            if(dafenqi1_hong==1):
+                                                self.onePointsTimeNowhong = self.onePoinsTime(dafenqi1_hong)
+                                            if (dafenqi1_hong == 3):
+                                                self.threePointsTimeNowhong = self.threePoinsTime(dafenqi1_hong)
 
-
-                                                if (dafenqi1_hong == 1):
-                                                    print("声音")
-                                                    music_path = r'music\yifen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_hong == 2):
-                                                    music_path = r'music\liangfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_hong == 3):
-                                                    music_path = r'music\sanfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_hong == 4):
-                                                    music_path = r'music\sifen.wav'
-                                                    self.sound(music_path)
-
-                                                t = time.time()
-                                                # sql = "update dangqianbisai set caipanhong1=%s,caipanhong2=%s,caipanhong3=%s where bisaixuhao=%s" % (
-                                                #     dafenqi1_hong, dafenqi2_hong, dafenqi3_hong,
-                                                #     gl.get_value('bisaixuhao'))
-                                                # # print(sql)
-                                                # _thread.start_new_thread(self.stat.update, (sql,))
-                                                # self.stat.update(sql)
-                                                dafenqi1_hong = 0
-                                                dafenqi2_hong = 0
-                                                dafenqi3_hong = 0
-                                                self.fencha(int(self.qingfangzongfen.text()), fenshu)
+                                            # if (self.twoPointsTimeNowhong == None):
+                                            #     fenshu = int(self.hongfangzongfen.text()) + dafenqi1_hong
+                                            #     self.hongfangzongfen.setText(str(fenshu))
+                                            #
+                                            #
+                                            #     if (dafenqi1_hong == 1):
+                                            #         print("声音")
+                                            #         music_path = r'music\yifen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_hong == 2):
+                                            #         music_path = r'music\liangfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_hong == 3):
+                                            #         music_path = r'music\sanfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_hong == 4):
+                                            #         music_path = r'music\sifen.wav'
+                                            #         self.sound(music_path)
+                                            #
+                                            #     t = time.time()
+                                            #     # sql = "update dangqianbisai set caipanhong1=%s,caipanhong2=%s,caipanhong3=%s where bisaixuhao=%s" % (
+                                            #     #     dafenqi1_hong, dafenqi2_hong, dafenqi3_hong,
+                                            #     #     gl.get_value('bisaixuhao'))
+                                            #     # # print(sql)
+                                            #     # _thread.start_new_thread(self.stat.update, (sql,))
+                                            #     # self.stat.update(sql)
+                                            #     dafenqi1_hong = 0
+                                            #     dafenqi2_hong = 0
+                                            #     dafenqi3_hong = 0
+                                            #     self.fencha(int(self.qingfangzongfen.text()), fenshu)
 
 
                                     elif (not dafenqi2_hong == 0 and dafenqi3_hong == dafenqi2_hong):
                                         print("2----------------------打分器得分----------------" + str(dafenqi2_hong))
                                         if(self.isfight):
-                                            self.twoPointsTimeNowhong = self.twoPoinsTime(dafenqi2_hong)
-                                            if (self.twoPointsTimeNowhong == None):
-                                                fenshu = int(self.hongfangzongfen.text()) + dafenqi2_hong
-                                                self.hongfangzongfen.setText(str(fenshu))
-
-
-                                                if (dafenqi2_hong == 1):
-                                                    print("声音")
-                                                    music_path = r'music\yifen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi2_hong == 2):
-                                                    music_path = r'music\liangfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi2_hong == 3):
-                                                    music_path = r'music\sanfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi2_hong == 4):
-                                                    music_path = r'music\sifen.wav'
-                                                    self.sound(music_path)
-
-                                                t = time.time()
-                                                # sql = "update dangqianbisai set caipanhong1=%s,caipanhong2=%s,caipanhong3=%s where bisaixuhao=%s" % (
-                                                #     dafenqi1_hong, dafenqi2_hong, dafenqi3_hong,
-                                                #     gl.get_value('bisaixuhao'))
-                                                # # print(sql)
-                                                # _thread.start_new_thread(self.stat.update, (sql,))
-                                                # self.stat.update(sql)
-                                                dafenqi1_hong = 0
-                                                dafenqi2_hong = 0
-                                                dafenqi3_hong = 0
-                                                self.fencha(int(self.qingfangzongfen.text()), fenshu)
+                                            if (dafenqi2_hong == 2):
+                                                self.twoPointsTimeNowhong = self.twoPoinsTime(dafenqi2_hong)
+                                            if (dafenqi2_hong == 1):
+                                                self.onePointsTimeNowhong = self.onePoinsTime(dafenqi2_hong)
+                                            if (dafenqi2_hong == 3):
+                                                self.threePointsTimeNowhong = self.threePoinsTime(dafenqi2_hong)
+                                            # if (self.twoPointsTimeNowhong == None):
+                                            #     fenshu = int(self.hongfangzongfen.text()) + dafenqi2_hong
+                                            #     self.hongfangzongfen.setText(str(fenshu))
+                                            #
+                                            #
+                                            #     if (dafenqi2_hong == 1):
+                                            #         print("声音")
+                                            #         music_path = r'music\yifen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi2_hong == 2):
+                                            #         music_path = r'music\liangfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi2_hong == 3):
+                                            #         music_path = r'music\sanfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi2_hong == 4):
+                                            #         music_path = r'music\sifen.wav'
+                                            #         self.sound(music_path)
+                                            #
+                                            #     t = time.time()
+                                            #     # sql = "update dangqianbisai set caipanhong1=%s,caipanhong2=%s,caipanhong3=%s where bisaixuhao=%s" % (
+                                            #     #     dafenqi1_hong, dafenqi2_hong, dafenqi3_hong,
+                                            #     #     gl.get_value('bisaixuhao'))
+                                            #     # # print(sql)
+                                            #     # _thread.start_new_thread(self.stat.update, (sql,))
+                                            #     # self.stat.update(sql)
+                                            #     dafenqi1_hong = 0
+                                            #     dafenqi2_hong = 0
+                                            #     dafenqi3_hong = 0
+                                            #     self.fencha(int(self.qingfangzongfen.text()), fenshu)
 
 
                                     elif (not dafenqi1_hong == 0 and dafenqi1_hong == dafenqi3_hong):
                                         print("3--------------------打分器得分---------------" + str(dafenqi1_hong))
                                         if(self.isfight):
-                                            self.twoPointsTimeNowhong = self.twoPoinsTime(dafenqi1_hong)
-                                            if (self.twoPointsTimeNowhong == None):
-                                                fenshu = int(self.hongfangzongfen.text()) + dafenqi1_hong
-                                                self.hongfangzongfen.setText(str(fenshu))
-
-                                                if (dafenqi1_hong == 1):
-                                                    print("声音")
-                                                    music_path = r'music\yifen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_hong == 2):
-                                                    music_path = r'music\liangfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_hong == 3):
-                                                    music_path = r'music\sanfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_hong == 4):
-                                                    music_path = r'music\sifen.wav'
-                                                    self.sound(music_path)
-
-                                                t = time.time()
-                                                # sql = "update dangqianbisai set caipanhong1=%s,caipanhong2=%s,caipanhong3=%s where bisaixuhao=%s" % (
-                                                #     dafenqi1_hong, dafenqi2_hong, dafenqi3_hong,
-                                                #     gl.get_value('bisaixuhao'))
-                                                # # print(sql)
-                                                # _thread.start_new_thread( self.stat.update, (sql,))
-                                                # self.stat.update(sql)
-                                                dafenqi1_hong = 0
-                                                dafenqi2_hong = 0
-                                                dafenqi3_hong = 0
-                                                self.fencha(int(self.qingfangzongfen.text()), fenshu)
+                                            if (dafenqi1_hong == 2):
+                                                self.twoPointsTimeNowhong = self.twoPoinsTime(dafenqi1_hong)
+                                            if (dafenqi1_hong == 1):
+                                                self.onePointsTimeNowhong = self.onePoinsTime(dafenqi1_hong)
+                                            if (dafenqi1_hong == 3):
+                                                self.threePointsTimeNowhong = self.threePoinsTime(dafenqi1_hong)
+                                            # if (self.twoPointsTimeNowhong == None):
+                                            #     fenshu = int(self.hongfangzongfen.text()) + dafenqi1_hong
+                                            #     self.hongfangzongfen.setText(str(fenshu))
+                                            #
+                                            #     if (dafenqi1_hong == 1):
+                                            #         print("声音")
+                                            #         music_path = r'music\yifen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_hong == 2):
+                                            #         music_path = r'music\liangfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_hong == 3):
+                                            #         music_path = r'music\sanfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_hong == 4):
+                                            #         music_path = r'music\sifen.wav'
+                                            #         self.sound(music_path)
+                                            #
+                                            #     t = time.time()
+                                            #     # sql = "update dangqianbisai set caipanhong1=%s,caipanhong2=%s,caipanhong3=%s where bisaixuhao=%s" % (
+                                            #     #     dafenqi1_hong, dafenqi2_hong, dafenqi3_hong,
+                                            #     #     gl.get_value('bisaixuhao'))
+                                            #     # # print(sql)
+                                            #     # _thread.start_new_thread( self.stat.update, (sql,))
+                                            #     # self.stat.update(sql)
+                                            #     dafenqi1_hong = 0
+                                            #     dafenqi2_hong = 0
+                                            #     dafenqi3_hong = 0
+                                            #     self.fencha(int(self.qingfangzongfen.text()), fenshu)
 
 
 
                                     elif (not dafenqi1_hong == 0 and dafenqi1_hong == dafenqi2_hong == dafenqi3_hong):
                                         print("4--------------------打分器得分---------------" + str(dafenqi1_hong))
                                         if(self.isfight):
-                                            self.twoPointsTimeNowhong = self.twoPoinsTime(dafenqi1_hong)
-                                            if (self.twoPointsTimeNowhong == None):
-                                                fenshu = int(self.hongfangzongfen.text()) + dafenqi1_hong
-                                                self.hongfangzongfen.setText(str(fenshu))
-
-
-                                                if (dafenqi1_hong == 1):
-                                                    print("声音")
-                                                    music_path = r'music\yifen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_hong == 2):
-                                                    music_path = r'music\liangfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_hong == 3):
-                                                    music_path = r'music\sanfen.wav'
-                                                    self.sound(music_path)
-                                                elif (dafenqi1_hong == 4):
-                                                    music_path = r'music\sifen.wav'
-                                                    self.sound(music_path)
-
-                                                t = time.time()
-                                                # sql = "update dangqianbisai set caipanhong1=%s,caipanhong2=%s,caipanhong3=%s where bisaixuhao=%s" % (
-                                                #     dafenqi1_hong,dafenqi2_hong,dafenqi3_hong,
-                                                #     gl.get_value('bisaixuhao'))
-                                                # # print(sql)
-                                                # # self.stat.update(sql)
-                                                # _thread.start_new_thread(self.stat.update, (sql,))
-                                                dafenqi1_hong = 0
-                                                dafenqi2_hong = 0
-                                                dafenqi3_hong = 0
-                                                self.fencha(int(self.qingfangzongfen.text()), fenshu)
+                                            if (dafenqi1_hong == 2):
+                                                self.twoPointsTimeNowhong = self.twoPoinsTime(dafenqi1_hong)
+                                            if (dafenqi1_hong == 1):
+                                                self.onePointsTimeNowhong = self.onePoinsTime(dafenqi1_hong)
+                                            if (dafenqi1_hong == 3):
+                                                self.threePointsTimeNowhong = self.threePoinsTime(dafenqi1_hong)
+                                            # if (self.twoPointsTimeNowhong == None):
+                                            #     fenshu = int(self.hongfangzongfen.text()) + dafenqi1_hong
+                                            #     self.hongfangzongfen.setText(str(fenshu))
+                                            #
+                                            #
+                                            #     if (dafenqi1_hong == 1):
+                                            #         print("声音")
+                                            #         music_path = r'music\yifen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_hong == 2):
+                                            #         music_path = r'music\liangfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_hong == 3):
+                                            #         music_path = r'music\sanfen.wav'
+                                            #         self.sound(music_path)
+                                            #     elif (dafenqi1_hong == 4):
+                                            #         music_path = r'music\sifen.wav'
+                                            #         self.sound(music_path)
+                                            #
+                                            #     t = time.time()
+                                            #     # sql = "update dangqianbisai set caipanhong1=%s,caipanhong2=%s,caipanhong3=%s where bisaixuhao=%s" % (
+                                            #     #     dafenqi1_hong,dafenqi2_hong,dafenqi3_hong,
+                                            #     #     gl.get_value('bisaixuhao'))
+                                            #     # # print(sql)
+                                            #     # # self.stat.update(sql)
+                                            #     # _thread.start_new_thread(self.stat.update, (sql,))
+                                            #     dafenqi1_hong = 0
+                                            #     dafenqi2_hong = 0
+                                            #     dafenqi3_hong = 0
+                                            #     self.fencha(int(self.qingfangzongfen.text()), fenshu)
 
 
                                     sql = "update bisaixinxi set hongfangdefen=%s where bisaixuhao=%s" % (

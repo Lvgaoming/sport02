@@ -229,6 +229,120 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.hongfangname)
 
 
+        #头盔护具电量显示
+        self.horizontalLayoutWidget_4 = QtWidgets.QWidget(Form)
+        self.horizontalLayoutWidget_4.setGeometry(QtCore.QRect(30, 45, 250, 70))
+        self.horizontalLayoutWidget_4.setObjectName("horizontalLayoutWidget_1")
+        self.horizontalLayoutWidget_4.setStyleSheet("border-width: 1px;border-style: solid;border-color: #767475 "
+                                                    )
+
+        self.label = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.label.setGeometry(QtCore.QRect(10, 5, 80, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label.setText("青方头盔电量：")
+        self.label.setStyleSheet(
+            "color:#000; border-width:0px"
+        )
+
+        self.qingtou_dianliang = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.qingtou_dianliang.setGeometry(QtCore.QRect(80, 5, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.qingtou_dianliang.setFont(font)
+        self.qingtou_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.qingtou_dianliang.setObjectName("qingtou_dianliang")
+        self.qingtou_dianliang.setText("--")
+        self.qingtou_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
+        )
+
+        self.label = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.label.setGeometry(QtCore.QRect(10, 35, 80, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label.setText("青方护具电量：")
+        self.label.setStyleSheet(
+            "color:#000; border-width:0px"
+        )
+
+        self.qinghuju_dianliang = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.qinghuju_dianliang.setGeometry(QtCore.QRect(80, 35, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.qinghuju_dianliang.setFont(font)
+        self.qinghuju_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.qinghuju_dianliang.setObjectName("qinghuju_dianliang")
+        self.qinghuju_dianliang.setText("--")
+        self.qinghuju_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
+        )
+
+        self.label = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.label.setGeometry(QtCore.QRect(130, 5, 80, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label.setText("红方头盔电量：")
+        self.label.setStyleSheet(
+            "color:#000; border-width:0px"
+        )
+
+        self.hongtou_dianliang = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.hongtou_dianliang.setGeometry(QtCore.QRect(200, 5, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.hongtou_dianliang.setFont(font)
+        self.hongtou_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.hongtou_dianliang.setObjectName("hongtou_dianliang")
+        self.hongtou_dianliang.setText("--")
+        self.hongtou_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
+        )
+
+        self.label = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.label.setGeometry(QtCore.QRect(130, 35, 80, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label.setText("红方护具电量：")
+        self.label.setStyleSheet(
+            "color:#000; border-width:0px"
+        )
+
+        self.honghuju_dianliang = QtWidgets.QLabel(self.horizontalLayoutWidget_4)
+        self.honghuju_dianliang.setGeometry(QtCore.QRect(200, 35, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.honghuju_dianliang.setFont(font)
+        self.honghuju_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.honghuju_dianliang.setObjectName("honghuju_dianliang")
+        self.honghuju_dianliang.setText("--")
+        self.honghuju_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
+        )
+
+
+
+
 
 
         #青方单位
@@ -310,6 +424,59 @@ class Ui_Form(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.verticalLayout.addWidget(self.label)
+
+
+        # # 青方警告
+        # self.horizontalLayoutWidget = QtWidgets.QWidget(Form)
+        # self.horizontalLayoutWidget.setGeometry(QtCore.QRect(170, 250, 80, 50))
+        # self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
+        # self.horizontalLayoutWidget.setStyleSheet("QWidget{color:#000}"
+        #                                           "QWidget{border:2px}"
+        #                                           "QWidget{border-radius:10px}"
+        #                                           "QWidget{padding:2px 4px}")
+        #
+        # self.verticalLayout = QtWidgets.QVBoxLayout(self.horizontalLayoutWidget)
+        # self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        # self.verticalLayout.setObjectName("verticalLayout")
+        # self.qingfangjinggao = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        # self.qingfangjinggao.setGeometry(QtCore.QRect(0, 0, 0, 0))
+        # font = QtGui.QFont()
+        # font.setFamily("Arial Black")
+        # font.setPointSize(25)
+        # font.setBold(True)
+        # self.qingfangjinggao.setFont(font)
+        # self.qingfangjinggao.setAlignment(QtCore.Qt.AlignCenter)
+        # self.qingfangjinggao.setObjectName("qingfangjinggao")
+        # self.qingfangjinggao.setText("0")
+        # self.qingfangjinggao.setStyleSheet("QLabel{color:#fff}"
+        #                          "QLabel{background-color:rgb(0,120,215)}"
+        #                          "QLabel{border:2px}"
+        #                          "QLabel{border-radius:10px}"
+        #                          "QLabel{padding:2px 4px}")
+        #
+        # self.verticalLayout.addWidget(self.qingfangjinggao)
+        #
+        # # 警告这两个字
+        # self.widget = QtWidgets.QWidget(Form)
+        # self.widget.setGeometry(QtCore.QRect(190, 220, 50, 30))
+        # self.widget.setObjectName("widget")
+        # self.label = QtWidgets.QLabel(self.widget)
+        # self.label.setGeometry(QtCore.QRect(0, 0, 0, 0))
+        # font = QtGui.QFont()
+        #
+        # font.setPointSize(15)
+        # font.setBold(True)
+        # self.label.setFont(font)
+        # self.label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.label.setObjectName("label")
+        # self.label.setText("警告")
+        # self.label.setStyleSheet("color:#595B5D")
+        #
+        # self.verticalLayout = QtWidgets.QHBoxLayout(self.widget)
+        # self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        # self.verticalLayout.setObjectName("verticalLayout")
+        # self.verticalLayout.addWidget(self.label)
+
 
 
         #红方单位
@@ -986,6 +1153,18 @@ class Ui_Form(object):
             "color:#000 ; border-radius:0px"
         )
 
+        self.changcai_1_dianliang = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.changcai_1_dianliang.setGeometry(QtCore.QRect(540, 120, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.changcai_1_dianliang.setFont(font)
+        self.changcai_1_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.changcai_1_dianliang.setObjectName("changcai_1_dianliang")
+        self.changcai_1_dianliang.setText("--")
+        self.changcai_1_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
+        )
 
 
 
@@ -1132,6 +1311,18 @@ class Ui_Form(object):
         self.changcai_2_hong_1.setStyleSheet(
             "color:#000 ; border-radius:0px"
         )
+        self.changcai_2_dianliang = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.changcai_2_dianliang.setGeometry(QtCore.QRect(540, 155, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.changcai_2_dianliang.setFont(font)
+        self.changcai_2_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.changcai_2_dianliang.setObjectName("changcai_2_dianliang")
+        self.changcai_2_dianliang.setText("--")
+        self.changcai_2_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
+        )
 
         # 三号裁判打分情况
         # 青方打分器分值
@@ -1277,6 +1468,20 @@ class Ui_Form(object):
         self.changcai_3_hong_1.setStyleSheet(
             "color:#000 ; border-radius:0px"
         )
+
+        self.changcai_3_dianliang = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.changcai_3_dianliang.setGeometry(QtCore.QRect(540, 190, 25, 25))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(8)
+        self.changcai_3_dianliang.setFont(font)
+        self.changcai_3_dianliang.setAlignment(QtCore.Qt.AlignCenter)
+        self.changcai_3_dianliang.setObjectName("changcai_3_dianliang")
+        self.changcai_3_dianliang.setText("--")
+        self.changcai_3_dianliang.setStyleSheet(
+            "color:#54AD62 ; border-width:0px"
+        )
+
 
         self.dafenqiceshi_bt = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.dafenqiceshi_bt.setGeometry(QtCore.QRect(50, 220, 50, 25))
@@ -3130,6 +3335,11 @@ class Ui_Form(object):
                             print(str(port_list[i])[:4])
 
                     x = serial.Serial(str(port_list[0])[:4], "115200")
+                    # Hex_str = bytes.fromhex('10 11 12 34 3f')
+                    Hex_str = bytes.fromhex('01')
+
+
+                    x.write(Hex_str)
 
                     print(x)
                     self.dataFlag = True
@@ -4048,6 +4258,9 @@ class Ui_Form(object):
 
 
 
+
+
+
     def getData(self, x):
 
         print(x)
@@ -4115,18 +4328,21 @@ class Ui_Form(object):
                 try:
                     shebeinum=int(last[4])
                     lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
-                    # print("力值--", lizhi)
+                    dianliang=self.transform_hex_data(myout[6])
+                    print("电量--", dianliang)
                 except:
                     break
                 # print(group_1)
                 if(zunum==int(self.shebeizunum.text())):
 
-                    if ((group_1 == "2" or group_1 == "3" or group_1=="7" or group_1=="8") ):
+                    if ((group_1 == "2" or group_1 == "3" or group_1=="7" or group_1=="8" or group_1 == "4" or group_1=="5" or group_1=="6") ):
                         self.shuaxin_bt.click()
 
                         # lizhi = (self.transform_hex_data(myout[4]) << 8) + self.transform_hex_data(myout[3])
                         # print(lizhi)
                         if (group_1 == "2" and shebeinum==int(self.qinghujunum.text())):
+                            print("青方护具电量--", dianliang)
+                            self.qinghuju_dianliang.setText(str(dianliang))
                             if (self.ishujufirst_qing):
                                 self.firstlizhi_qing = lizhi
 
@@ -4136,9 +4352,12 @@ class Ui_Form(object):
                                                              "QLabel{border:2px}"
                                                              "QLabel{border-radius:5px}"
                                                              "QLabel{padding:2px 4px}")
+
                                 # myout = []
                                 self.ishujufirst_qing = False
                         if (group_1 == "3" and shebeinum==int(self.honghujunum.text())):
+                            print("红方护具电量--", dianliang)
+                            self.honghuju_dianliang.setText(str(dianliang))
                             if (self.ishujufirst_hong):
                                 self.firstlizhi_hong = lizhi
 
@@ -4149,7 +4368,32 @@ class Ui_Form(object):
                                                              "QLabel{border:2px}"
                                                              "QLabel{border-radius:5px}"
                                                              "QLabel{padding:2px 4px}")
+
                                 self.ishujufirst_hong = False
+                        if (group_1 == "7" and shebeinum==int(self.honghujunum.text())):
+
+                            print("青方头盔电量--", dianliang)
+                            self.qingtou_dianliang.setText(str(dianliang))
+
+                        if (group_1 == "8" and shebeinum == int(self.honghujunum.text())):
+                            print("红方头盔电量--", dianliang)
+                            self.hongtou_dianliang.setText(str(dianliang))
+
+                        if (group_1 == "4" and shebeinum == int(self.honghujunum.text())):
+                            print("一号打分器电量--", dianliang)
+                            self.changcai_1_dianliang.setText(str(dianliang))
+
+                        if (group_1 == "5" and shebeinum == int(self.honghujunum.text())):
+                            print("二号打分器电量--", dianliang)
+                            self.changcai_2_dianliang.setText(str(dianliang))
+
+                        if (group_1 == "6" and shebeinum == int(self.honghujunum.text())):
+                            print("三号打分器电量--", dianliang)
+                            self.changcai_3_dianliang.setText(str(dianliang))
+                        self.shuaxin_bt.click()
+
+
+
 
                         if (self.istest):
                             if (group_1 == "2" and shebeinum==int(self.qinghujunum.text())):
@@ -4340,10 +4584,10 @@ class Ui_Form(object):
 
 
 
-                                    if (lizhi <= 300):
+                                    if (lizhi <= 600):
                                         hongfanglizhi = math.floor(lizhi / 10)
                                     else:
-                                        hongfanglizhi = 30
+                                        hongfanglizhi = 60
                                     print("红方力值",hongfanglizhi)
                                     if(self.hongfanglizhi==""):
                                         self.hongfanglizhi=str(hongfanglizhi)
@@ -4421,10 +4665,10 @@ class Ui_Form(object):
                                     #     qingfanglizhi = math.ceil((self.firstlizhi_hong - lizhi) / 1)
                                     # print("青方力值",qingfanglizhi)
                                     # print("红方力值", hongfanglizhi)
-                                    if(lizhi<=300):
+                                    if(lizhi<=600):
                                         qingfanglizhi=math.floor(lizhi/10)
                                     else:
-                                        qingfanglizhi=30
+                                        qingfanglizhi=60
                                     print("青方力值",qingfanglizhi)
 
                                     if(self.qingfanglizhi==""):
@@ -5101,7 +5345,7 @@ if __name__ == '__main__':
     utils.mysqlUtil.MysqlUtil.host = 'localhost'
     utils.mysqlUtil.MysqlUtil.dbPort = '3306'
     utils.mysqlUtil.MysqlUtil.username = 'root'
-    utils.mysqlUtil.MysqlUtil.password = 'lgm123'
+    utils.mysqlUtil.MysqlUtil.password = 'root123'
     utils.mysqlUtil.MysqlUtil.database = 'sport'
     gl._init()
     app = QApplication(sys.argv)
