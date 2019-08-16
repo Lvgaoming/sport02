@@ -3496,12 +3496,95 @@ class Ui_Form(object):
     def ceshi(self):
         if (not self.istest):
             self.istest = True
+            self.dataFlag2 = True
             self.ceshi_bt.setText("取消")
+
+            sql = "update dangqianbisai set bisaizhuangtai=%s where bisaixuhao='%s'" % (
+                6,
+                gl.get_value('bisaixuhao'))
+            # print(sql)
+            _thread.start_new_thread(self.stat.update, (sql,))
 
         else:
             self.istest = False
+            self.dataFlag2 = False
+            self.qingfangzongfen.setText("0")
+            self.qingfangkoufen.setText("0")
+            self.qingfanghujudefenqujian.setText("0")
+            self.hongfanghujudefenqujian.setText("0")
+            self.changcai_1_qing_1.setText("0")
+            self.changcai_1_qing_2.setText("0")
+            self.changcai_1_qing_3.setText("0")
+            self.changcai_1_qing_4.setText("0")
+            self.changcai_1_qing_5.setText("0")
+            self.changcai_2_qing_1.setText("0")
+            self.changcai_2_qing_2.setText("0")
+            self.changcai_2_qing_3.setText("0")
+            self.changcai_2_qing_4.setText("0")
+            self.changcai_2_qing_5.setText("0")
+            self.changcai_3_qing_1.setText("0")
+            self.changcai_3_qing_2.setText("0")
+            self.changcai_3_qing_3.setText("0")
+            self.changcai_3_qing_4.setText("0")
+            self.changcai_3_qing_5.setText("0")
+
+            self.qing_game_1_koufen.setText("0")
+            self.qing_game_1_defen.setText("0")
+
+            self.qing_game_2_koufen.setText("0")
+            self.qing_game_2_defen.setText("0")
+
+            self.qing_game_3_koufen.setText("0")
+            self.qing_game_3_defen.setText("0")
+
+            self.qing_game_4_koufen.setText("0")
+            self.qing_game_4_defen.setText("0")
+
+            self.hongfangzongfen.setText("0")
+            self.hongfangkoufen.setText("0")
+
+            self.changcai_1_hong_1.setText("0")
+            self.changcai_1_hong_2.setText("0")
+            self.changcai_1_hong_3.setText("0")
+            self.changcai_1_hong_4.setText("0")
+            self.changcai_1_hong_5.setText("0")
+            self.changcai_2_hong_1.setText("0")
+            self.changcai_2_hong_2.setText("0")
+            self.changcai_2_hong_3.setText("0")
+            self.changcai_2_hong_4.setText("0")
+            self.changcai_2_hong_5.setText("0")
+            self.changcai_3_hong_1.setText("0")
+            self.changcai_3_hong_2.setText("0")
+            self.changcai_3_hong_3.setText("0")
+            self.changcai_3_hong_4.setText("0")
+            self.changcai_3_hong_5.setText("0")
+
+            self.hong_game_1_koufen.setText("0")
+            self.hong_game_1_defen.setText("0")
+
+            self.hong_game_2_koufen.setText("0")
+            self.hong_game_2_defen.setText("0")
+
+            self.hong_game_3_koufen.setText("0")
+            self.hong_game_3_defen.setText("0")
+
+            self.hong_game_4_koufen.setText("0")
+            self.hong_game_4_defen.setText("0")
 
             self.ceshi_bt.setText("测试")
+
+            sql = "update bisaixinxi set hongfangdefen=%s,hongfangdefen1=%s,hongfangdefen2=%s,hongfangdefen3=%s,hongfangdefen4=%s,hongfangkoufen=%s,hongfangkoufen1=%s,hongfangkoufen2=%s,hongfangkoufen3=%s,hongfangkoufen4=%s," \
+                  "qingfangdefen=%s,qingfangdefen1=%s,qingfangdefen2=%s,qingfangdefen3=%s,qingfangdefen4=%s,qingfangkoufen=%s,qingfangkoufen1=%s,qingfangkoufen2=%s,qingfangkoufen3=%s,qingfangkoufen4=%s where bisaixuhao=%s" % (
+                      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                      gl.get_value('bisaixuhao'))
+            # print(sql)
+            _thread.start_new_thread(self.stat.update, (sql,))
+
+            sql = "update dangqianbisai set hongfanglizhi='%s',qingfanglizhi='%s',bisaizhuangtai=%s where bisaixuhao='%s'" % (
+                "","",0,
+                gl.get_value('bisaixuhao'))
+            # print(sql)
+            _thread.start_new_thread(self.stat.update, (sql,))
 
     def qingsheng(self):
 
