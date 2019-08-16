@@ -2677,6 +2677,28 @@ class Ui_Form(object):
         self.genggai_bt.setObjectName("genggai_bt")
         self.genggai_bt.setText("更 改")
 
+        # 下一局
+        self.xiayiju_bt = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.xiayiju_bt.setGeometry(QtCore.QRect(380, 60, 60, 40))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.xiayiju_bt.setFont(font)
+        font.setFamily("Arial Black")
+        font.setBold(True)
+        self.xiayiju_bt.setStyleSheet("QPushButton{color:#000}"
+                                     "QPushButton:hover{color:red}"
+                                     "QPushButton{background-color:#FFE05E}"
+                                     "QPushButton{border:2px}"
+                                     "QPushButton{border-radius:10px}"
+                                     "QPushButton{padding:2px 4px}"
+
+                                     )
+        self.xiayiju_bt.setObjectName("shezhi_bt")
+        self.xiayiju_bt.setText("下一局")
+
+
+
+
         # 设置
         self.shezhi_bt = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.shezhi_bt.setGeometry(QtCore.QRect(450, 80, 80, 40))
@@ -2873,6 +2895,8 @@ class Ui_Form(object):
         self.qingkoufenjia_bt.clicked.connect(self.qingkoufenjia)
         self.qingkoufenjian_bt.clicked.connect(self.qingkoufenjian)
 
+        self.xiayiju_bt.clicked.connect(self.xiayiju)
+
         # 红方得分+-
         self.hongdefenjia_bt.clicked.connect(self.hongdefenjia)
         self.hongdefenjian_bt.clicked.connect(self.hongdefenjian)
@@ -2949,6 +2973,9 @@ class Ui_Form(object):
         self.isxiuxinow=False
          # music_path = r'music\yifen.wav'
          # self.sound(music_path)
+        self.qingwinnum = 0
+        self.hongwinnum = 0
+
 
     def sound(self,path):
         _thread.start_new_thread(playsound, (path,))
@@ -3301,8 +3328,16 @@ class Ui_Form(object):
                 self.qingfangdefen = 0
                 self.hongfangdefen = 0
 
+                self.qingwinnum = 0
+                self.hongwinnum = 0
+
                 self.twoPointsTimeNowqing=None
                 self.twoPointsTimeNowhong=None
+
+                self.isdiyijuwinnumjia = True
+                self.isdierjuwinnumjia = True
+                self.isdisanjuwinnumjia = True
+                self.isdisijuwinnumjia = True
 
                 sql = "select id from dangqianbisai where changdi='%s'" % (self.changdi.text())
                 if (self.stat.fetchone(sql)):
@@ -3557,6 +3592,14 @@ class Ui_Form(object):
         self.isqingtoutestfinsh = False
         self.ishongtoutestfinsh = False
 
+        self.qingwinnum = 0
+        self.hongwinnum = 0
+
+        self.isdiyijuwinnumjia=True
+        self.isdierjuwinnumjia = True
+        self.isdisanjuwinnumjia = True
+        self.isdisijuwinnumjia = True
+
 
         self.isjiashi = False
         self.kaishi_bt.setText("开 始")
@@ -3645,44 +3688,34 @@ class Ui_Form(object):
         print('倒计时',self.daojishinow)
         print('当前局',self.gamenum)
 
-        if(self.gamenum==1):
-            print(self.daojishinow)
 
-            # 判断是否达到最大分差
-            if(self.daojishinow==0):
-                if (abs(qingdefen - hongdefen) >= int(gl.get_value('zuidafencha'))):
-                    music_path = r'music\jieshu.wav'
-                    self.sound(music_path)
-                    print('达到最大分差')
-                    # if qingdefen > hongdefen:
-                    #     # self.qingsheng_bt.click()
-                    #     # qw = QtWidgets.QWidget()
-                    #     # QMessageBox.warning(qw, '提示', "青方分差胜", QMessageBox.Ok)
-                    # else:
-                    #     # self.hongsheng_bt.click()
-                    #     # qw = QtWidgets.QWidget()
-                    #     # QMessageBox.warning(qw, '提示', "红方分差胜", QMessageBox.Ok)
-                    self.kaishi_bt.click()
+        # 加时得分
+        if(self.isjiashi):
+            if (hongdefen >= self.jiashizuidadefen or qingdefen >= self.jiashizuidadefen):
+                # self.setgamenum.setText("结束")
+                music_path = r'music\jieshu.wav'
+                self.sound(music_path)
+                self.kaishi_bt.click()
 
 
-            pass
         else:
-            # 加时得分
-            if(self.isjiashi):
-                if (hongdefen >= self.jiashizuidadefen or qingdefen >= self.jiashizuidadefen):
-                    # self.setgamenum.setText("结束")
-                    music_path = r'music\jieshu.wav'
-                    self.sound(music_path)
-                    self.kaishi_bt.click()
+             #判断是否达到最大分差
+            if(abs(qingdefen - hongdefen)>=int(gl.get_value('zuidafencha'))):
+                print('达到最大分差')
+                music_path = r'music\jieshu.wav'
+                self.sound(music_path)
+                self.kaishi_bt.click()
 
+    def winnumcha(self,hongwinnum,qingwinnum):
+        if(abs(hongwinnum-qingwinnum)>=2):
+            music_path = r'music\jieshu.wav'
+            self.sound(music_path)
+            self.kaishi_bt.click()
 
-            else:
-                 #判断是否达到最大分差
-                if(abs(qingdefen - hongdefen)>=int(gl.get_value('zuidafencha'))):
-                    print('达到最大分差')
-                    music_path = r'music\jieshu.wav'
-                    self.sound(music_path)
-                    self.kaishi_bt.click()
+    def xiayiju(self):
+        self.daojishinow=0
+        self.isone=False
+        self.kaishi_bt.click()
 
 
     def qingdefenjia(self):
@@ -3993,79 +4026,14 @@ class Ui_Form(object):
             self.flag = True
             self.dataFlag2 = False
 
-            if (self.gamenum == 1):
-                self.qing_game_1_defen.setText(self.qingfangzongfen.text())
-                self.qing_game_1_koufen.setText(self.qingfangkoufen.text())
-                self.hong_game_1_defen.setText(self.hongfangzongfen.text())
-                self.hong_game_1_koufen.setText(self.hongfangkoufen.text())
-                sql = "update bisaixinxi set qingfangdefen1=%s,qingfangkoufen1=%s,hongfangdefen1=%s,hongfangkoufen1=%s where bisaixuhao=%s" % (
-                    self.qing_game_1_defen.text(), self.qing_game_1_koufen.text(),
-                    self.hong_game_1_defen.text(), self.hong_game_1_koufen.text(),
-                    gl.get_value('bisaixuhao'))
-                # print(sql)
-                _thread.start_new_thread(self.stat.update, (sql,))
-                # self.stat.update(sql)
-
-            elif (self.gamenum == 2):
-                self.qing_game_2_defen.setText(
-                    str(int(self.qingfangzongfen.text()) - int(self.qing_game_1_defen.text())))
-                self.qing_game_2_koufen.setText(
-                    str(int(self.qingfangkoufen.text()) - int(self.qing_game_1_koufen.text())))
-                self.hong_game_2_defen.setText(
-                    str(int(self.hongfangzongfen.text()) - int(self.hong_game_1_defen.text())))
-                self.hong_game_2_koufen.setText(
-                    str(int(self.hongfangkoufen.text()) - int(self.hong_game_1_koufen.text())))
-                sql = "update bisaixinxi set qingfangdefen2=%s,qingfangkoufen2=%s,hongfangdefen2=%s,hongfangkoufen2=%s where bisaixuhao=%s" % (
-                    self.qing_game_2_defen.text(), self.qing_game_2_koufen.text(),
-                    self.hong_game_2_defen.text(), self.hong_game_2_koufen.text(),
-                    gl.get_value('bisaixuhao'))
-                # print(sql)
-                _thread.start_new_thread(self.stat.update, (sql,))
-                # self.stat.update(sql)
-            elif (self.gamenum == 3):
-                self.qing_game_3_defen.setText(
-                    str(int(self.qingfangzongfen.text()) - int(self.qing_game_1_defen.text()) - int(
-                        self.qing_game_2_defen.text())))
-                self.qing_game_3_koufen.setText(
-                    str(int(self.qingfangkoufen.text()) - int(self.qing_game_1_koufen.text()) - int(
-                        self.qing_game_2_koufen.text())))
-                self.hong_game_3_defen.setText(
-                    str(int(self.hongfangzongfen.text()) - int(self.hong_game_1_defen.text()) - int(
-                        self.hong_game_2_defen.text())))
-                self.hong_game_3_koufen.setText(
-                    str(int(self.hongfangkoufen.text()) - int(self.hong_game_1_koufen.text()) - int(
-                        self.hong_game_2_koufen.text())))
-
-                sql = "update bisaixinxi set qingfangdefen3=%s,qingfangkoufen3=%s,hongfangdefen3=%s,hongfangkoufen3=%s where bisaixuhao=%s" % (
-                    self.qing_game_3_defen.text(), self.qing_game_3_koufen.text(),
-                    self.hong_game_3_defen.text(), self.hong_game_3_koufen.text(),
-                    gl.get_value('bisaixuhao'))
-                # print(sql)
-                _thread.start_new_thread(self.stat.update, (sql,))
-                # self.stat.update(sql)
 
 
-            elif (self.gamenum == 4):
-                self.qing_game_4_defen.setText(
-                    str(int(self.qingfangzongfen.text()) - int(self.qing_game_1_defen.text()) - int(
-                        self.qing_game_2_defen.text()) - int(self.qing_game_3_defen.text())))
-                self.qing_game_4_koufen.setText(
-                    str(int(self.qingfangkoufen.text()) - int(self.qing_game_1_koufen.text()) - int(
-                        self.qing_game_2_koufen.text()) - int(self.qing_game_3_koufen.text())))
-                self.hong_game_4_defen.setText(
-                    str(int(self.hongfangzongfen.text()) - int(self.hong_game_1_defen.text()) - int(
-                        self.hong_game_2_defen.text()) - int(self.hong_game_3_defen.text())))
-                self.hong_game_4_koufen.setText(
-                    str(int(self.hongfangkoufen.text()) - int(self.hong_game_1_koufen.text()) - int(
-                        self.hong_game_2_koufen.text()) - int(self.hong_game_3_koufen.text())))
 
-                sql = "update bisaixinxi set qingfangdefen4=%s,qingfangkoufen4=%s,hongfangdefen4=%s,hongfangkoufen4=%s where bisaixuhao=%s" % (
-                    self.qing_game_4_defen.text(), self.qing_game_4_koufen.text(),
-                    self.hong_game_4_defen.text(), self.hong_game_4_koufen.text(),
-                    gl.get_value('bisaixuhao'))
-                # print(sql)
-                _thread.start_new_thread(self.stat.update, (sql,))
-                # self.stat.update(sql)
+
+
+
+
+
 
             if (self.gamenum <= int(self.gamenums)):
                 # print("休息")
@@ -4082,7 +4050,135 @@ class Ui_Form(object):
                         self.ishujufirst_qing = True
                 else:
                     # //一局结束
-                    self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
+                    # self.fencha(int(self.qingfangzongfen.text()), int(self.hongfangzongfen.text()))
+
+                    if (self.gamenum == 1 and self.isdiyijuwinnumjia):
+
+                        self.qing_game_1_defen.setText(self.qingfangzongfen.text())
+                        self.qing_game_1_koufen.setText(self.qingfangkoufen.text())
+                        self.hong_game_1_defen.setText(self.hongfangzongfen.text())
+                        self.hong_game_1_koufen.setText(self.hongfangkoufen.text())
+
+                        if (int(self.hongfangzongfen.text()) > int(self.qingfangzongfen.text())):
+                            self.hongwinnum = self.hongwinnum + 1
+
+                        if (int(self.hongfangzongfen.text()) < int(self.qingfangzongfen.text())):
+                            self.qingwinnum = self.qingwinnum + 1
+                        if (int(self.hongfangzongfen.text()) == int(self.qingfangzongfen.text())):
+                            self.qingwinnum = self.qingwinnum + 1
+                            self.hongwinnum = self.hongwinnum + 1
+
+                        sql = "update bisaixinxi set qingfangdefen1=%s,qingfangkoufen1=%s,hongfangdefen1=%s,hongfangkoufen1=%s,hongwinnum=%s,qingwinnum=%s where bisaixuhao=%s" % (
+                            self.qing_game_1_defen.text(), self.qing_game_1_koufen.text(),
+                            self.hong_game_1_defen.text(), self.hong_game_1_koufen.text(),
+                            self.hongwinnum, self.qingwinnum,
+                            gl.get_value('bisaixuhao'))
+                        print(sql)
+                        _thread.start_new_thread(self.stat.update, (sql,))
+
+                        # self.stat.update(sql)
+                        self.isdiyijuwinnumjia=False
+
+                    elif (self.gamenum == 2 and self.isdierjuwinnumjia):
+                        # self.qing_game_2_defen.setText(
+                        #     str(int(self.qingfangzongfen.text()) - int(self.qing_game_1_defen.text())))
+                        # self.qing_game_2_koufen.setText(
+                        #     str(int(self.qingfangkoufen.text()) - int(self.qing_game_1_koufen.text())))
+                        # self.hong_game_2_defen.setText(
+                        #     str(int(self.hongfangzongfen.text()) - int(self.hong_game_1_defen.text())))
+                        # self.hong_game_2_koufen.setText(
+                        #     str(int(self.hongfangkoufen.text()) - int(self.hong_game_1_koufen.text())))
+
+                        self.qing_game_2_defen.setText(self.qingfangzongfen.text())
+                        self.qing_game_2_koufen.setText(self.qingfangkoufen.text())
+                        self.hong_game_2_defen.setText(self.hongfangzongfen.text())
+                        self.hong_game_2_koufen.setText(self.hongfangkoufen.text())
+
+                        if (int(self.hongfangzongfen.text()) > int(self.qingfangzongfen.text())):
+                            self.hongwinnum = self.hongwinnum + 1
+
+                        if (int(self.hongfangzongfen.text()) < int(self.qingfangzongfen.text())):
+                            self.qingwinnum = self.qingwinnum + 1
+                        if (int(self.hongfangzongfen.text()) == int(self.qingfangzongfen.text())):
+                            self.qingwinnum = self.qingwinnum + 1
+                            self.hongwinnum = self.hongwinnum + 1
+
+                        sql = "update bisaixinxi set qingfangdefen2=%s,qingfangkoufen2=%s,hongfangdefen2=%s,hongfangkoufen2=%s,hongwinnum=%s,qingwinnum=%s where bisaixuhao=%s" % (
+                            self.qing_game_2_defen.text(), self.qing_game_2_koufen.text(),
+                            self.hong_game_2_defen.text(), self.hong_game_2_koufen.text(),
+                            self.hongwinnum, self.qingwinnum,
+                            gl.get_value('bisaixuhao'))
+                        print(sql)
+                        _thread.start_new_thread(self.stat.update, (sql,))
+                        # self.stat.update(sql)
+                        self.isdierjuwinnumjia=False
+                    elif (self.gamenum == 3 and self.isdisanjuwinnumjia):
+                        # self.qing_game_3_defen.setText(
+                        #     str(int(self.qingfangzongfen.text()) - int(self.qing_game_1_defen.text()) - int(
+                        #         self.qing_game_2_defen.text())))
+                        # self.qing_game_3_koufen.setText(
+                        #     str(int(self.qingfangkoufen.text()) - int(self.qing_game_1_koufen.text()) - int(
+                        #         self.qing_game_2_koufen.text())))
+                        # self.hong_game_3_defen.setText(
+                        #     str(int(self.hongfangzongfen.text()) - int(self.hong_game_1_defen.text()) - int(
+                        #         self.hong_game_2_defen.text())))
+                        # self.hong_game_3_koufen.setText(
+                        #     str(int(self.hongfangkoufen.text()) - int(self.hong_game_1_koufen.text()) - int(
+                        #         self.hong_game_2_koufen.text())))
+
+                        self.qing_game_3_defen.setText(self.qingfangzongfen.text())
+                        self.qing_game_3_koufen.setText(self.qingfangkoufen.text())
+                        self.hong_game_3_defen.setText(self.hongfangzongfen.text())
+                        self.hong_game_3_koufen.setText(self.hongfangkoufen.text())
+
+                        if (int(self.hongfangzongfen.text()) > int(self.qingfangzongfen.text())):
+                            self.hongwinnum = self.hongwinnum + 1
+
+                        if (int(self.hongfangzongfen.text()) < int(self.qingfangzongfen.text())):
+                            self.qingwinnum = self.qingwinnum + 1
+                        if (int(self.hongfangzongfen.text()) == int(self.qingfangzongfen.text())):
+                            self.qingwinnum = self.qingwinnum + 1
+                            self.hongwinnum = self.hongwinnum + 1
+
+                        sql = "update bisaixinxi set qingfangdefen3=%s,qingfangkoufen3=%s,hongfangdefen3=%s,hongfangkoufen3=%s,hongwinnum=%s,qingwinnum=%s where bisaixuhao=%s" % (
+                            self.qing_game_3_defen.text(), self.qing_game_3_koufen.text(),
+                            self.hong_game_3_defen.text(), self.hong_game_3_koufen.text(),
+                            self.hongwinnum, self.qingwinnum,
+                            gl.get_value('bisaixuhao'))
+                        print(sql)
+                        _thread.start_new_thread(self.stat.update, (sql,))
+                        # self.stat.update(sql)
+                        self.isdisanjuwinnumjia=False
+
+
+                    elif (self.gamenum == 4 and self.isdisijuwinnumjia):
+                        self.qing_game_4_defen.setText(self.qingfangzongfen.text())
+                        self.qing_game_4_koufen.setText(self.qingfangkoufen.text())
+                        self.hong_game_4_defen.setText(self.hongfangzongfen.text())
+                        self.hong_game_4_koufen.setText(self.hongfangkoufen.text())
+
+                        if (int(self.hongfangzongfen.text()) > int(self.qingfangzongfen.text())):
+                            self.hongwinnum = self.hongwinnum + 1
+
+                        if (int(self.hongfangzongfen.text()) < int(self.qingfangzongfen.text())):
+                            self.qingwinnum = self.qingwinnum + 1
+                        if (int(self.hongfangzongfen.text()) == int(self.qingfangzongfen.text())):
+                            self.qingwinnum = self.qingwinnum + 1
+                            self.hongwinnum = self.hongwinnum + 1
+
+                        sql = "update bisaixinxi set qingfangdefen4=%s,qingfangkoufen4=%s,hongfangdefen4=%s,hongfangkoufen4=%s,hongwinnum=%s,qingwinnum=%s where bisaixuhao=%s" % (
+                            self.qing_game_4_defen.text(), self.qing_game_4_koufen.text(),
+                            self.hong_game_4_defen.text(), self.hong_game_4_koufen.text(),
+                            self.hongwinnum, self.qingwinnum,
+                            gl.get_value('bisaixuhao'))
+                        print(sql)
+                        _thread.start_new_thread(self.stat.update, (sql,))
+                        # self.stat.update(sql)
+                        self.isdisijuwinnumjia=False
+
+                    # self.winnumcha(self.hongwinnum, self.qingwinnum)
+
+
                     if (int(self.xiuxitimenow) > 0 and self.isxiuxi):
 
                         self.isxiuxinow=True
@@ -4105,6 +4201,17 @@ class Ui_Form(object):
                         self.issound = True
                         # print('当前局' + str(self.gamenum))
                         # print('总局数' + str(self.gamenums))
+
+
+                        self.qingfangzongfen.setText('0')
+                        self.qingfangkoufen.setText('0')
+                        self.hongfangzongfen.setText('0')
+                        self.hongfangkoufen.setText('0')
+                        sql = "update bisaixinxi set qingfangdefen=0,hongfangdefen=0,qingfangkoufen=0,hongfangkoufen=0 where bisaixuhao='%s'" % (
+                            gl.get_value('bisaixuhao'))
+                        print(sql)
+                        _thread.start_new_thread(self.stat.update, (sql,))
+
                         if (self.gamenum == int(self.gamenums)):
                             if (int(self.hongfangzongfen.text()) == int(self.qingfangzongfen.text())):
                                 sql = "update bisaixinxi set qingfangdefen=0,hongfangdefen=0,qingfangkoufen=0,hongfangkoufen=0 where bisaixuhao='%s'" % (
@@ -4480,9 +4587,9 @@ class Ui_Form(object):
                                     _thread.start_new_thread(self.stat.update, (sql,))
 
                                     if (self.hongfanglizhi == ""):
-                                        self.hongfanglizhi = str(40)
+                                        self.hongfanglizhi = str(70)
                                     else:
-                                        self.hongfanglizhi = self.hongfanglizhi + "," + str(40)
+                                        self.hongfanglizhi = self.hongfanglizhi + "," + str(70)
 
                                     # 击打头盔，力值为40
                                     sql = "update dangqianbisai set hongfanglizhi='%s' where bisaixuhao='%s'" % (
@@ -4535,9 +4642,9 @@ class Ui_Form(object):
                                     _thread.start_new_thread(self.stat.update, (sql,))
 
                                     if (self.qingfanglizhi == ""):
-                                        self.qingfanglizhi = str(40)
+                                        self.qingfanglizhi = str(70)
                                     else:
-                                        self.qingfanglizhi = self.qingfanglizhi + "," + str(40)
+                                        self.qingfanglizhi = self.qingfanglizhi + "," + str(70)
                                     # 击打头盔，力值为40
                                     sql = "update dangqianbisai set qingfanglizhi='%s' where bisaixuhao='%s'" % (
                                         self.qingfanglizhi,
@@ -5345,7 +5452,7 @@ if __name__ == '__main__':
     utils.mysqlUtil.MysqlUtil.host = 'localhost'
     utils.mysqlUtil.MysqlUtil.dbPort = '3306'
     utils.mysqlUtil.MysqlUtil.username = 'root'
-    utils.mysqlUtil.MysqlUtil.password = 'root123'
+    utils.mysqlUtil.MysqlUtil.password = 'lgm123'
     utils.mysqlUtil.MysqlUtil.database = 'sport'
     gl._init()
     app = QApplication(sys.argv)

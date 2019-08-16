@@ -4469,9 +4469,9 @@ class Ui_Form(object):
                                     _thread.start_new_thread(self.stat.update, (sql,))
 
                                     if (self.hongfanglizhi == ""):
-                                        self.hongfanglizhi = str(40)
+                                        self.hongfanglizhi = str(70)
                                     else:
-                                        self.hongfanglizhi = self.hongfanglizhi + "," + str(40)
+                                        self.hongfanglizhi = self.hongfanglizhi + "," + str(70)
 
                                     # 击打头盔，力值为40
                                     sql = "update dangqianbisai set hongfanglizhi='%s' where bisaixuhao='%s'" % (
@@ -4527,9 +4527,9 @@ class Ui_Form(object):
                                     _thread.start_new_thread(self.stat.update, (sql,))
 
                                     if (self.qingfanglizhi == ""):
-                                        self.qingfanglizhi = str(40)
+                                        self.qingfanglizhi = str(70)
                                     else:
-                                        self.qingfanglizhi = self.qingfanglizhi + "," + str(40)
+                                        self.qingfanglizhi = self.qingfanglizhi + "," + str(70)
                                     # 击打头盔，力值为40
                                     sql = "update dangqianbisai set qingfanglizhi='%s' where bisaixuhao='%s'" % (
                                         self.qingfanglizhi,
